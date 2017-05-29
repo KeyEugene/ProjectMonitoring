@@ -22,45 +22,6 @@
                 border-right: 2px silver solid;
                 box-shadow: 1px 0 2px #bbb;
             }
-
-        /*.templateItem {
-            background-color: #eee;
-            width: 300px;
-            padding: 4px 4px;
-            margin-bottom: 3px;
-            box-shadow: 0 1px 1px #bbb;
-            cursor: pointer;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-               .templateItem img {
-            width: 36px;
-            height: 36px;
-            vertical-align: middle;
-            margin-right: 3px;
-        }
-
-        .templateItem:hover {
-            background-color: #e9e9e9;
-        }
-
-        .templateMenu {
-            padding-left: 10px;
-            border-bottom: 1px silver solid;
-            vertical-align: middle;
-            box-shadow: 0 1px 2px #bbb;
-        }
-
-            .templateMenu a {
-                margin-right: 20px;
-            }
-
-        .templateButton {
-            color: #000;
-            text-decoration: none;
-        }*/
     </style>
     <link href="../Styles/TableView.css" rel="Stylesheet" />
     <link href="../Styles/PredicateControl.css" rel="Stylesheet" />
@@ -85,18 +46,8 @@
                     option.css("display", "block");
             }
         }
-
-        //$(document).ready(function () {
-        //    setWidthContent()
-        //});
-        //$(window).resize(function () {
-        //    setWidthContent()
-        //});
-
-        //function setWidthContent() {
-        //    $(".content").width($(window).width() - $(".left_menu").width());
-        //}
         $(document).ready(function () {
+           //Чтобы диалог был на первом плане 
             $('[id$=TemplateDesignerDialog]').css("z-index", "1030");
         });
     </script>

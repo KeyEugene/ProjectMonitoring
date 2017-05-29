@@ -252,7 +252,6 @@
     <Content Include="Styles\Header_style\NavigationFrame_Home.css" />
     <Content Include="Styles\Header_style\NavigationFrame_Template.css" />
     <Content Include="Styles\Header_style\breadcrumbs.css" />
-    <Content Include="Styles\Header_style\header_menu.css" />
     <Content Include="Styles\DELETE_newObjectStyle.css" />
     <Content Include="Styles\PredicateControl.css" />
     <Content Include="Styles\ReferenceTableControl.css" />

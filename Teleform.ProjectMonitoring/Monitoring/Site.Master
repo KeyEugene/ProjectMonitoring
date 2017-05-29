@@ -20,8 +20,6 @@
     <link type="text/css" href="Styles/gridviewStyle.css" rel="Stylesheet" />
     <link type="text/css" href="~/Styles/Site.css" rel="stylesheet" />
 
-    <link href="Styles/Header_style/header_menu.css" rel="stylesheet" />
-
     <link href="Styles/bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Styles/bootstrap/bootstrap.min.css" rel="stylesheet" />
 
@@ -37,15 +35,10 @@
     <form runat="server" id="MasterForm">
         <%--http://jsfiddle.net/2Smgv/2858/ - Вариант меню--%>
         <div id="wrapper">
-            <!-- Navigation -->
             <nav class=" navbar navbar-inverse navbar-fixed-top">
-                <%--header row--%>
                 <div class="navbar-header">
-                    <%--logo_menu col-md-2 text-center--%>
                     <asp:LinkButton CssClass="navbar-brand" runat="server" EnableViewState="false" PostBackUrl="~/Person_Page/Home.aspx">Мониторинг</asp:LinkButton>
-                    <%--ID="logo" --%>
                 </div>
-                <%--<div class="nav navbar-left top-nav">--%> <%--col-md-8  text-center --%>
                 <ul class="nav navbar-left top-nav">
                     <li>
                         <asp:LinkButton ID="A1" runat="server" EnableViewState="false" PostBackUrl="~/EntityListAttributeView.aspx">Функционал АРМ</asp:LinkButton>
@@ -74,25 +67,21 @@
                         <asp:LinkButton ID="A5" runat="server" EnableViewState="false" PostBackUrl="~/admin/administration.aspx">Администрирование</asp:LinkButton>
                     </li>
                 </ul>
-                <%-- </div>--%>
-                <%-- <div class="nav navbar-right top-nav" style="margin-left: 0px;"> <--%>%--preson_menu col-md-2--%>
-                    <ul class="nav navbar-right top-nav">
-                        <%--nav nav-pills--%>
-                        <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                <asp:Label ID="PersonInfo" runat="server" /><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <asp:LinkButton ID="SettingButton" runat="server" EnableViewState="false" PostBackUrl="~/Settings.aspx">Личные настройки</asp:LinkButton>
-                                </li>
-                                <li>
-                                    <asp:LinkButton runat="server" ID="LogoutButton" Text="Выход" OnClick="LogoutButton_Click"
-                                        ToolTip="Завершить работу под текущей учетной записью." />
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                <%--</div>--%>
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            <asp:Label ID="PersonInfo" runat="server" /><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <asp:LinkButton ID="SettingButton" runat="server" EnableViewState="false" PostBackUrl="~/Settings.aspx">Личные настройки</asp:LinkButton>
+                            </li>
+                            <li>
+                                <asp:LinkButton runat="server" ID="LogoutButton" Text="Выход" OnClick="LogoutButton_Click"
+                                    ToolTip="Завершить работу под текущей учетной записью." />
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
                 <div id="left_menu" class="collapse navbar-collapse navbar-ex1-collapse">
                 </div>
             </nav>
@@ -101,6 +90,7 @@
 
             <script>
                 $(document).ready(function () {
+                    //Перемещаем контейнеры на свои места
                     var inner_left_menu = $("#inner_left_menu");
                     var left_menu = $("#left_menu");
                     inner_left_menu.appendTo(left_menu);
@@ -150,10 +140,8 @@
             </div>
 
             <div id="page-wrapper">
-                <%--class="page"--%>
                 <Project:NavigationDialog runat="server" ID="navigationDialog" EnableViewState="false" ViewStateMode="Disabled" />
                 <div class="container-fluid " align="center">
-                    <%--main--%>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                 </div>
             </div>

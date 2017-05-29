@@ -54,9 +54,8 @@
 </div>
 
 <div id="inner_left_menu" class="nav navbar-nav side-nav">
-<%--left_menu--%>
-<asp:SqlDataSource runat="server" ID="TemplateListSource" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
-    SelectCommand="SELECT
+    <asp:SqlDataSource runat="server" ID="TemplateListSource" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
+        SelectCommand="SELECT
                                 [T].[objID],
                                 [T].[name],
                                 [A].[icon],
@@ -67,49 +66,47 @@
 	                            END [body]
                             FROM [model].[R$Template] [T] JOIN [model].[R$TemplateType] [A] ON [A].[objID] = [T].[typeID]
                             WHERE [T].[entityID] = @entityID"
-    DeleteCommand="EXEC [model].[R$TemplateDelete] @id">
-    <SelectParameters>
-        <asp:ControlParameter ControlID="EntityList" PropertyName="SelectedValue" Name="entityID" />
-    </SelectParameters>
-    <DeleteParameters>
-        <asp:ControlParameter ControlID="TemplateList" PropertyName='SelectedDataKey["objID"]'
-            Name="id" />
-    </DeleteParameters>
-</asp:SqlDataSource>
-<div id="templateList">
-<asp:ListView runat="server" ID="TemplateList" DataSourceID="TemplateListSource"
-    OnSelectedIndexChanged="TemplateList_SelectedIndexChanged" ClientIDMode="Predictable"
-    DataKeyNames="objID,body,code">
-    <LayoutTemplate>
-        <ul id="inner_left_menu" class="nav navbar-nav side-nav">
-            <asp:PlaceHolder runat="server" ID="itemPlaceholder" />
-            <%--ID="itemPlaceholder"--%>
-        </ul>
-    </LayoutTemplate>
-    <ItemTemplate>
-        <li>
-            <asp:LinkButton runat="server" ID="SelectButton" CommandName="Select" CssClass="templateButton"> <%# Eval("name") %>
+        DeleteCommand="EXEC [model].[R$TemplateDelete] @id">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="EntityList" PropertyName="SelectedValue" Name="entityID" />
+        </SelectParameters>
+        <DeleteParameters>
+            <asp:ControlParameter ControlID="TemplateList" PropertyName='SelectedDataKey["objID"]'
+                Name="id" />
+        </DeleteParameters>
+    </asp:SqlDataSource>
+    <div id="templateList">
+        <asp:ListView runat="server" ID="TemplateList" DataSourceID="TemplateListSource"
+            OnSelectedIndexChanged="TemplateList_SelectedIndexChanged" ClientIDMode="Predictable"
+            DataKeyNames="objID,body,code">
+            <LayoutTemplate>
+                <ul id="inner_left_menu" class="nav navbar-nav side-nav">
+                    <asp:PlaceHolder runat="server" ID="itemPlaceholder" />
+                </ul>
+            </LayoutTemplate>
+            <ItemTemplate>
+                <li>
+                    <asp:LinkButton runat="server" ID="SelectButton" CommandName="Select" CssClass="templateButton"> <%# Eval("name") %>
                                    <%-- <div class="templateItem" title='<%# Eval("name") %>'>
     <img src='<%# ResolveUrl(Eval("icon").ToString()) %>' />
-                                        <%# Eval("name") %>
-</div>--%>
-            </asp:LinkButton>
-        </li>
-    </ItemTemplate>
-    <SelectedItemTemplate>
-        <%--<img src="#" alt="Alternate Text" />--%>
-        <%--  <div class="templateItem" style="background-color: #CCCCCC; color: #000" title='<%# Eval("name") %>'>
+                                        <%# Eval("name") %></div>--%>
+                    </asp:LinkButton>
+                </li>
+            </ItemTemplate>
+            <SelectedItemTemplate>
+                <%--<img src="#" alt="Alternate Text" />--%>
+                <%--  <div class="templateItem" style="background-color: #CCCCCC; color: #000" title='<%# Eval("name") %>'>
 
                     <img src='<%# ResolveUrl(Eval("icon").ToString()) %>' />
                     <%# Eval("name") %>
                 </div>--%>
-        <li class="active">
-            <asp:LinkButton runat="server" ID="SelectButton" CommandName="Select" CssClass="active"> <%# Eval("name") %>
+                <li class="active">
+                    <asp:LinkButton runat="server" ID="SelectButton" CommandName="Select" CssClass="active"> <%# Eval("name") %>
                       <%--<img src='<%# ResolveUrl(Eval("icon").ToString()) %>' />--%>
-            </asp:LinkButton>
-        </li>
-    </SelectedItemTemplate>
-</asp:ListView>
-</div>
+                    </asp:LinkButton>
+                </li>
+            </SelectedItemTemplate>
+        </asp:ListView>
     </div>
+</div>
 
