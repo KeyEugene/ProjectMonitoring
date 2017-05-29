@@ -1,0 +1,88 @@
+﻿<%--<asp:GridView runat="server" CssClass="gridviewStyle" AlternatingRowStyle-CssClass="alt" GridLines="None" />--%>
+
+<asp:TextBox runat="server" SkinID="DateBox" CssClass="DateBox" onfocus='this.select(); lcs(this, this)'
+    onclick='event.cancelBubble=true;this.select();/*lcs(this)*/' />
+
+<asp:DetailsView runat="server" CssClass="detailStyle" AutoGenerateRows="false" AutoGenerateEditButton="true">
+    <AlternatingRowStyle CssClass="alt" />
+    <FieldHeaderStyle CssClass="dHeader" />
+    <CommandRowStyle CssClass="cmd" />
+</asp:DetailsView>
+
+<asp:FormView runat="server" CssClass="NewFormView">
+</asp:FormView>
+
+<SearchSystem:SearchForm runat="server" InstantSearch="true"
+    CssClass="SearchForm"
+    Caption="Фильтрация"
+    SearchButtonContainerID="SearchButtonContainer"
+    PageContainerID="PagerContainer">
+    <SearchButtonStyle CssClass="SearchButton" />
+    <%--<PagerManagerItems>
+        <asp:ListItem Text="10" Value="10" />
+        <asp:ListItem Text="15" Value="15" />
+        <asp:ListItem Text="20" Value="20" Selected="true" />
+        <asp:ListItem Text="50" Value="50" />
+        <asp:ListItem Text="100" Value="100" />
+    </PagerManagerItems>--%>
+</SearchSystem:SearchForm>
+
+<%--/*▾▴*/--%>
+
+<asp:DropDownList runat="server" SkinID="List" CssClass="List" >
+    <asp:ListItem Text="не выбрано" Value= "" />
+</asp:DropDownList>
+
+<Phoenix:GridView runat="server"
+    AutoGenerateSelectButton="true"
+    CssClass="gridviewStyle"
+    CellSpacing="0"
+    CellPadding="4"
+    Width="100%"
+    AutoGenerateColumns="false"
+    AllowSorting="True">
+    <SelectedRowStyle CssClass="SelectedRow" />
+    <AlternatingRowStyle CssClass="AlternativeRow" />
+    <RowStyle CssClass="Row" />
+    <SortedAscendingHeaderStyle CssClass="SortedAscendColumn" />
+    <SortedDescendingHeaderStyle CssClass="SortedDescendColumn" />
+</Phoenix:GridView>
+
+<Phoenix:GridView runat="server" SkinID="Collection"
+    AutoGenerateSelectButton="true"
+    CssClass="gridviewStyle"
+    CellSpacing="0"
+    CellPadding="4"
+    Width="100%"
+    AllowSorting="True">
+    <SelectedRowStyle CssClass="SelectedRow" />
+    <AlternatingRowStyle CssClass="AlternativeRow" />
+    <RowStyle CssClass="Row" />
+    <SortedAscendingHeaderStyle CssClass="SortedAscendColumn" />
+    <SortedDescendingHeaderStyle CssClass="SortedDescendColumn" />
+</Phoenix:GridView>
+
+<Dialog:EditorForm runat="server" SkinID="ObjectEditorForm"
+    CancelButtonID="CancelButton" AcceptButtonID="AcceptButton">
+    <ContentContainerStyle CssClass="EditorFormContent" />
+    <Buttons>
+        <Dialog:ButtonItem ControlID="AcceptButton" Text="Принять" />
+        <Dialog:ButtonItem ControlID="CancelButton" Text="Отмена" />
+    </Buttons>
+</Dialog:EditorForm>
+
+<Dialog:MessageBox runat="server"
+    NotificationImageUrl="~/images/MessageBox/notification.png"
+    QuestionImageUrl="~/images/MessageBox/question.png"
+    WarningImageUrl="~/images/MessageBox/warning.png"
+    ErrorImageUrl="~/images/MessageBox/error.png"
+    ImageWidth="48" ImageHeight="48" />
+
+<Dialog:MessageBox runat="server" Icon="Question" Buttons="YesNo"
+    DefaultButton="No" SkinID="DeleteObjectMessageBox"
+    QuestionImageUrl="~/images/MessageBox/question.png"
+    ImageWidth="48" ImageHeight="48">
+    <ContentTemplate>
+        Объект будет удалён. Продолжить?
+    </ContentTemplate>
+</Dialog:MessageBox>

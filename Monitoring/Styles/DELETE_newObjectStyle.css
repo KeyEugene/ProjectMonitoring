@@ -1,0 +1,63 @@
+﻿
+/* Внешний вид popup для создания объектов. */
+.backgroundDiv {
+    visibility:hidden;
+    position:absolute;
+    z-index:999;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(50,50,50,0.5)
+}
+
+.addCompanyDiv {
+    visibility:inherit;
+    position: absolute;
+    width: 800px;
+    min-height: 600px;
+    height: auto;
+    top:50%;
+    left: 50%;
+    margin-left: -400px;
+    margin-top: -300px;
+    background-color: White;
+    
+    border: 1px solid black;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    -ms-border-radius: 7px;
+    -o-border-radius: 7px;
+    border-radius: 7px;
+    padding: 5px 5px 5px 5px;
+}
+
+
+/* Таблица для создания новых объектов */
+table.newObjectTable {
+    border: 1px solid silver;
+    width: 790px;
+    height: 590px;
+    max-width: 790px;
+    max-height: 590px;
+    background-color: rgba(20,20,20,0.05)
+}
+
+table.newObjectTable tr {
+    background-color: rgba(20,20,20, 0.1)
+}
+
+table.newObjectTable td.caption {
+    font-size: 1.2em;
+    font-variant:small-caps;
+    color:Black;
+    text-align:right;
+    vertical-align: middle;
+    width: 120px;
+    padding-right: 5px
+}
+
+table.newObjectTable select, table.newObjectTable input[type="text"], table.newObjectTable textarea {
+    margin-left: 5px;
+    width: 600px
+}

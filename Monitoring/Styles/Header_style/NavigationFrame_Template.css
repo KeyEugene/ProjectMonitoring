@@ -1,0 +1,23 @@
+﻿
+.column_left {
+}
+
+.column_right {
+}
+
+.column_center {
+    border-right: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+}
+
+.column_center, .column_left, .column_right {
+    min-height: 100px;
+}
+
+.margin_top {
+    margin-top: 2px;
+}
+
+.buttons_template {
+    margin-top: 25px;
+}

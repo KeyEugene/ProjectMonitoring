@@ -1,0 +1,44 @@
+﻿.selectedRow {
+    background-color: #C7C7C7;
+    color: Black
+}
+
+.hiddenMenu {
+    position: absolute;
+    visibility: hidden
+}
+
+.displayedMenu {
+    position: absolute;
+    visibility: visible;
+    
+    /*/////////////////////*/
+    /*background: #c1c1c1;
+    background: -moz-linear-gradient(top,  #c1c1c1 0%, #aaaaaa 15%, #afafaf 86%, #cecece 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c1c1c1), color-stop(15%,#aaaaaa), color-stop(86%,#afafaf), color-stop(100%,#cecece));
+    background: -webkit-linear-gradient(top,  #c1c1c1 0%,#aaaaaa 15%,#afafaf 86%,#cecece 100%);
+    background: -o-linear-gradient(top,  #c1c1c1 0%,#aaaaaa 15%,#afafaf 86%,#cecece 100%);
+    background: -ms-linear-gradient(top,  #c1c1c1 0%,#aaaaaa 15%,#afafaf 86%,#cecece 100%);
+    background: linear-gradient(to bottom,  #c1c1c1 0%,#aaaaaa 15%,#afafaf 86%,#cecece 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c1c1c1', endColorstr='#cecece',GradientType=0 );*/
+
+
+    
+    
+    background: #ccc;
+    /*background: #424242 url(./Images/main_head.png) repeat-x top;*/
+    border: 1px solid black;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -ms-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -o-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    box-shadow: inset 0 0 1px 1px #f6f6f6;
+    height: 40px;
+    width: 1024px;
+    padding: 5px 0 0 35px;
+}
