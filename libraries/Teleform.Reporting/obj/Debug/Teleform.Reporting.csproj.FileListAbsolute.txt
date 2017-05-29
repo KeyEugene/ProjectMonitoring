@@ -1,0 +1,6 @@
+D:\Development\Teleform_work\Libraries\Teleform.Reporting\bin\Debug\Teleform.Reporting.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting\bin\Debug\Teleform.Reporting.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting\obj\Debug\Teleform.Reporting.csprojResolveAssemblyReference.cache
+D:\Development\Teleform_work\Libraries\Teleform.Reporting\obj\Debug\Teleform.Reporting.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting\obj\Debug\Teleform.Reporting.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting\bin\Debug\DocumentFormat.OpenXml.dll

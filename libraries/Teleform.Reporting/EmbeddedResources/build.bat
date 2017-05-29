@@ -1,0 +1,2 @@
+resgen Messages.txt
+pause

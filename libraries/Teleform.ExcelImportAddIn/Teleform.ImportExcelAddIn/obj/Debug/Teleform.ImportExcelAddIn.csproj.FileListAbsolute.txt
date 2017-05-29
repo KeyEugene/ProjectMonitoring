@@ -1,0 +1,58 @@
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.Properties.Resources.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.csproj.GenerateResource.Cache
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.EntityForm.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormBool.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormDate.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormMoney.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormString.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.LoginForm.resources
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.dll
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.pdb
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.dll.manifest
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.vsto
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.Reporting.dll
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.Reporting.pdb
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.dll
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.pdb
+D:\С#\Project VS 2013\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.csprojResolveAssemblyReference.cache
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.dll
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.pdb
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.dll.manifest
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.vsto
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.Reporting.dll
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.Reporting.pdb
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.EntityForm.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormBool.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormDate.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormMoney.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormString.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.LoginForm.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.Properties.Resources.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.Ribbon1.resources
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.csproj.GenerateResource.Cache
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.dll
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.pdb
+C:\Users\AlexK\Desktop\pMonitor\libraries\Teleform.ImportExcelAddIn\VS2013 New\Teleform.ImportExcelAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.csprojResolveAssemblyReference.cache
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.dll
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.pdb
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.dll.manifest
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.ImportExcelAddIn.vsto
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Teleform.Reporting.pdb
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.csprojResolveAssemblyReference.cache
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.EntityForm.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormBool.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormDate.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormMoney.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.Forms.FormString.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\ExcelDialog.LoginForm.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.Properties.Resources.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.Ribbon1.resources
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.csproj.GenerateResource.Cache
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.dll
+C:\PMonitor\libraries\Teleform.ExcelImportAddIn\Teleform.ImportExcelAddIn\obj\Debug\Teleform.ImportExcelAddIn.pdb

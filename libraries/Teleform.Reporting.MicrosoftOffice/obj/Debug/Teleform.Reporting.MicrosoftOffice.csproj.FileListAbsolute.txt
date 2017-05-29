@@ -1,0 +1,8 @@
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.MicrosoftOffice.dll
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.MicrosoftOffice.pdb
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.dll
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.pdb
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.csprojResolveAssemblyReference.cache
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.dll
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.pdb
+D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\DocumentFormat.OpenXml.dll

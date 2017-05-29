@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<report>
+  <template id="11" name="Программисты отдела НИОКР" fileName="программисты.docx" entityID="99">
+    <content>
+      0KjQu9CwINCh0LDRiNCwINC/0L4g0YjQvtGB0YHQtSDQuCDRgdC+0YHQsNC70LAg0YHRg9GI0LrRgy4=
+    </content>
+  </template>
+  <instances>
+    <instance>
+      <attribute id="1" value="Тябут Евгений" />
+      <attribute id="2" value="Программист" />
+    </instance>
+    <instance>
+      <attribute id="1" value="Палюлина Дарья" />
+      <attribute id="2" value="Программист" />
+    </instance>
+    <instance>
+      <attribute id="1" value="Гончаров Василий" />
+      <attribute id="2" value="Ведущий программист" />
+    </instance>
+    <instance>
+      <attribute id="1" value="Баценков Антон" />
+      <attribute id="2" value="Программист" />
+    </instance>
+    <instance>
+      <attribute id="1" value="Гатаулин Виктор" />
+      <attribute id="2" value="Программист" />
+    </instance>
+    <instance>
+      <attribute id="1" value="Крайнов Алексей" />
+      <attribute id="2" value="Программист" />
+    </instance>
+  </instances>
+</report>
+<!-- Протокол формирования группового отчета. -->

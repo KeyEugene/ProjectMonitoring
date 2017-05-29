@@ -1,0 +1,39 @@
+﻿.filterButton
+{
+    border: 1px solid silver;
+    border-top: 2px solid royalBlue;
+    padding: 2px;    
+    background-color: #eee;
+    text-align:center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.filterButton:hover 
+{
+    background-color: #e2e2e2;
+}
+
+.filterButtonActive
+{
+    border: 1px solid silver;
+    border-bottom: 2px solid royalBlue;
+}
+
+
+.filterContainer
+{
+    position: absolute;
+    border: 1px solid silver;
+    background-color: #f9f9f9;
+    height: 250px;
+    min-width: 100px;
+    overflow: scroll;
+}
+
+
+.filterContainer tr td label
+{
+    text-align: justify;
+    /*width: 100%;*/
+}

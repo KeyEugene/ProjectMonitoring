@@ -1,0 +1,761 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Phoenix.Web</name>
+    </assembly>
+    <members>
+        <member name="M:Phoenix.Web.UI.SearchSystem.BaseSearchForm.OnCreateSearchCondition(System.Object,System.EventArgs)">
+            <summary>
+            Инициирует событие создания условия поиска.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.SearchSystem.BaseSearchForm.CreateTemplateContainer">
+            <summary>
+            Создаёт контейнер визуального шаблона поиска.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.SearchSystem.BaseSearchForm.CreatePagerManager">
+            <summary>
+            Создаёт элемент управления постраничным выводом.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.SearchSystem.BaseSearchForm.CreateSearchButton">
+            <summary>
+            Создаёт кнопку поиска.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.AttachedControls">
+            <summary>
+            Возвращает список присоединённых элементов управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.InstantSearch">
+            <summary>
+            Возвращает или задаёт значение, указывающее будет ли осуществляться
+            "живой поиск". Обычно используется совместно с UpdatePanel.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.PagerManagerItems">
+            <summary>
+            Возвращает или задаёт список возможных значений для
+            управления постраничным выводом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.TargetControlID">
+            <summary>
+            Возвращает или задаёт идентификатор элемента управления, чьё
+            постраничное отображения нуждается в динамической настройке.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.Caption">
+            <summary>
+            Возвращает или задаёт значение заголовка.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.DisplayRecordsText">
+            <summary>
+            Возвращает или задаёsт значение сопроводительного текста
+            для постраничного управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.AllRecordsText">
+            <summary>
+            Возвращает или задаёт текстовую константу, характерезующую
+            отображение всех элементов в результате поиска.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.SearchCondition">
+            <summary>
+            Возвращает условие поиска.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.BaseSearchForm.ContentTemplate">
+            <summary>
+            Возвращает или задаёт шаблон элемента управления поиска.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.SearchSystem.BaseSearchForm.CreatingSearchCondition">
+            <summary>
+            Происходит в момент, когда необходимо создать условие поиска.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.MessageBoxResult">
+            <summary>
+            Задает идентификаторы, которые определяют возвращаемое значение диалогового окна.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.SlideSystem.MenuItem">
+            <summary>
+            Описывает элемент меню.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.ControlItem">
+            <summary>
+            Представляет описание управляющего элемента, например,
+            кнопки диалога или элемента меню.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.ControlItem.Handlers">
+            <summary>
+            Коллекция обработчиков события нажатия на управляющий элемент.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.ControlItem.ControlID">
+            <summary>
+            Возвращает или задаёт идентификатор порождаемого элемента управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.ControlItem.Text">
+            <summary>
+            Возвращает или задаёт текст управляющего элемента.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.ControlItem.ToolTip">
+            <summary>
+            Возвращает или задаёт подсказку для управляющего элемента.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.ControlItem.Command">
+            <summary>
+            Возвращает или задаёт команду, которую выполняет данный
+            управляющий элемент.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.ControlItem.Argument">
+            <summary>
+            Возвращает или задаёт аргумент команды управляющего элемента.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.ControlItem.Click">
+            <summary>
+            Происходит при нажатии на управляющий элемент.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.SlideSystem.MenuItem.#ctor">
+            <summary>
+            Инициализирует объект типа Phoenix.Web.UI.SlideSystem.MenuItem.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.SlideSystem.MenuItem.CreateControl``1">
+            <summary>
+            Создаёт соответствующий описанию элемент управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SlideSystem.MenuItem.Enabled">
+            <summary>
+            Возвращает или задаёт значение, указывающее является ли
+            элемент меню доступным.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.IDefaultButtonContainer">
+            <summary>
+            Описывает интерфейс контейнера с кнопкой по умолчанию.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.IDefaultButtonContainer.DefaultButtonID">
+            <summary>
+            Возвращает идентификатор кнопки по умолчанию.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.BaseDialog">
+            <summary>
+            Описывает базовые функциональные возможности диалогового окна.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.BaseDialog.RenderBeginTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Записывает открывающий тег элемента разметки в исходящий поток.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.BaseDialog.RenderEndTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Записывает закрывающий тег элемента разметки в исходящий поток.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.BaseDialog.#ctor">
+            <summary>
+            Инициализирует объект типа Phoenix.Web.UI.Dialogs.BaseDialog.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.BaseDialog.Index">
+            <summary>
+            Порядковый номер диалога на странице.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.BaseDialog.CountOfDialogs">
+            <summary>
+            Представляет число диалогов на странице.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.BaseDialog.GetAppearanceLevel">
+            <summary>
+            Возвращает уровень появления.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.BaseDialog.Show(System.Object,System.EventArgs)">
+            <summary>
+            Делает диалог видимым.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.BaseDialog.Close(System.Object,System.EventArgs)">
+            <summary>
+            Закрывает диалог.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.BaseDialog.Caption">
+            <summary>
+            Возвращает или задает значение заголовка диалога.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.BaseDialog.ButtonsAlign">
+            <summary>
+            Возвращает или задает значение выравнивания кнопок управления диалога.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.BaseDialog.ContentTemplate">
+            <summary>
+            Возвращает или задает внутреннее содержание диалога.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.BaseDialog.Closed">
+            <summary>
+            Происходит после завершения работы с диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.BaseDialog.ContentContainerStyle">
+            <summary>
+            Возвращает или задаёт стили для контейнера содержания.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.BaseDialog.PreparingButtons">
+            <summary>
+            Происходит, когда необходимо добавить кнопки диалога
+            в коллекцию дочерних элементов управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.BaseDialog.Phoenix#Web#UI#Dialogs#IDefaultButtonContainer#DefaultButtonID">
+            <summary>
+            Возвращает идентификатор кнопки по умолчанию.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.Form.#ctor">
+            <summary>
+            Инициализирует экземпляр типа Phoenix.Web.UI.Dialogs.Form. 
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.Form.CancelButtonID">
+            <summary>
+            Возвращает или задает значение идентификатора кнопки, отменяющей
+            работу с диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.Form.AcceptButtonID">
+            <summary>
+            Возвращает или задает значение идентификатора кнопки, подтверждения
+            работы с диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.Form.DefaultButtonID">
+            <summary>
+            Возвращает или задаёт идентификатор кнопки по умолчанию.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.Form.Cancelled">
+            <summary>
+            Происходит после нажатия кнопки отмены пользователем.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.Form.Accepted">
+            <summary>
+            Происходит после нажатия кнопки принятия пользователем.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.Form.Buttons">
+            <summary>
+            Задает или возвращает список кнопок управления диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.Phoenix.ResourceManager">
+            <summary>
+            Возвращает объект управления ресурсами.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.XForm.SetActiveTemplate(System.Object,System.EventArgs)">
+            <summary>
+            Слот. Задаёт идентификатор активного шаблона диалога.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.XForm.#ctor">
+            <summary>
+            Инициализирует экземпляр типа Phoenix.Web.UI.Dialogs.Form. 
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.DisplayAsWizard">
+            <summary>
+            Возвращает или задаёт значение, указывающее, является
+            ли данный диалог мастер-диалогом или нет.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.Templates">
+            <summary>
+            Возвращает или задаёт список шаблонов диалога.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.ActiveTemplateID">
+            <summary>
+            Возвращает или задаёт идентификатор активного шаблона диалога.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.CancelButtonID">
+            <summary>
+            Возвращает или задает значение идентификатора кнопки, отменяющей
+            работу с диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.AcceptButtonID">
+            <summary>
+            Возвращает или задает значение идентификатора кнопки, подтверждения
+            работы с диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.DefaultButtonID">
+            <summary>
+            Возвращает или задаёт идентификатор кнопки по умолчанию.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.XForm.Cancelled">
+            <summary>
+            Происходит после нажатия кнопки отмены пользователем.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.XForm.Accepted">
+            <summary>
+            Происходит после нажатия кнопки принятия пользователем.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.XForm.Buttons">
+            <summary>
+            Задает или возвращает список кнопок управления диалогом.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.ButtonItem">
+            <summary>
+            Описывает кнопку диалога.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Controls.SortableColumn">
+            <summary>
+            Представляет сортируемую колонку.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Controls.SortableColumn.#ctor">
+            <summary>
+            Инициализирует объект типа Teleform.Web.Controls.SortableColumn.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Controls.SortableColumn.Sortable">
+            <summary>
+            Возвращает или задаёт значение, указывающее является ли колонка
+            сортируемой.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.EditorForm">
+            <summary>
+            Представляет редактор отдельной записи из элемента управления,
+            к которому осуществлена привязка.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.SubscribeToDataBindingEvent(System.Web.UI.Control)">
+            <summary>
+            Подписывается на событие привязки данных ко все подходящим
+            дочерним элементам управления.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.ControlDataBinding(System.Object,System.EventArgs)">
+            <summary>
+            Собирает идентификаторы элементов управления, к которым осуществлена привязка данных.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.DataSourceUpdating(System.Object,System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)">
+            <summary>
+            Формирует необходимые для обновления источника данных параметры.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.Bind(System.String)">
+            <summary>
+            Привязывает данные по предоставленному ключу.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.Accept(System.Object,System.EventArgs)">
+            <summary>
+            Утверждает работу диалога.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.Show(Phoenix.Web.UI.Dialogs.EditorMode)">
+            <summary>
+            Показывает диалог. Существует УНИКАЛЬНАЯ ВОЗМОЖНОСТЬ задать режим работы.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.EditorForm.Show(System.Object,System.EventArgs)">
+            <summary>
+            Делает диалог видимым.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.InitialSet">
+            <summary>
+            Возвращает (или задаёт) словать с исходными значениями.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.ActiveControls">
+            <summary>
+            Возвращает набор дочерних элементов управления, к которым
+            осуществлена привязка.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.DataControl">
+            <summary>
+            Возвращает элемент управления, к которому привязаны данные.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.DataSource">
+            <summary>
+            Возвращает источник данных элемента управления, к которому привязаны данные.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.CurrentMode">
+            <summary>
+            Возвращает текущий режим работы элемента управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.DataKeyNames">
+            <summary>
+            Возвращает или задает массив, содержащий имена первичных
+            ключевых полей для элементов, отображенных в элементе
+            управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.EditorForm.TargetControlID">
+            <summary>
+            Возвращает или задаёт идентификатор элемента управления, к которому
+            осуществлена привязка данных.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.EditorForm.Updating">
+            <summary>
+            Происходит до операции обновления.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.DialogTemplate">
+            <summary>
+            Представляет шаблон диалога.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.DialogTemplate.ContentTemplate">
+            <summary>
+            Возвращает или задаёт шаблон с контентом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.DialogTemplate.ID">
+            <summary>
+            Возвращает или задаёт идентификатор шаблона диалога.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.SlideSystem.Menu">
+            <summary>
+            Представляет меню.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.SlideSystem.Menu.GetTargetControl">
+            <summary>
+            Возвращает элемент управления с привязкой данных, к которому
+            прикрепляется данное меню.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SlideSystem.Menu.RequiringSelectionItems">
+            <summary>
+            Возвращает или задаёт список идентификаторов элементов меню,
+            требующих выделение.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SlideSystem.Menu.TargetControlID">
+            <summary>
+            Возвращает или задаёт идентификатор элемента управления с привязкой
+            данных, к которому прикрепляется данное меню.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SlideSystem.Menu.TargetControl">
+            <summary>
+            Возвращает или задаёт элемент управления с привязкой данных, к
+            которому прикрепляется данное меню.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SlideSystem.Menu.MenuItems">
+            <summary>
+            Возвращает или задаёт коллекцию элементов меню.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.FindControlExtensions">
+            <summary>
+            Расширяет методы поиска серверных элементов управления.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.FindControlExtensions.FindControl``1(System.Web.UI.Control)">
+            <summary>
+            Выполняет рекурсивный поиск серверного элемента управления заданного типа.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.FindControlExtensions.FindControl``1(System.Web.UI.Control,System.String)">
+            <summary>
+            Выполняет поиск серверного элемента управления заданного типа согласно
+            представленному пути.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.FindControlExtensions.FindControl``1(System.Web.UI.Control,System.String,System.Boolean)">
+            <summary>
+            Выполняет поиск серверного элемента управления заданного типа. При необходимости
+            осуществляется рекурсивный поиск.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.FindControlExtensions.FindControlRecursively(System.Web.UI.Control,System.String)">
+            <summary>
+            Инфраструктура. Выполняет рекурсивный поиск серверного элемента управления
+            с заданным идентификатором.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.FindControlExtensions.BaseFindControl(System.Web.UI.Control,System.String)">
+            <summary>
+            Инфраструктура. Выполняет поиск серверного элемента управления в текущем
+            контейнере именования.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.MessageBox">
+            <summary>
+            Представляет окно сообщения.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.MessageBox.#ctor">
+            <summary>
+            Инициализирует объект типа Phoenix.Web.UI.Dialogs.MessageBox.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.MessageBox.Close(System.Object,System.EventArgs)">
+            <summary>
+            Закрывает диалог.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.NotificationImageUrl">
+            <summary>
+            Возвращает или задает URL-адрес, который является путем к изображению, отображаемому
+            элементом управления MessageBox, когда сообщение представляет собой уведомление.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.QuestionImageUrl">
+            <summary>
+            Возвращает или задает URL-адрес, который является путем к изображению, отображаемому
+            элементом управления MessageBox, когда сообщение представляет собой вопрос.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.WarningImageUrl">
+            <summary>
+            Возвращает или задает URL-адрес, который является путем к изображению, отображаемому
+            элементом управления MessageBox, когда сообщение является предупреждением.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.ErrorImageUrl">
+            <summary>
+            Возвращает или задает URL-адрес, который является путем к изображению, отображаемому
+            элементом управления MessageBox, когда сообщение является сообщением об ошибке.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.ImageWidth">
+            <summary>
+            Возвращает или задаёт ширину иконки в окне сообщения.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.ImageHeight">
+            <summary>
+            Возвращает или задаёт высоту иконки в окне сообщения.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.Buttons">
+            <summary>
+            Возвращает или задаёт набор кнопок окна сообщения.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.DefaultButton">
+            <summary>
+            Возвращает или задаёт кнопку по умолчанию.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.Phoenix#Web#UI#Dialogs#IDefaultButtonContainer#DefaultButtonID">
+            <summary>
+            Возвращает идентификатор кнопки по умолчанию.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Dialogs.MessageBox.Closed">
+            <summary>
+            Происходит после завершения работы с диалогом.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Dialogs.MessageBox.Icon">
+            <summary>
+            Возвращает или задаёт иконку окна сообщения.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Controls.SortableTable">
+            <summary>
+            Представляет элемент управления сортируемой таблицы.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Controls.SortableTable.CreateChildControls">
+            <summary>
+            Вызванный страницей ASP.NET, сообщает серверному элементу управления,
+            использующего составную реализацию, о необходимости создания дочерних
+            элементов управления.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Controls.SortableTable.AllowSorting">
+            <summary>
+            Возвращает или задает значение, определяющее, доступна ли возможность сортировки.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Controls.SortableTable.HasSortableColumn">
+            <summary>
+            Возвращает или задает значение, определяющее, имеется ли хотя бы
+            одна сортируемая колонка.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.MessageBoxIcons">
+            <summary>
+            Перечисляет возможные иконки окна сообщения.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxIcons.None">
+            <summary>
+            Окно сообщения не имеет иконки.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxIcons.Notification">
+            <summary>
+            Сообщение носит характер уведомления.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxIcons.Question">
+            <summary>
+            Сообщение представляет собой вопрос.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxIcons.Warning">
+            <summary>
+            Сообщение является предупреждением.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxIcons.Error">
+            <summary>
+            Сообщение представляет собой сообщение об ошибке.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.MessageBoxButtons">
+            <summary>
+            Задает константы, определяющие кнопки, которые нужно отображать в окне сообщения.
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxButtons.OK">
+            <summary>
+            Окно сообщения содержит кнопку "ОК".
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxButtons.OKCancel">
+            <summary>
+            Окно сообщения содержит кнопки "OK" и "Отмена".
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxButtons.YesNo">
+            <summary>
+            Окно сообщения содержит кнопки "Да" и "Нет".
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxButtons.OKMore">
+            <summary>
+            Окно сообщения содержит кнопки "OK" и "Подробнее"
+            </summary>
+        </member>
+        <member name="F:Phoenix.Web.UI.Dialogs.MessageBoxButtons.YesNoCancel">
+            <summary>
+            Окно сообщения содержит кнопки "Да", "Нет" и "Отмена".
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.SearchSystem.CreatingSearchConditionEventArgs">
+            <summary>
+            Описывает аргумент события создания условия поиска.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.SearchSystem.CreatingSearchConditionEventArgs.SearchCondition">
+            <summary>
+            Возвращает или задаёт условие поиска.
+            </summary>
+        </member>
+        <member name="T:Phoenix.ListExtensions">
+            <summary>
+            Представляет класс-расширение для System.Collections.Generic.List.
+            </summary>
+        </member>
+        <member name="M:Phoenix.ListExtensions.RemoveRange``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Удаляет диапазон элементов из списка.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Page">
+            <summary>
+            Представляет класс страницы с расширенными возможностями.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Page.#ctor">
+            <summary>
+            Инициализирует объект типа Phoenix.Web.UI.Page.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Page.ErrorHandler(System.Object,System.EventArgs)">
+            <summary>
+            Включает стандартный механизм обработки ошибки.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Page.RaisePostBackEvent(System.Web.UI.IPostBackEventHandler,System.String)">
+            <summary>
+            Оповещает серверный элемент управления, вызвавший обратный запрос, о необходимости
+            обработки входящего события обратной передачи.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Page.OnLoadComplete(System.EventArgs)">
+            <summary>
+            Создает событие System.Web.UI.Control.PreRender.
+            </summary>
+        </member>
+        <member name="P:Phoenix.Web.UI.Page.HasError">
+            <summary>
+            Возвращает или задаёт значение, указывающее о возникновении ошибки
+            в ходе обработки текущего Http-запроса страницей.
+            </summary>
+        </member>
+        <member name="E:Phoenix.Web.UI.Page.PostBackEventHandled">
+            <summary>
+            Происходит после обработки PostBack-запроса.
+            </summary>
+        </member>
+        <member name="T:Phoenix.Web.UI.Dialogs.MessageBoxTemplate">
+            <summary>
+            Описывает стандартный шаблон для окна сообщения.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.MessageBoxTemplate.#ctor(System.String)">
+            <summary>
+            Инициализирует объект типа Phoenix.Web.UI.Dialogs.MessageBoxTemplate.
+            </summary>
+        </member>
+        <member name="M:Phoenix.Web.UI.Dialogs.MessageBoxTemplate.#ctor(System.Web.UI.Control)">
+            <summary>
+            Инициализирует объект типа Phoenix.Web.UI.Dialogs.MessageBoxTemplate.
+            </summary>
+        </member>
+    </members>
+</doc>

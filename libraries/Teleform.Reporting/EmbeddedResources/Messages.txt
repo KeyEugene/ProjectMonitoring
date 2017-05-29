@@ -1,0 +1,12 @@
+﻿Common.NullArgument=Значение параметра '{0}' равно null.
+Common.NullIdentifier=Идентификатор объекта равен null.
+Common.NullName=Имя объекта равно null.
+Common.InvalidName=Указанное имя является недопустимым для объектов данного типа.
+Common.EmptyCollection=Коллекция '{0}' пуста.
+
+Xml.NoAttribute=Следующий элемент xml не содержит атрибут {0}:\n{1}
+Xml.NoElements=Следующий элемент xml не содержит элементы {0}:\n{1}
+Xml.NoElement=Следующий элемент xml не содержит элемент {0}:\n{1}
+
+Format.NoDescription=Формат '{0}' не содержит текст описания.
+Format.NoExample=Формат '{0}' не содержит текст примера.

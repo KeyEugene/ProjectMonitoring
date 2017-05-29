@@ -1,5 +1,0 @@
-D:\Development\Teleform_work\Teleform.ProjectMonitoring\TemplatePreview\bin\Debug\TemplatePreview.dll
-D:\Development\Teleform_work\Teleform.ProjectMonitoring\TemplatePreview\bin\Debug\TemplatePreview.pdb
-D:\Development\Teleform_work\Teleform.ProjectMonitoring\TemplatePreview\obj\Debug\TemplatePreview.csprojResolveAssemblyReference.cache
-D:\Development\Teleform_work\Teleform.ProjectMonitoring\TemplatePreview\obj\Debug\TemplatePreview.dll
-D:\Development\Teleform_work\Teleform.ProjectMonitoring\TemplatePreview\obj\Debug\TemplatePreview.pdb

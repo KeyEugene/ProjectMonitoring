@@ -1,0 +1,54 @@
+﻿
+.draggable{
+
+}
+
+.docRow
+{
+    
+}
+
+.imgDoc
+{
+    
+}
+
+.lblDoc
+{
+    display: none;
+}
+
+.docCell
+{
+    border-style: solid;
+    border-color: Black;
+    border-width: 1px;
+    width: 20px;
+    height: auto;
+}
+
+.headerCell
+{
+    color: White;
+    background-color: Gray;
+    border-color: Black;
+    border-width: 2px;
+    border-style: solid;
+    height: auto;
+    width: 120px;
+}
+
+.endCell
+{
+    border-style: none;
+    width: 120px;
+}
+
+.routeCell
+{
+    border-color: Black;
+    border-width: 2px;
+    border-style: solid;
+    height: auto;
+    width: 120px;
+}

@@ -1,0 +1,19 @@
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\bin\Debug\RecordBodyToDB.exe.config
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\bin\Debug\RecordBodyToDB.exe
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\bin\Debug\RecordBodyToDB.pdb
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.csprojResolveAssemblyReference.cache
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.Form1.resources
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.Properties.Resources.resources
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.csproj.GenerateResource.Cache
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.exe
+c:\users\alex\documents\visual studio 2013\Projects\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.pdb
+I:\работа\RecordBodyToDB\RecordBodyToDB\bin\Debug\RecordBodyToDB.exe.config
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.exe
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.pdb
+I:\работа\RecordBodyToDB\RecordBodyToDB\bin\Debug\RecordBodyToDB.exe
+I:\работа\RecordBodyToDB\RecordBodyToDB\bin\Debug\RecordBodyToDB.pdb
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.csprojResolveAssemblyReference.cache
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.Form1.resources
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.Properties.Resources.resources
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.csproj.GenerateResource.Cache
+I:\работа\RecordBodyToDB\RecordBodyToDB\obj\Debug\RecordBodyToDB.Login.resources

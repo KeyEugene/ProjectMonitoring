@@ -1,0 +1,1 @@
+http://localhost:25000/monitoring/get.schema.aspx

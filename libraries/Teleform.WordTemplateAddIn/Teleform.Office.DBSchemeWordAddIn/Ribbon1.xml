@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabAddIns">
+        <group id="ContentGroup" label="Привязка данных">
+          <button id="textButton" label="Атрибут"
+               imageMso="ExportWord" size="large"
+               screentip="Привязка свойства" onAction="OnTextButton"
+               supertip="Связывает текущую позицию документа с атрибутом базы данных."/>
+          <!--<button id="tableButton" label="Список"
+               imageMso="ExportSharePointList" size="large"
+               screentip="Привязка списка" onAction="OnTableButton"
+               supertip="Связывает текущую позицию документа с списковым атрибутом базы данных."/>-->
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

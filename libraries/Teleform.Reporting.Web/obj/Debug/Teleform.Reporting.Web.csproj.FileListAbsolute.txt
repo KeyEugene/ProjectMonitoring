@@ -1,0 +1,15 @@
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Teleform.Reporting.Web.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Teleform.Reporting.Web.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\DynamicCardControl.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\DynamicCardModel.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Phoenix.Web.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Teleform.Reporting.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\DynamicCardControl.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\DynamicCardModel.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Teleform.Reporting.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Phoenix.Web.pdb
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\Phoenix.Web.xml
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\bin\Debug\en-US\Phoenix.Web.resources.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\obj\Debug\Teleform.Reporting.Web.csprojResolveAssemblyReference.cache
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\obj\Debug\Teleform.Reporting.Web.dll
+D:\Development\Teleform_work\Libraries\Teleform.Reporting.Web\obj\Debug\Teleform.Reporting.Web.pdb

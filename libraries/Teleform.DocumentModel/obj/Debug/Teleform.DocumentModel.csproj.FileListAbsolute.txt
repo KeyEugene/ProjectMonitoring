@@ -1,0 +1,4 @@
+D:\Development\Teleform_work\libraries\Teleform.DocumentModel\bin\Debug\Teleform.DocumentModel.dll
+D:\Development\Teleform_work\libraries\Teleform.DocumentModel\bin\Debug\Teleform.DocumentModel.pdb
+D:\Development\Teleform_work\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.dll
+D:\Development\Teleform_work\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.pdb

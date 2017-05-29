@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Для надстройки Word. -->
+<schema>
+  <types>
+    <type name="Int">
+      <format id="123" name="Первые три цифры" example="123" description="Показывает первые три цифры целого числа." />
+      <format id="23" name="Первый разряд" example="3" description="Показывает первый разряд целого числа." />
+    </type>
+    <type name="Money">
+      <format id="17" name="Прописью" example="один рубль" description="Выводит сумму прописью." />
+    </type>
+  </types>
+  <entities>
+    <entity name="Контракт" id="11" main="1">
+      <attribute id="11" name="Название" type="String" />
+      <attribute id="21" name="Исполнитель" type="String" />
+      <attribute id="37" name="Сумма" type="Money" />
+    </entity>
+    <entity name="Организация" id="99" main="0">
+      <attribute id="768" name="Название" type="String" />
+      <attribute id="52" name="Генеральный директор" type="String" />
+      <attribute id="30" name="Год основания" type="Int" />
+    </entity>
+  </entities>
+</schema>

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSHA", "SimpleSHA\SimpleSHA.csproj", "{A77BC44A-70BF-4DA8-A22A-293455482723}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A77BC44A-70BF-4DA8-A22A-293455482723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A77BC44A-70BF-4DA8-A22A-293455482723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A77BC44A-70BF-4DA8-A22A-293455482723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A77BC44A-70BF-4DA8-A22A-293455482723}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\DynamicCardControl.dll
+D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\DynamicCardControl.pdb
+D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\DynamicCardModel.dll
+D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\Teleform.Reporting.dll
+D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\DynamicCardModel.pdb
+D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\Teleform.Reporting.pdb
+D:\Development\Teleform_work\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.csprojResolveAssemblyReference.cache
+D:\Development\Teleform_work\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.dll
+D:\Development\Teleform_work\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.pdb

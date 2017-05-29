@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teleform.SqlServer.Formatting.Tests", "Teleform.SqlServer.Formatting.Tests\Teleform.SqlServer.Formatting.Tests.csproj", "{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37041180-16BE-4685-9E45-D7F6065D1FE2}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Teleform.SqlServer.Formatting.vsmdi = Teleform.SqlServer.Formatting.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teleform.SqlServer.Formatting", "Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting.csproj", "{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Teleform.SqlServer.Formatting.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AF07AAD2-C8E4-422D-9C5C-44B3C09F66F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0F84AC27-3F24-4CAC-B80F-4985ACD13A0F}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Debug|x86.ActiveCfg = Debug|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Debug|x86.Build.0 = Debug|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Release|Any CPU.ActiveCfg = Release|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Release|x86.ActiveCfg = Release|x86
+		{3E7A2A97-A9A2-401D-B8DC-027EA6A603BE}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

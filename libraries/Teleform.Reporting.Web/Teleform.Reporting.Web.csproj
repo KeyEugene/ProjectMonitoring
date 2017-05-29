@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{87C841AD-CE10-4EF0-9920-45F05C786BE2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Teleform.Reporting.Web</RootNamespace>
+    <AssemblyName>Teleform.Reporting.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;FOR_EXCLUDE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Phoenix.Web">
+      <HintPath>..\..\Teleform.ProjectMonitoring\libraries\Phoenix.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CellControls\CellControlNewAttributes.cs" />
+    <Compile Include="CompositePredicateControl\CompositePredicateControl.cs" />
+    <Compile Include="CompositePredicateControl\events.cs" />
+    <Compile Include="CompositePredicateControl\rendering.cs" />
+    <Compile Include="CompositePredicateControl\styling.cs" />
+    <Compile Include="FilterControl\FilterControl.cs" />
+    <Compile Include="FilterControl\rendering.cs" />
+    <Compile Include="FilterControl\styling.cs" />
+    <Compile Include="IFilterControl.cs" />
+    <Compile Include="AddRemoveInstanceControl\events.cs" />
+    <Compile Include="AddRemoveInstanceControl\AddRemoveInstanceControl.cs" />
+    <Compile Include="AddRemoveInstanceControl\rendering.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceTableControl\eventMethods.cs" />
+    <Compile Include="ReferenceTableControl\ReferenceTableControl.cs" />
+    <Compile Include="Serializers\XMLSelfColumnsSerializer.cs.cs" />
+    <Compile Include="SortingControl\events.cs" />
+    <Compile Include="SortingControl\rendering.cs" />
+    <Compile Include="SortingControl\SortingControl.cs" />
+    <Compile Include="SortingControl\styling.cs" />
+    <Compile Include="TableViewControl\aggregation.cs" />
+    <Compile Include="CellControls\CellControls.cs" />
+    <Compile Include="TableViewControl\HeaderRow.cs" />
+    <Compile Include="TableViewControl\ListAggregation.cs" />
+    <Compile Include="TableViewControl\SelfColumnsValue.cs" />
+    <Compile Include="Serializers\xmlTableViewControlAllColumnsSerializer.cs" />
+    <Compile Include="TableViewControl\SessionContent.cs" />
+    <Compile Include="TableViewControl\events.cs" />
+    <Compile Include="TableViewControl\navigation.cs" />
+    <Compile Include="TableViewControl\paging.cs" />
+    <Compile Include="TableViewControl\rendering.cs" />
+    <Compile Include="TableViewControl\styling.cs" />
+    <Compile Include="TableViewControl\TableViewControl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicCardControl\DynamicCardControl.csproj">
+      <Project>{8271844C-5A37-4CEA-9E84-7801CCA2987F}</Project>
+      <Name>DynamicCardControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynamicCardModel\DynamicCardModel.csproj">
+      <Project>{DE8B9098-12D7-4BBA-A08A-D1134A380944}</Project>
+      <Name>DynamicCardModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Teleform.Reporting\Teleform.Reporting.csproj">
+      <Project>{C4248172-34B7-4B4F-8453-21C0D96049D9}</Project>
+      <Name>Teleform.Reporting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

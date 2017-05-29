@@ -1,0 +1,137 @@
+﻿
+
+.gridviewStyle
+{
+    /* width: 100%;*/
+    text-align: left;    
+    min-height: 0px;
+    background-color: #fff;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+}
+
+
+table.gridviewStyle tr td
+{
+    border: solid 1px #c1c1c1;
+    color: #444;
+    max-height: 200px;
+    text-overflow: ellipsis;
+    /*white-space:pre-wrap;*/
+     
+}
+
+.gridviewStyle td a
+{
+    color: royalBlue;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.gridviewStyle td a:hover
+{
+    color: royalBlue;
+    text-decoration: underline;
+}
+
+
+.gridviewStyle th
+{
+    /* padding: 4px 2px; */
+    vertical-align: bottom;
+    color: #fff;
+    background: #424242; /*url(./Images/grd_head.png) repeat-x top;   */
+    border-top: 2px solid royalBlue;
+    border-left: solid 1px #525252;
+    font-size: 1.0em;
+    cursor: pointer; /*#if Alex padding-right: 10%; #endif */
+}
+
+.gridviewStyle th:hover a
+{
+    color: #f96b07;
+}
+
+.gridviewStyle th a
+{
+    color: #fff;
+    text-decoration: none; /*    display:inline-block;     white-space:nowrap;*/
+}
+
+.gridviewStyle tr
+{
+    max-height: 200px;
+}
+
+.gridviewStyle .alt
+{
+    background-color: AliceBlue /*#e7e7e7*/ /*url(./Images/grd_alt.png) repeat-x top; */;
+}
+.gridviewStyle .pgr
+{
+    background: #424242 url(./Images/grd_pgr.png) repeat-x top;
+}
+.gridviewStyle .pgr table
+{
+    margin: 5px 0;
+}
+/*.gridviewStyle .pgr td {   
+    border-width: 0;   
+    padding: 0 6px;   
+    border-left: solid 1px #666;   
+    font-weight: bold;   
+    color: #fff;   
+    line-height: 12px;
+    height: 25px;   
+ }*/
+.gridviewStyle .pgr a
+{
+    color: #fff;
+    text-decoration: none;
+}
+.gridviewStyle .pgr a:hover
+{
+    color: #000;
+    text-decoration: none;
+}
+
+/*.gridviewStyle .pgr td table tr td span  
+{
+    padding: 2px;
+    background-color: rgba(240, 240, 240, 0.7);
+    border: 1px solid royalBlue;
+    color: black;
+}*/
+
+.gridviewStyle-header
+{
+    color: White;
+}
+
+
+.agregationTable
+{
+    width: 100%;
+    min-height: 0px;
+    background-color: #fff;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+}
+
+
+
+.agregationTable tr th
+{
+    padding: 2px 2px;
+    color: #fff;
+    background-color: silver;
+    border-top: 2px solid royalBlue;
+    border-left: solid 1px #525252;
+    font-size: 1.0em;
+    height: 30px;
+    cursor: pointer;
+}
+
+
+

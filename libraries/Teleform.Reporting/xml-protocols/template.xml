@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<template type="ExcelBased" name="Шаблон_от_31.01.2014" entityID="1730873283" fileName="Шаблон_от_31.01.2014" id="119">
+  <fields>
+    <field attributeID="5ABEC355CA3470AFED6FFDD2294DBF65AC4D85E8" formatID="0" alias="Основание" filter="" operation="7" order="0" aggregate="" />
+    <field attributeID="5E3354FA218B3C7A175B75CD98F75381F5649D7F" formatID="0" alias="Комментарий" filter="" operation="0" order="0" aggregate="" />
+    <field attributeID="14E6CFC38F4EE7D55C8FB809B4C4B8A3DC77B243" formatID="5" alias="Дата" filter="" operation="0" order="0" aggregate="" />
+    <field attributeID="3D96C16E61E00E126C2761970A88289CEFF7A7DB" formatID="5" alias="Действителен до" filter="" operation="0" order="0" aggregate="" />
+    <field attributeID="B496BE1549643E1A008120B59D4676EA504F0C8E" formatID="0" alias="Название" filter="" operation="0" order="0" aggregate="" />
+    <field attributeID="79D14C80F40467E6636AC8F4A2BAE15BA7DB6E87" formatID="0" alias="Номер" filter="" operation="1" order="0" aggregate="" />
+    <field attributeID="877F1B984FF6D060CA37D9990E5D0CEFEB3733AB" formatID="0" alias="Номер собственный" filter="" operation="0" order="0" aggregate="" />
+    <field attributeID="BB772FA8D5A3776DDD4249DEABEDC07C96905C89" formatID="0" alias="Идент" filter="" operation="0" order="0" aggregate="" />
+    <field attributeID="2E02E533E2AF336D421203012EC14672169E5F07" formatID="13" alias="Сумма" filter="" operation="0" order="0" aggregate="" />
+  </fields>
+  <parameters>
+    <parameter name="sheet" value="Шаблон_от_31.01.2014" />
+  </parameters>
+  <body></body>
+</template>
