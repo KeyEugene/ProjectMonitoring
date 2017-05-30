@@ -430,9 +430,6 @@ namespace Teleform.ProjectMonitoring
             base.OnPreRender(e);
         }
 
-
-
-
         private string MakeUniqueKey(string item)
         {
             var entityID = Request.QueryString["entity"];

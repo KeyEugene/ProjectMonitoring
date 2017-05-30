@@ -22,11 +22,9 @@
 
     <link href="Styles/bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Styles/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="Styles/bootstrap/site_template/sb-admin.css" rel="stylesheet" />
 
     <link href="Styles/Header_style/NavigationFrame_Base.css" rel="stylesheet" />
-
-    <link href="Styles/bootstrap/site_template/sb-admin.css" rel="stylesheet" />
-    <link href="Styles/bootstrap/site_template/plugins/morris.css" rel="stylesheet" />
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -153,9 +151,5 @@
 
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/site.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/bootstrap/bootstrap.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/Styles/bootstrap/site_template/js/plugins/morris/raphael.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/Styles/bootstrap/site_template/js/plugins/morris/morris.min.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl("~/Styles/bootstrap/site_template/js/plugins/morris/morris-data.js") %>"></script>
-
 </body>
 </html>

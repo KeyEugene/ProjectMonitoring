@@ -11,7 +11,7 @@ namespace Teleform.ProjectMonitoring
     public partial class ReportView
     {
         /// <summary>
-        /// Свойство для того чтобы запоминать изменял ли пользователь название шаблона(это для того чтобы каждый раз,
+        /// Свойство для того чтобы запоминать изменял ли пользователь название шаблона(это нужно чтобы каждый раз,
         /// после завершения работы с конструктором, не запускать метод FillDropDownList())
         /// </summary>
         public string oldTemplateName
@@ -54,10 +54,10 @@ namespace Teleform.ProjectMonitoring
                     if (isUpdate)
                         TemplateConstructorButton.Enabled = true;
                     else
-                        TemplateConstructorButton.Enabled = false;    
+                        TemplateConstructorButton.Enabled = false;
                 }
-                
-                #else
+
+#else
                 var query = string.Format("SELECT [update] FROM [Permission].[IUTemplatePermission]({0}) where objID = {1}", Session["SystemUser.objID"].ToString(), TemplateList.SelectedValue);
                 
                 var dt = Storage.GetDataTable(query);
@@ -124,7 +124,7 @@ namespace Teleform.ProjectMonitoring
             {
                 entityList.Visible = entitiListLabel.Visible = p;
             }
-         
+
             GoToFilterDesignerButton.Visible = FilterList.Visible = p;
         }
 
