@@ -1,7 +1,9 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportView.ascx.cs"    Inherits="Teleform.ProjectMonitoring.ReportView" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportView.ascx.cs" Inherits="Teleform.ProjectMonitoring.ReportView" %>
 <%@ Register Src="~/project/FilterDesigner.ascx" TagPrefix="Project" TagName="FilterDesigner" %>
 
-<%@ Register TagPrefix="Navigation" TagName="Breadcrumbs" Src="~/NavigationFrame/Breadcrumbs.ascx" %>
+<%@ Register TagPrefix="Navigation" TagName="Frame" Src="~/NavigationFrame/NavigationFrame_EntityListAttributeView.ascx" %>
+
+<Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
 <%--
 <%@ Register TagPrefix="Dynamic" Namespace="DynamicCardControl.Controls" Assembly="DynamicCardControl" %>
 --%>
@@ -157,29 +159,6 @@
         afterPost = 1;
     }
 
-    // аткуалин ли ? 
-    //не актуальна, перенесена в site.js
-    //        function keyup_handlerFilterControl(o, itemID) {
-    //            alert("аткуалин ли ?);
-    //            // console.info(itemID)
-
-    //            var c = $("#" + itemID).find("td")
-    //            for (var i = 0; i < c.length; i++) {
-    //                var td = c.eq(i);
-    //                var checkbox = td.find("input")
-    //                var label = td.find("label");
-
-    //                console.info(label.html());
-
-    //                var html = label.html();
-
-    //                if (checkbox.attr("checked") != "checked" && html != undefined && html.toString().toLowerCase().indexOf(o.value) == -1)
-    //                    td.parent().css("display", "none");
-    //                else
-    //                    td.parent().css("display", "block");
-    //            }
-    //        }
-
     //for new Constructor
     function keyup_handlerFilterControl(o, itemID) {
         var c = $("#" + itemID).find("option");
@@ -228,54 +207,14 @@
     </Buttons>
 </Dialog:Form>
 <asp:HiddenField ID="hfScrollPosition" runat="server" Value="0" ClientIDMode="Static" />
-<table>
-    <tr>
-        <td>
-            <details>
-                <summary style="color: gray;">
-Шаблоны, фильтры:
-</summary>
-
-                <table>
-                    <tr>
-                        <td>
-                            <asp:Button ID="TemplateConstructorButton" runat="server" Text="Шаблон:" OnLoad="TemplateConstructorButton_Load" OnClick="TemplateConstructorButton_Click" />
-                            <asp:SqlDataSource ID="TemplateListSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
-                                SelectCommand="EXEC [model].[R$TemplateGetTableBased] @entityID">
-                                <SelectParameters>
-                                    <asp:QueryStringParameter Name="entityID" DbType="Int32" QueryStringField="entity"
-                                        DefaultValue="-1" />
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-                             <asp:DropDownList ID="TemplateList" runat="server" AutoPostBack="true" DataValueField="Value" DataTextField="Text"
-                              OnSelectedIndexChanged="TemplateList_SelectedIndexChanged"
-                                AppendDataBoundItems="true" SkinID="List" />
-                           <%-- <asp:DropDownList ID="TemplateList" runat="server" AutoPostBack="true" DataTextField="name"
-                                DataValueField="objID" OnSelectedIndexChanged="TemplateList_SelectedIndexChanged"
-                                DataSourceID="TemplateListSource" AppendDataBoundItems="true" SkinID="List" />--%>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Button ID="GoToFilterDesignerButton" runat="server" Text="Фильтр:" OnClick="GoToFilterDesignerButton_Click" />
-                            <asp:SqlDataSource ID="FilterSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
-                                SelectCommand="SELECT [objID], [name] FROM [model].[R$EntityFilter] WHERE [entityID] = @entityID AND [userID] = @userID ORDER BY [name]">
-                                <SelectParameters>
-                                    <asp:QueryStringParameter Name="entityID" DbType="Int32" QueryStringField="entity" />
-                                    <asp:SessionParameter Name="userID" DbType="String" SessionField="SystemUser.objID"
-                                        DefaultValue="0" />
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-                            <asp:DropDownList ID="FilterList" runat="server" AutoPostBack="true" DataTextField="name"
-                                DataValueField="objID" OnSelectedIndexChanged="FilterList_SelectedIndexChanged"
-                                DataSourceID="FilterSource" AppendDataBoundItems="true" SkinID="List" />
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Отображать по:
+<asp:UpdatePanel ID="RecordsNumberUpPanel" runat="server">
+    <ContentTemplate>
+        <asp:Label ID="Wcf_summator" runat="server" />
+        <asp:Label ID="RecordsNumberLabel" runat="server" />
+    </ContentTemplate>
+</asp:UpdatePanel>
+<div>
+    Отображать по:
         <asp:DropDownList runat="server" ID="PageCountList" AutoPostBack="true" ClientIDMode="Static"
             OnSelectedIndexChanged="PageCountList_SelectedIndexChanged">
             <asp:ListItem Text="10" Value="10" Selected="True" />
@@ -283,118 +222,7 @@
             <asp:ListItem Text="50" Value="50" />
             <asp:ListItem Text="Все" Value="all" />
         </asp:DropDownList>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:LinkButton ID="ResetAllFilters" runat="server" Text="Сброс фильтров:" OnClick="ResetAllFilters_OnClick"
-                                ToolTip="Сбрасывает все фильтры." />
-
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:LinkButton ID="ResetAllSortings" runat="server" Text="Сброс сортировок:" OnClick="ResetAllSortings_OnClick"
-                                ToolTip="Сбрасывает все сортировки." />
-                        </td>
-                    </tr>
-
-
-                </table>
-            </details>
-        </td>
-        <td>
-            <details>
-                <summary style="color: gray;">
-Отчеты, объекты:
-</summary>
-
-
-                <table>
-
-                    <tr>
-                        <td>
-                            <asp:Image ID="Image1" runat="server" Style="position: relative; top: -3px; left: 1px"
-                                ImageUrl="~/images/zip.png" Width="20" Height="20" ImageAlign="Middle" />
-                            <asp:LinkButton ID="ToGroupReportButton" runat="server" Text="Шаблоны и Отчеты:"
-                                OnClick="ToGroupReportButton_Click" />
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Image ID="ExcelImage" runat="server" Style="position: relative; top: -3px; left: 0px"
-                                ImageUrl="~/images/excel.png" Width="20" Height="20" ImageAlign="Middle" />
-
-                            <asp:CheckBox runat="server" Title="создать отчет Excel, без учета оперативных фильтров"
-                                ID="IsNeedAllInstances" Style="position: relative; top: 4px; left: 0px" />
-                            <asp:LinkButton ID="ExcelReportButton" runat="server" Text="Экспорт в Excel:" EnableViewState="false"
-                                OnClick="CreateExcelReportButton_Click" /></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Image ID="Image2" runat="server" Style="position: relative; top: -4px; left: 2px"
-                                ImageUrl="~/images/import.png" Width="20" Height="20" ImageAlign="Middle" />
-                            <label runat="server" style="cursor: pointer; color: blue;" onclick="ShowImportDialog()"
-                                id="ImportReportButton">
-                                Импорт файл:</label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Image ID="CreateImage" runat="server" Style="position: relative; top: -4px; left: 0px"
-                                ImageUrl="~/images/create.png" Width="20" Height="20" ImageAlign="Middle" />
-                            <asp:LinkButton ID="InsertInstance" runat="server" Text="Добавить:" OnClick="InsertInstance_Click" />
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Image ID="DeleteImage" runat="server" Style="position: relative; top: -4px; left: 1px"
-                                ImageUrl="~/images/delete.png" Width="20" Height="20" ImageAlign="Middle" />
-                            <asp:LinkButton ID="DeleteInstance" runat="server" Text="Удалить:" OnClick="DeleteInstance_Click" />
-
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <asp:Image ID="SaveImage" runat="server" ImageUrl="~/images/save-icon.png" Width="20" Height="20" ImageAlign="Middle"
-                                       Style="position: relative; top: -4px; left: 1px" />
-                             <span title="Включить/Отключить редактирование объектов">
-                                <asp:CheckBox runat="server" ID="IsEditModeCheckBox" OnCheckedChanged="IsEditModeCheckBox_CheckedChanged"
-                                    AutoPostBack="true" />
-                            </span>
-                            <asp:LinkButton ID="SaveObjects" runat="server" Text="Сохранить объекты:" OnClick="SaveObjects_OnClick"
-                                ToolTip="Сохранить объекты:" />
-                       </td>
-                    </tr>
-
-                </table>
-
-            </details>
-        </td>
-    </tr>
-    <asp:UpdatePanel style="float: right;" ID="RecordsNumberUpPanel" runat="server">
-        <ContentTemplate>
-         <asp:Label ID="Wcf_summator" runat="server" />
-            <asp:Label ID="RecordsNumberLabel" runat="server" />
-        </ContentTemplate>
-    </asp:UpdatePanel>
-</table>
-<%--
-            <asp:UpdatePanel  style="float:right;"  ID="RecordsNumberUpPanel" runat="server">
-                <ContentTemplate >
-                    <asp:Label   ID="RecordsNumberLabel" runat="server" />
-                </ContentTemplate>
-            </asp:UpdatePanel>--%>
+</div>
 <asp:Button Visible="false" ID="FilterReNameButton" runat="server" Text="Переименовать"
     OnClick="FilterReNameButton_Click" />
 <asp:Button Visible="false" ID="FilterDeleteButton" runat="server" Text="Удалить"
@@ -410,11 +238,10 @@
 <asp:LinkButton ID="navigationLink" runat="server" Text="ClientIDMode=Static" Style="display: none"
     ClientIDMode="Static" PostBackUrl=""></asp:LinkButton>
 
-    <Navigation:Breadcrumbs runat="server"></Navigation:Breadcrumbs>
 <asp:MultiView ID="ReportMultiView" runat="server" ActiveViewIndex="0">
-   
-     <asp:View ID="TemplateView" runat="server">
-    
+
+    <asp:View ID="TemplateView" runat="server">
+
         <Dialog:Form runat="server" ID="GroupReportForm2" Caption="Подготовка отчета по шаблону"
             CancelButtonID="CancelButton">
             <ContentTemplate>
@@ -470,7 +297,7 @@
                     <activepagestyle cssclass="activePageStyle" />
                 </Report:TableViewControl>
             </ContentTemplate>
-        </asp:UpdatePanel>         
+        </asp:UpdatePanel>
         <asp:TextBox Style="display: none" ID="ResizableTableControlBox" Width="1000" runat="server" />
         <asp:TextBox Style="display: none" ID="ColResizableTempIDBox" Width="100" runat="server" />
         <asp:TextBox Style="display: none" ID="SelectedRowIDBox" runat="server"></asp:TextBox>
@@ -488,8 +315,7 @@
     <ContentTemplate>
         <table>
             <tr>
-                <td>
-                    Имя фильтра
+                <td>Имя фильтра
                 </td>
                 <td>
                     <asp:TextBox ID="InsertNameFilter" Width="250px" runat="server" placeholder="обязательно для заполнения" />
@@ -506,8 +332,7 @@
     <ContentTemplate>
         <table>
             <tr>
-                <td>
-                    Имя фильтра
+                <td>Имя фильтра
                 </td>
                 <td>
                     <asp:TextBox ID="RenameNameBox" Width="250px" runat="server" placeholder="обязательно для заполнения" />

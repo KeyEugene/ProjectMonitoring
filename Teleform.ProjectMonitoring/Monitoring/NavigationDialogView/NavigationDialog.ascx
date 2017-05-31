@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationDialog.ascx.cs" Inherits="Teleform.ProjectMonitoring.NavigationDialog" %>
 
-<asp:UpdatePanel runat="server" ID="NavigationTreeDialog">
+<%--<asp:UpdatePanel runat="server" ID="NavigationTreeDialog">
     <ContentTemplate>
         <div runat="server" class="navigationTreeDialog" onmouseover="onMouseOverNavigDialog(this);" onmouseout="onMouseOutNavigDialog(this);">
             <div class="SettingsNavigation" id="SettingsNavig">
@@ -14,24 +14,38 @@
             </asp:TreeView>
         </div>
     </ContentTemplate>
-</asp:UpdatePanel>
+</asp:UpdatePanel>--%>
+<asp:TreeView runat="server" ID="treeView" ViewStateMode="Disabled" EnableViewState="false">
+</asp:TreeView>
+ <asp:CheckBox ID="ShowAllNavigation" Text="Показать все" runat="server" AutoPostBack="true" />
+
 <asp:UpdatePanel runat="server" ID="NavigationObjects">
     <ContentTemplate>
-        <div class="navigationTreeDialog NavigationObjects" onmouseover="onMouseOverNavigDialog(this);" onmouseout="onMouseOutNavigDialog(this);">
+
+        <div class="navigationTreeDialog NavigationObjects" onmouseover="onMouseOverNavigDialog(this);" onmouseout="onMouseOutNavigDialog(this);" 
+            onclick="moveNavigationDialog(this);">
             <div class="movedialog" onclick="moveNavigationDialog(this);" id="MoveButtonNavigationObjects">
                 >>>
             </div>
             <asp:PlaceHolder runat="server" ID="LevelContainer">
                 <asp:TextBox ID="IndexNodeTextBox" CssClass="IndexNodeTextBox" runat="server"
-                     Style="margin: 2px 1px 0px 50px; width: 50px;" ToolTip="Уровень раскрытия." type="number" onchange="ChangeIndexNodeTextBox(this)" />
+                    Style="margin: 2px 1px 0px 50px; width: 50px;" ToolTip="Уровень раскрытия." type="number" onchange="ChangeIndexNodeTextBox(this)" />
                 <asp:Button Text="Обновить" runat="server" OnClientClick="ShowWaitGifForIndexNodeTextBox();" />
                 <asp:Image CssClass="WaitForRightNaviControl" ImageUrl="~/images/WaitForRightNaviControl.gif" runat="server" Style="display: none;" />
-                <asp:Label CssClass="ErrorMessage"  runat="server" style="color: red;" />
+                <asp:Label CssClass="ErrorMessage" runat="server" Style="color: red;" />
             </asp:PlaceHolder>
             <asp:TreeView runat="server" ID="objectTreeView" ViewStateMode="Disabled" EnableViewState="false" />
         </div>
     </ContentTemplate>
 </asp:UpdatePanel>
+
+ <script>
+        $(document).ready(function () {
+            var navigation_object = $("[id*=NavigationObjects]");
+            var navigation_object_container = $("#object_treeview_conteiner");
+            navigation_object.appendTo(navigation_object_container);
+        });
+    </script>
 
 <style>
     #IndexNodeTextBox {
@@ -42,20 +56,13 @@
 
 <script type="text/javascript">
     /* Navigation dialog */
-
-
-
-   
-    
-    
-    
     function moveNavigationDialog(o) {
         var divPath = document.getElementsByClassName("navigationTreeDialog");
 
         var isPath = o["id"] !== "MoveButtonNavigationPath";
         if (isPath)
             divPath = document.getElementsByClassName("NavigationObjects");  //Move NavigationObjects
-
+        o = $(".movedialog")[0];
         if (o.innerText === ">>>") {
             o.innerText = "<<<";
             divPath[0].style.transition = "all 0.4s ease-in-out 0.1s";
@@ -77,7 +84,7 @@
                 divPath[0].style.left = "97.8%";
                 divPath[0].style.height = '150px';
             }
-            divPath[0].style["opacity"] = ".05"; //".1";
+            divPath[0].style["opacity"] = "1"; //".1";.05
         }
     }
 
@@ -86,7 +93,7 @@
     }
 
     function onMouseOutNavigDialog(o) {
-        o.style["opacity"] = ".05"; //".1"; --- разкоментить
+        o.style["opacity"] = "1"; //".1"; 05 --- разкоментить
     }
 
     function showHideSettings(o) {

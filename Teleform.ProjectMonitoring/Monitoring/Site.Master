@@ -2,7 +2,8 @@
 
 <%@ Import Namespace="Teleform.ProjectMonitoring" %>
 <%@ Import Namespace="Monitoring" %>
-<%@ Register Src="~/NavigationDialogView/NavigationDialog.ascx" TagPrefix="Project" TagName="NavigationDialog" %>
+<%@ Register TagPrefix="Navigation" TagName="Breadcrumbs" Src="~/NavigationFrame/Breadcrumbs.ascx" %>
+
 <%--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">--%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -12,7 +13,6 @@
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/calendar.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery-3.2.1.min.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Scripts/colResizable-1.6.min.js") %>"></script>
-
 
     <link type="text/css" href="./Styles/selectedRow.css" rel="Stylesheet" />
     <%--<link type="text/css" href="Styles/newObjectStyle.css" rel="Stylesheet" />--%>
@@ -86,23 +86,6 @@
             <div class="" id="breadcrumb_container"></div>
             <div class="navbar navbar-default" id="action_menu" style="margin-bottom: 4px;"></div>
 
-            <script>
-                $(document).ready(function () {
-                    //Перемещаем контейнеры на свои места
-                    var inner_left_menu = $("#inner_left_menu");
-                    var left_menu = $("#left_menu");
-                    inner_left_menu.appendTo(left_menu);
-
-                    var action_menu = $("#action_menu");
-                    var action_container = $("#action_container");
-                    action_container.appendTo(action_menu);
-
-                    var breadcrumb = $("#breadcrumb");
-                    var breadcrumb_container = $("#breadcrumb_container");
-                    breadcrumb.appendTo(breadcrumb_container);
-                });
-            </script>
-
             <div class="DELETE_After">
                 <asp:PlaceHolder runat="server">
                     <asp:ScriptManager ID="ScriptManager" runat="server" />
@@ -138,11 +121,27 @@
             </div>
 
             <div id="page-wrapper">
-                <Project:NavigationDialog runat="server" ID="navigationDialog" EnableViewState="false" ViewStateMode="Disabled" />
                 <div class="container-fluid " align="center">
+                    <Navigation:Breadcrumbs runat="server"></Navigation:Breadcrumbs>
                     <asp:ContentPlaceHolder ID="MainContent" runat="server" />
                 </div>
             </div>
+            <script>
+                // $(document).ready(function () {
+                //Перемещаем контейнеры на свои места
+                var inner_left_menu = $("#inner_left_menu");
+                var left_menu = $("#left_menu");
+                inner_left_menu.appendTo(left_menu);
+
+                var action_menu = $("#action_menu");
+                var action_container = $("#action_container");
+                action_container.appendTo(action_menu);
+
+                var breadcrumb = $("#breadcrumb");
+                var breadcrumb_container = $("#breadcrumb_container");
+                breadcrumb.appendTo(breadcrumb_container);
+                //  });
+            </script>
             <%--  <footer class="footer">
             Мониторинг проектов, ООО «Телеформ», все права защищены © 2013-2016 
         </footer>--%>

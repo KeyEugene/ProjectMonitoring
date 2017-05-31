@@ -361,6 +361,19 @@ namespace Teleform.ProjectMonitoring
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Frame.UserControl_InsertInstance_Click += InsertInstance_Click;
+            Frame.UserControl_DeleteInstance_Click += DeleteInstance_Click;
+            Frame.UserControl_IsEditModeCheckBox_CheckedChanged += IsEditModeCheckBox_CheckedChanged;
+            Frame.UserControl_SaveObjects_OnClick += SaveObjects_OnClick;
+            Frame.UserControl_TemplateConstructorButton_Click += TemplateConstructorButton_Click;
+            Frame.UserControl_TemplateConstructorButton_Load += TemplateConstructorButton_Load;
+            Frame.UserControl_TemplateList_SelectedIndexChanged += TemplateList_SelectedIndexChanged;
+            Frame.UserControl_FilterList_SelectedIndexChanged += FilterList_SelectedIndexChanged;
+            Frame.UserControl_GoToFilterDesignerButton_Click += GoToFilterDesignerButton_Click;
+            Frame.UserControl_ResetAllFilters_OnClick += ResetAllFilters_OnClick;
+            Frame.UserControl_ResetAllSortings_OnClick += ResetAllSortings_OnClick;
+            Frame.UserControl_ToGroupReportButton_Click += ToGroupReportButton_Click;
+            Frame.UserControl_CreateExcelReportButton_Click += CreateExcelReportButton_Click;
 
             if (ViewState["templateCode"] != null)
             {
@@ -378,7 +391,7 @@ namespace Teleform.ProjectMonitoring
 
 
             }
-            
+
             var requestEntity = Request["entity"];
             var someEntity = SomeEntity;
 
@@ -411,8 +424,8 @@ namespace Teleform.ProjectMonitoring
             }
 
 #if true
-            var path = string.Format("~/Dynamics/XDynamicCard.aspx?entity={0}", this.Request["entity"]);                
-            InsertInstance.PostBackUrl = path;
+            var path = string.Format("~/Dynamics/XDynamicCard.aspx?entity={0}", this.Request["entity"]);
+            Frame.InsertInstance.PostBackUrl = path;
 #else
             var path = string.Format("~/Dynamics/XDynamicCard.aspx?entity={0}{1}{2}&regime=insert{3}",
                 this.Request["entity"],
@@ -443,16 +456,16 @@ namespace Teleform.ProjectMonitoring
 
         protected void FilterList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(FilterList.SelectedValue))
+            if (!string.IsNullOrEmpty(Frame.FilterList.SelectedValue))
             {
-                var filterID = FilterList.SelectedValue.ToString();
+                var filterID = Frame.FilterList.SelectedValue.ToString();
 
                 FilterDesigner.EntityFilterID = filterID;
 
                 Session[MakeUniqueKey("FilterList")] = filterID;
 
             }
-            else if (FilterList.SelectedValue == "")
+            else if (Frame.FilterList.SelectedValue == "")
             {
                 Session[MakeUniqueKey("FilterList")] = "";
 
@@ -465,10 +478,10 @@ namespace Teleform.ProjectMonitoring
 
         protected void TemplateList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TemplateList.SelectedValue))
+            if (!string.IsNullOrEmpty(Frame.TemplateList.SelectedValue))
             {
                 var userID = Session["SystemUser.objID"].ToString();
-                var templateID = TemplateList.SelectedValue.ToString();
+                var templateID = Frame.TemplateList.SelectedValue.ToString();
 
                 var tContr = TemplateDesigner.Controls.Count;
                 var entID = TemplateDesigner.EntityID;
@@ -494,11 +507,11 @@ namespace Teleform.ProjectMonitoring
 #else
         protected void TemplateList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TemplateList.SelectedValue))
+            if (!string.IsNullOrEmpty(Frame.TemplateList.SelectedValue))
             {
 
                 var userID = Session["SystemUser.objID"].ToString();
-                var templateID = TemplateList.SelectedValue.ToString();
+                var templateID = Frame.TemplateList.SelectedValue.ToString();
 
 
                 if (templateID.Contains("AttributesTemplate"))
@@ -511,7 +524,7 @@ namespace Teleform.ProjectMonitoring
                 }
                 else
                 {
-                    if (!AuthorizationRulesTemplate.Resolution(ActionType.read, Session["SystemUser.objID"].ToString(), TemplateList.SelectedValue))
+                    if (!AuthorizationRulesTemplate.Resolution(ActionType.read, Session["SystemUser.objID"].ToString(), Frame.TemplateList.SelectedValue))
                     {
                         WarningMessageBoxAuthorization.Show();
                         return;
@@ -574,8 +587,8 @@ namespace Teleform.ProjectMonitoring
 
 
             var entityFilterID = string.Empty;
-            if (!string.IsNullOrEmpty(FilterList.SelectedValue))
-                entityFilterID = FilterList.SelectedValue;
+            if (!string.IsNullOrEmpty(Frame.FilterList.SelectedValue))
+                entityFilterID = Frame.FilterList.SelectedValue;
             else
                 entityFilterID = null;
 
@@ -622,11 +635,11 @@ namespace Teleform.ProjectMonitoring
             ListAggregation.ComputeAggrigate(template, refTbl);
 
 
-            if (!IsEditModeCheckBox.Checked)
+            if (!Frame.IsEditModeCheckBox.Checked)
                 Page.Session[string.Concat("DataViewFor", entity.SystemName)] = null;
 
             //Временно, отключить навигацию по объектам (надо разбираться)  
-             Page.Session["checkBoxObjectsNavigation"] = true;
+            Page.Session["checkBoxObjectsNavigation"] = true;
 
             initialiseTableContorl(templateID, refTbl, entityFilterID);
         }
@@ -643,7 +656,7 @@ namespace Teleform.ProjectMonitoring
 
             //ColResizableBox.Text = null;
 
-           
+
 
             ReportViewControl.DataSource = refTbl;
             ReportViewControl.NavigatFilterExpression = GetNavigatFilterExpression();
@@ -659,7 +672,7 @@ namespace Teleform.ProjectMonitoring
         protected void DeleteMessage_Closed(object sender, Phoenix.Web.UI.Dialogs.MessageBoxEventArgs e)
         {
             if (e.Result == Phoenix.Web.UI.Dialogs.MessageBoxResult.Yes)
-            {               
+            {
 
                 int instanceID;
                 var isParse = Int32.TryParse(SelectedRowIDBox.Text, out instanceID);
@@ -677,7 +690,7 @@ namespace Teleform.ProjectMonitoring
                         (ErrorMessageBox.FindControl("ErrorLabel") as Label).Text = ex.Message;
                     }
 
-                   
+
                     GetInstanceList();
                 }
                 else
@@ -703,12 +716,12 @@ namespace Teleform.ProjectMonitoring
             }
             catch (Exception ex)
             {
-                            
+
                 ErrorMessageBox.Show();
                 (ErrorMessageBox.FindControl("ErrorLabel") as Label).Text = ex.Message;
             }
 
-            
+
 
             SaveObjectsJeysonBox.Text = null;
 
@@ -868,7 +881,7 @@ namespace Teleform.ProjectMonitoring
         protected void CreateExcelReportButton_Click(object sender, EventArgs e)
         {
 
-            if (TemplateList.Items.Count == 0)
+            if (Frame.TemplateList.Items.Count == 0)
                 return;
             else
             {
@@ -876,9 +889,9 @@ namespace Teleform.ProjectMonitoring
                 int userID;
                 bool result = int.TryParse(Session["SystemUser.objID"].ToString(), out userID);
                 if (true)
-                    CreateExcelReport(TemplateList.SelectedValue, userID);
+                    CreateExcelReport(Frame.TemplateList.SelectedValue, userID);
                 else
-                    CreateExcelReport(TemplateList.SelectedValue, 0);
+                    CreateExcelReport(Frame.TemplateList.SelectedValue, 0);
             }
 
         }
@@ -907,18 +920,18 @@ namespace Teleform.ProjectMonitoring
             FilterDeleteButton.Visible = false;
             FilterReNameButton.Visible = false;
 
-            FilterList.Visible = true;
-            GoToFilterDesignerButton.Visible = true;
+            Frame.FilterList.Visible = true;
+            Frame.GoToFilterDesignerButton.Visible = true;
 
-            TemplateList.Visible = true;
-            TemplateConstructorButton.Visible = true;
+            Frame.TemplateList.Visible = true;
+            Frame.TemplateConstructorButton.Visible = true;
 
 
         }
 
         protected void GoToFilterDesignerButton_Click(object sender, EventArgs e)
         {
-            if (FilterList.SelectedValue == "")
+            if (Frame.FilterList.SelectedValue == "")
             {
                 FilterDialog.Caption = "Создание фильтра";
                 FilterDialog.Show();
@@ -946,10 +959,10 @@ namespace Teleform.ProjectMonitoring
             FilterDesigner.CreateFilter(xml);
             var filterID = FilterDesigner.GetFilterID(name, entityID);
 
-            FilterList.Items.Clear();
-            FilterList.Items.Add(new ListItem("Не выбрано", ""));
-            FilterList.DataBind();
-            FilterList.SelectedValue = filterID;
+            Frame.FilterList.Items.Clear();
+            Frame.FilterList.Items.Add(new ListItem("Не выбрано", ""));
+            Frame.FilterList.DataBind();
+            Frame.FilterList.SelectedValue = filterID;
 
             FilterDialog.Close();
             goToFilterDesigner();
@@ -964,16 +977,16 @@ namespace Teleform.ProjectMonitoring
 
         public void ApplyReNameFilterButton_Click(object sender, EventArgs e)
         {
-            var filterID = FilterList.SelectedValue;
+            var filterID = Frame.FilterList.SelectedValue;
             var entityFilter = Storage.Select<EntityFilter>(filterID);
 
             var name = (this.ReNameFilterDialog.FindControl("RenameNameBox") as TextBox).Text;
             entityFilter.Name = name;
 
             var i = 0;
-            foreach (var item in FilterList.Items)
+            foreach (var item in Frame.FilterList.Items)
             {
-                if (name == FilterList.Items[i].Text || string.IsNullOrEmpty(name))
+                if (name == Frame.FilterList.Items[i].Text || string.IsNullOrEmpty(name))
                 {
                     FilterDesigner.ErrorsChecking(name, false);
                 }
@@ -983,7 +996,7 @@ namespace Teleform.ProjectMonitoring
 
             var xml = FilterDesigner.GenerateXml(entityFilter);
             FilterDesigner.UpdateFilter(xml);
-            FilterList.SelectedItem.Text = RenameNameBox.Text;
+            Frame.FilterList.SelectedItem.Text = RenameNameBox.Text;
 
             ReNameFilterDialog.Close();
             goToFilterDesigner();
@@ -996,7 +1009,7 @@ namespace Teleform.ProjectMonitoring
 
         private void goToFilterDesigner()
         {
-            FilterDesigner.EntityFilterID = int.Parse(FilterList.SelectedValue);
+            FilterDesigner.EntityFilterID = int.Parse(Frame.FilterList.SelectedValue);
             ReportMultiView.SetActiveView(FilterDesignerView);
 
             var reportView = this.Parent;
@@ -1011,8 +1024,8 @@ namespace Teleform.ProjectMonitoring
             FilterReNameButton.Visible = true;
             FilterDeleteButton.Visible = true;
 
-            TemplateConstructorButton.Visible = false;
-            TemplateList.Visible = false;
+            Frame.TemplateConstructorButton.Visible = false;
+            Frame.TemplateList.Visible = false;
 
         }
 
@@ -1043,7 +1056,7 @@ namespace Teleform.ProjectMonitoring
 
         protected void FilterDeleteButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(FilterList.SelectedValue))
+            if (!string.IsNullOrEmpty(Frame.FilterList.SelectedValue))
                 DeleteWarningDialog.Show();
         }
         protected void DeleteWarningDialog_Close(object sender, EventArgs e)
@@ -1052,8 +1065,8 @@ namespace Teleform.ProjectMonitoring
             {
                 var FilterList = this.FindControl("FilterList") as DropDownList;
 
-                var index = FilterList.SelectedIndex;
-                var entityFilterID = FilterList.SelectedValue;
+                var index = Frame.FilterList.SelectedIndex;
+                var entityFilterID = Frame.FilterList.SelectedValue;
 
                 using (var c = new SqlConnection(Kernel.ConnectionString))
                 using (var cmd = new SqlCommand("DELETE FROM [model].[R$EntityFilter] WHERE objID = @entityFilterID; DELETE FROM [model].[R$EntityFilterAttribute] WHERE [entityFilterID] = @entityFilterID", c))
@@ -1066,12 +1079,12 @@ namespace Teleform.ProjectMonitoring
                 Storage.ClearInstanceCache(typeof(EntityFilter), entityFilterID);
 
 
-                FilterList.Items.Clear();
-                FilterList.Items.Add(new ListItem("Не выбрано", ""));
-                FilterList.DataBind();
+                Frame.FilterList.Items.Clear();
+                Frame.FilterList.Items.Add(new ListItem("Не выбрано", ""));
+                Frame.FilterList.DataBind();
 
-                if (!string.IsNullOrEmpty(FilterList.SelectedValue))
-                    ReportViewControl.EntityFilterID = FilterList.SelectedValue;
+                if (!string.IsNullOrEmpty(Frame.FilterList.SelectedValue))
+                    ReportViewControl.EntityFilterID = Frame.FilterList.SelectedValue;
                 else
                     ReportViewControl.EntityFilterID = null;
 
@@ -1107,7 +1120,7 @@ namespace Teleform.ProjectMonitoring
 
 
         protected List<object> GetPermittedTemplates(string lexem, string typeCode)
-        {       
+        {
             var ReportsTemplateslist = new List<object>();
 
             entityID = Request.QueryString["entity"];
@@ -1155,47 +1168,47 @@ namespace Teleform.ProjectMonitoring
             {
                 var userID = Session["SystemUser.objID"].ToString();
 
-                TemplateList.Items.Clear();
+                Frame.TemplateList.Items.Clear();
 
-                var requireTemplateID = string.Format("requireAttributesTemplate_{0}", entityID);                
+                var requireTemplateID = string.Format("requireAttributesTemplate_{0}", entityID);
                 var titleTemplateID = string.Format("titleAttributesTemplate_{0}", entityID);
-                                
+
                 var requireTemplate = Storage.Select<Template>(requireTemplateID);
                 var titleTemplate = Storage.Select<Template>(titleTemplateID);
 
                 var runtimeTeplates = new List<Template>();
                 runtimeTeplates.Add(requireTemplate);
                 runtimeTeplates.Add(titleTemplate);
-                
 
-                //TemplateList.Items.Add(new ListItem("Титульный шаблон", titleTemplateID));
-                //TemplateList.Items.Add(new ListItem("Создание и редактирование объектов", requireTemplateID));
-                
+
+                //Frame.TemplateList.Items.Add(new ListItem("Титульный шаблон", titleTemplateID));
+                //Frame.TemplateList.Items.Add(new ListItem("Создание и редактирование объектов", requireTemplateID));
+
 
                 var templateListSource = UserTemlatePermission.GetPermittedTemplates(entityID, userID, "=", "TableBased", runtimeTeplates);
 
-                TemplateList.DataSource = templateListSource;              
-                TemplateList.DataBind();
+                Frame.TemplateList.DataSource = templateListSource;
+                Frame.TemplateList.DataBind();
 
                 var templateSessionKey = MakeUniqueKey("TemplateList");
                 var templateID = Session[templateSessionKey];
                 if (templateID != null)
-                    TemplateList.SelectedValue = templateID.ToString();
+                    Frame.TemplateList.SelectedValue = templateID.ToString();
                 else
-                    TemplateList.SelectedValue = string.Format("titleAttributesTemplate_{0}", entityID);
+                    Frame.TemplateList.SelectedValue = string.Format("titleAttributesTemplate_{0}", entityID);
             }
 
 
-            FilterList.Items.Clear();
-            FilterList.Items.Add(new ListItem("Создать новый", ""));
-            FilterList.DataBind();
+            Frame.FilterList.Items.Clear();
+            Frame.FilterList.Items.Add(new ListItem("Создать новый", ""));
+            Frame.FilterList.DataBind();
 
             var filterSessionKey = MakeUniqueKey("FilterList");
             var filterID = Session[filterSessionKey];
             if (filterID != null)
-                FilterList.SelectedValue = filterID.ToString();
+                Frame.FilterList.SelectedValue = filterID.ToString();
             else
-                FilterList.SelectedValue = "";
+                Frame.FilterList.SelectedValue = "";
         }
 
 
@@ -1209,8 +1222,8 @@ namespace Teleform.ProjectMonitoring
 
             if (string.IsNullOrEmpty(templateID))
             {
-        
-                var templateList = UserTemlatePermission.GetPermittedTemplates(entityID, userID, " != ", "InputExcelBased");      
+
+                var templateList = UserTemlatePermission.GetPermittedTemplates(entityID, userID, " != ", "InputExcelBased");
                 if (templateList.Count == 0)
                 {
                     EditTemplateButton.Visible = false;
@@ -1300,12 +1313,12 @@ namespace Teleform.ProjectMonitoring
         {
             FillDropDownList();
         }
-        
+
         protected void EditTemplateButton_Click(object sender, EventArgs e)
         {
             var userID = Session["SystemUser.objID"].ToString();
             var templateID = ReportsTemplatesList.SelectedValue;
-            var template = Storage.Select<Template>(templateID);           
+            var template = Storage.Select<Template>(templateID);
 
             if (template.TypeCode == EnumTypeCode.crossReport || template.TypeCode == EnumTypeCode.screenTree)
             {

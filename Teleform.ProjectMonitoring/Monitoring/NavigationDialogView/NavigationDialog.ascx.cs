@@ -61,7 +61,6 @@ namespace Teleform.ProjectMonitoring
             get
             {
                 return Session["checkBoxObjectsNavigation"] == null ? true : Convert.ToBoolean(Session["checkBoxObjectsNavigation"]);
-               
             }
         }
 
@@ -94,14 +93,14 @@ namespace Teleform.ProjectMonitoring
 
             if (isOnNavigation)
             {
-                NavigationTreeDialog.Visible = true;
+                //NavigationTreeDialog.Visible = true;
                 Session["ShowAllNavigation"] = ShowAllNavigation.Checked;
                 InitializationDataTree();
                 InitializationLeftTreeNode();
                 FillTreeView();
             }
-            else
-                NavigationTreeDialog.Visible = false;
+            //else
+                //NavigationTreeDialog.Visible = false;
 
             if (isOnObjectsNavigation)
             {
@@ -133,41 +132,42 @@ namespace Teleform.ProjectMonitoring
             objectTreeView.Nodes.Clear();
 
             //Вход в админку и "Шаблоны" только Типу Администратор
-            var typeID = Convert.ToInt32(Session["SystemUser.typeID"]);
-            var userID = Convert.ToInt32(Session["SystemUser.objID"]);
+            //var typeID = Convert.ToInt32(Session["SystemUser.typeID"]);
+            //var userID = Convert.ToInt32(Session["SystemUser.objID"]);
 
-            treeView.Nodes.Add(FillMonitoring());
+            FillMonitoring();
+            //treeView.Nodes.Add(FillMonitoring());
 
             //var templatePermission = StorageUserObgects.Select<UserTemplatePermission>(userID, userID).Permission;
 
-            if (typeID == 1 || typeID == 0) //typeID == 0 - временно
-                treeView.Nodes.Add(CreateMainNode("Шаблоны", "Templates/TemplateManager.aspx"));
+            //if (typeID == 1 || typeID == 0) //typeID == 0 - временно
+            //    treeView.Nodes.Add(CreateMainNode("Шаблоны", "Templates/TemplateManager.aspx"));
 
-            if (typeID == 0 || typeID == 1)
-            {
-                var reportsNode = CreateMainNode("Специальные отчеты", "Reporting/Reports.aspx");
-                reportsNode.ChildNodes.Add(CreateMainNode("Древовидное представление", "HardTemplate/HardTemplateView.aspx"));
-                reportsNode.ChildNodes.Add(CreateMainNode("Перекрестное представление", "CrossTemplate/CrossTemplateView.aspx"));
-                reportsNode.Expanded = false;
-                treeView.Nodes.Add(reportsNode);
-            }
+            //if (typeID == 0 || typeID == 1)
+            //{
+            //    var reportsNode = CreateMainNode("Специальные отчеты", "Reporting/Reports.aspx");
+            //    reportsNode.ChildNodes.Add(CreateMainNode("Древовидное представление", "HardTemplate/HardTemplateView.aspx"));
+            //    reportsNode.ChildNodes.Add(CreateMainNode("Перекрестное представление", "CrossTemplate/CrossTemplateView.aspx"));
+            //    reportsNode.Expanded = false;
+            //    treeView.Nodes.Add(reportsNode);
+            //}
 
-            if (typeID == 2 || typeID == 5 || typeID == 1 || typeID == 0)  //typeID == 0 - временно
-                treeView.Nodes.Add(CreateMainNode("Маршруты документов", "Routes/Routes.aspx"));
+            //if (typeID == 2 || typeID == 5 || typeID == 1 || typeID == 0)  //typeID == 0 - временно
+            //    treeView.Nodes.Add(CreateMainNode("Маршруты документов", "Routes/Routes.aspx"));
 
-            treeView.Nodes.Add(CreateMainNode("Уведомления", "events.aspx"));
-            treeView.Nodes.Add(CreateMainNode("Личные настройки", "Settings.aspx"));
+            //treeView.Nodes.Add(CreateMainNode("Уведомления", "events.aspx"));
+            //treeView.Nodes.Add(CreateMainNode("Личные настройки", "Settings.aspx"));
 
-            if (typeID == 1 || typeID == 0) //typeID == 0 - временно
-                treeView.Nodes.Add(CreateMainNode("Администрирование", "admin/administration.aspx"));
+            //if (typeID == 1 || typeID == 0) //typeID == 0 - временно
+            //    treeView.Nodes.Add(CreateMainNode("Администрирование", "admin/administration.aspx"));
             
         }
 
         #region  Fill navigation Tree Node
         private TreeNode FillMonitoring()
         {
-            var nodeMonitoring = CreateMainNode("Функционал АРМ", "EntityListAttributeView.aspx");
-            
+            //var nodeMonitoring = CreateMainNode("Функционал АРМ", "EntityListAttributeView.aspx");// new TreeNode();//
+
 #if alexj
 
             #region Отсеивание Entity без права доступа
@@ -192,13 +192,14 @@ namespace Teleform.ProjectMonitoring
                 var node = new TreeNode();
                 FillThisNode(entity, ref node, GetCountInstance(entity.SystemName));
                 FilledNavigationNode(entity, ref node);
-
-                nodeMonitoring.ChildNodes.Add(node);
+                treeView.Nodes.Add(node);
+                //nodeMonitoring.ChildNodes.Add(node);
 
                 //Делает для того что бы был открыт главный Node, если мы находимся внутри его
-                nodeMonitoring.Expanded = GetExpandedMainNode();
+                node.Expanded = GetExpandedMainNode();
+               //node.Expanded = GetExpandedMainNode();
             }
-            return nodeMonitoring;
+            return null;
         }
 
         private void FilledNavigationNode(Reporting.Entity entity, ref TreeNode node)
@@ -210,7 +211,6 @@ namespace Teleform.ProjectMonitoring
                 var parentID1 = row["parentID"];
                 var parentID2 = parentID;
                 var showAll = ShowAllNavigation.Checked == true ? true : Convert.ToBoolean(row["isIdentified"]); //row["isIdentified"].ToString() == "1"
-                var showAll1 = ShowAllNavigation.Checked;
                 var isIdent = row["isIdentified"];
 
                 if (row["parentID"].ToString() == parentID && (ShowAllNavigation.Checked == true ? true : Convert.ToBoolean(row["isIdentified"])))

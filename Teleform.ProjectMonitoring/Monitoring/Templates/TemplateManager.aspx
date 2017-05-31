@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Шаблоны" Language="C#" AutoEventWireup="true" CodeBehind="TemplateManager.aspx.cs"
     MasterPageFile="~/Site.Master" Inherits="Teleform.ProjectMonitoring.Templates.TemplateManager" %>
 
-<%@ Register TagPrefix="Navigation" TagName="Breadcrumbs" Src="~/NavigationFrame/Breadcrumbs.ascx" %>
 <%@ Register TagPrefix="Navigation" TagName="Frame" Src="~/NavigationFrame/NavigationFrame_Template.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
@@ -52,7 +51,7 @@
         });
     </script>
 
-    <Navigation:Breadcrumbs runat="server"></Navigation:Breadcrumbs>
+    
     <Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
 
     <div class="content">

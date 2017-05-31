@@ -16,6 +16,7 @@
 
 select {
     cursor: pointer;
+    width: auto !important;
 }
 
 input[type="button"], input[type="submit"] {
@@ -367,7 +368,7 @@ details[open] summary.no-det:before {
     left: -470px;
     top: 22%;
     background-color: #424242;
-    opacity: .2;
+    /*opacity: .2;*/
     overflow-x: hidden;
     border-radius: 0px 5px 5px 0px;
     background: linear-gradient(to bottom, #424242, #848484); /*#585858);*/
@@ -391,7 +392,7 @@ details[open] summary.no-det:before {
     text-decoration: blink;
 }
 
-.navigationMainTagA:hover, .navigationTagA:hover {
+/*.navigationMainTagA:hover, .navigationTagA:hover {
     transition: all .3s ease-in-out .02s;
     color: black;
     font-size: 18px;
@@ -399,7 +400,7 @@ details[open] summary.no-det:before {
     height: 10px;
     background-color: #E9EFFD;
     border-radius: 2px;
-}
+}*/
 
 .movedialog {
     position: absolute;
@@ -479,6 +480,7 @@ details[open] summary.no-det:before {
     border-radius: 5px 5px 5px 5px;
     overflow: scroll;
     z-index: 999;
+    text-align: left;
 }
 
 #MoveButtonNavigationObjects {

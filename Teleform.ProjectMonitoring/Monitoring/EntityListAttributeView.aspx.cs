@@ -31,7 +31,7 @@ namespace Teleform.ProjectMonitoring
 
             var entityID = Request.QueryString["entity"];
             var nameObject = Request.QueryString["nameObject"];
-           
+
             if (entityID != null)
             {
 
@@ -63,92 +63,28 @@ namespace Teleform.ProjectMonitoring
 
         protected void Page_Init(object sender, EventArgs e)
         {
-
-            var isClassifier = Request["checker"] != null;
-
             Predicate<Entity> predicate;
 
-            if (isClassifier)
-                predicate = EnumMode;
-            else predicate = DefaultMode;
+            //if (isClassifier)
+            //    predicate = EnumMode;
+            //else
+                predicate = DefaultMode;
 
-            FillEntityList(isClassifier, predicate);
-
-
-            if (isClassifier) CurrentPageTitle = "Классификаторы";
-
+            FillEntityList( predicate);
         }
 
-        private void FillEntityList(bool isClassifier, Predicate<Entity> predicate)
+        private void FillEntityList( Predicate<Entity> predicate)
         {
-
-            if (Session["EntityDropDownList"] != null && Session["EntityDropDownList.isClassifier"] != null)
-            {
-                if (!(isClassifier ^ Convert.ToBoolean(Session["EntityDropDownList.isClassifier"])))
-                {
-                    NewEntityList.literal.Text = Session["EntityDropDownList"].ToString();
-                    return;
-                }
-                Session["EntityDropDownList"] = null;
-            }
-
-            if (isClassifier)
-            {
-                //var query = string.Format("SELECT DISTINCT b.object_ID ID, b.alias as name FROM [model].[R$Template] t join model.BTables b on b.object_ID=t.baseTableID join model.AppTypes a on a.object_ID=b.appTypeID and a.name='Enum'");
-                var query = @"SELECT  bt.object_ID ID, bt.alias as name 
-                            FROM model.BTables bt
-                            join model.AppTypes at on at.object_ID=bt.appTypeID and at.name='Enum'";
-                var dt = Global.GetDataTable(query);
-
-                var list = new List<Entity>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    list.Add(this.GetSchema().Entities.FirstOrDefault(x => x.ID.ToString() == dt.Rows[i]["ID"].ToString()));
-                }
-                NewEntityList.Entities = list;
-            }
-            else
-            {
-                //  EntityList.DataSource = this.GetSchema().Entities.Where(ent => predicate(ent)).OrderBy(ent => ent.Name);
-                var dt = Storage.GetDataTable(string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
+            var dt = Storage.GetDataTable(string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
                                                 left join model.BTables b on b.name=p.entity
                                                 left join model.AppTypes t on t.object_id=b.appTypeID
                                                 where  p.objID is NULL
                                                 order by p.entityAlias", Session["SystemUser.objID"].ToString()));
 
-                var permittedEntities = dt.AsEnumerable().Where(ent => Convert.ToBoolean(ent["read"]));
-                var Entities = this.GetSchema().Entities.Where(ent => predicate(ent)).OrderBy(ent => ent.Name);
-
-                NewEntityList.Entities = Entities.Where(ent => permittedEntities.Select(o => o["entity"].ToString()).Contains(ent.SystemName));
-            }
+            var permittedEntities = dt.AsEnumerable().Where(ent => Convert.ToBoolean(ent["read"]));
+            var Entities = this.GetSchema().Entities.Where(ent => predicate(ent)).OrderBy(ent => ent.Name);
 
             Session["ReportCondition"] = "null";
-            Session["EntityDropDownList.isClassifier"] = isClassifier;
-            NewEntityList.DataBind();
-            NewEntityList.literal.Text = Session["EntityDropDownList"].ToString();
-
-            // EntityList.DataTextField = "name";
-            // EntityList.DataValueField = "ID";
-
-            //EntityList.DataBind();
-
-            //var entityID = Request["entity"];
-            //var j = 0;
-
-            //foreach (ListItem item in EntityList.Items)
-            //    check.Add(item.Value, j++);
-
-            //if (entityID != null && check.ContainsKey(entityID))
-            //    EntityList.SelectedIndex = check[entityID];
-            //else
-            //{
-            //    EntityList.SelectedIndex = 0;
-
-            //    if (!isClassifier)
-            //        Response.Redirect(string.Format("~/EntityListAttributeView.aspx?entity={0}", check.Keys.First()));
-            //    else
-            //        Response.Redirect(string.Format("~/EntityListAttributeView.aspx?entity={0}&checker=isClassifier", check.Keys.First()));
-            //}
         }
 
         protected void reCreateEntityTriggersButton_Click(object sender, EventArgs e)
@@ -189,11 +125,5 @@ namespace Teleform.ProjectMonitoring
                 }
             }
         }
-
-        //protected void EntityList_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    Response.Redirect(string.Format("~/EntityListAttributeView.aspx?entity={0}" + (Request["checker"] != null ? "&checker=" + Request["checker"] : string.Empty), EntityList.SelectedValue));
-        //}
-
     }
 }

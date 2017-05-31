@@ -55,7 +55,7 @@ namespace Teleform.ProjectMonitoring
             entityID = template.Entity.ID.ToString();
             var table = Storage.Select<BusinessContent>(entityID).GetTable(userID);
 
-            if (!IsNeedAllInstances.Checked)
+            if (!Frame.IsNeedAllInstances.Checked)
             {
                 var instancesID = GetInstancesID();
                 DataRow[] rows = table.AsEnumerable().Where(x => instancesID.Contains(x["objID"].ToString())).ToArray();

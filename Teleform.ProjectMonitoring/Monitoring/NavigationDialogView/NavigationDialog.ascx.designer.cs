@@ -13,13 +13,13 @@ namespace Teleform.ProjectMonitoring {
     public partial class NavigationDialog {
         
         /// <summary>
-        /// NavigationTreeDialog control.
+        /// treeView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel NavigationTreeDialog;
+        protected global::System.Web.UI.WebControls.TreeView treeView;
         
         /// <summary>
         /// ShowAllNavigation control.
@@ -29,15 +29,6 @@ namespace Teleform.ProjectMonitoring {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox ShowAllNavigation;
-        
-        /// <summary>
-        /// treeView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView treeView;
         
         /// <summary>
         /// NavigationObjects control.

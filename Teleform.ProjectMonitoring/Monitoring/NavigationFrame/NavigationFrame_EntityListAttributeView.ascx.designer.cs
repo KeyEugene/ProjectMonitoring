@@ -7,162 +7,162 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Monitoring {
+namespace Teleform.ProjectMonitoring.NavigationFrame {
     
     
-    public partial class SiteMaster {
+    public partial class NavigationFrame_EntityListAttributeView {
         
         /// <summary>
-        /// HeadContent control.
+        /// InsertInstance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
+        public global::System.Web.UI.WebControls.LinkButton InsertInstance;
         
         /// <summary>
-        /// MasterForm control.
+        /// DeleteInstance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm MasterForm;
+        public global::System.Web.UI.WebControls.LinkButton DeleteInstance;
         
         /// <summary>
-        /// A1 control.
+        /// IsEditModeCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton A1;
+        public global::System.Web.UI.WebControls.CheckBox IsEditModeCheckBox;
         
         /// <summary>
-        /// Templates control.
+        /// SaveObjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Templates;
+        public global::System.Web.UI.WebControls.LinkButton SaveObjects;
         
         /// <summary>
-        /// TreeViewReports control.
+        /// TemplateConstructorButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton TreeViewReports;
+        public global::System.Web.UI.WebControls.Button TemplateConstructorButton;
         
         /// <summary>
-        /// CrossViewReports control.
+        /// TemplateListSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton CrossViewReports;
+        public global::System.Web.UI.WebControls.SqlDataSource TemplateListSource;
         
         /// <summary>
-        /// Routes control.
+        /// TemplateList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Routes;
+        public global::System.Web.UI.WebControls.DropDownList TemplateList;
         
         /// <summary>
-        /// A2 control.
+        /// ToGroupReportButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton A2;
+        public global::System.Web.UI.WebControls.LinkButton ToGroupReportButton;
         
         /// <summary>
-        /// A5 control.
+        /// GoToFilterDesignerButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton A5;
+        public global::System.Web.UI.WebControls.Button GoToFilterDesignerButton;
         
         /// <summary>
-        /// PersonInfo control.
+        /// FilterSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PersonInfo;
+        public global::System.Web.UI.WebControls.SqlDataSource FilterSource;
         
         /// <summary>
-        /// SettingButton control.
+        /// FilterList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SettingButton;
+        public global::System.Web.UI.WebControls.DropDownList FilterList;
         
         /// <summary>
-        /// LogoutButton control.
+        /// ResetAllFilters control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LogoutButton;
+        public global::System.Web.UI.WebControls.LinkButton ResetAllFilters;
         
         /// <summary>
-        /// ScriptManager control.
+        /// ResetAllSortings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
+        public global::System.Web.UI.WebControls.LinkButton ResetAllSortings;
         
         /// <summary>
-        /// EventsSource control.
+        /// IsNeedAllInstances control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource EventsSource;
+        public global::System.Web.UI.WebControls.CheckBox IsNeedAllInstances;
         
         /// <summary>
-        /// RecentEventsDialog control.
+        /// ExcelReportButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox RecentEventsDialog;
+        protected global::System.Web.UI.WebControls.LinkButton ExcelReportButton;
         
         /// <summary>
-        /// EventList control.
+        /// ImportReportButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView EventList;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ImportReportButton;
         
         /// <summary>
-        /// MainContent control.
+        /// navigationDialog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::Teleform.ProjectMonitoring.NavigationDialog navigationDialog;
     }
 }

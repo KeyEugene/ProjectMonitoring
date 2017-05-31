@@ -39,10 +39,10 @@ namespace Teleform.ProjectMonitoring
         protected void TemplateConstructorButton_Load(object sender, EventArgs e)
         {
             var userID = Session["SystemUser.objID"].ToString();
-            var templateID = TemplateList.SelectedValue.ToString();
+            var templateID = Frame.TemplateList.SelectedValue.ToString();
 
             if (templateID.Contains("AttributesTemplate"))
-                TemplateConstructorButton.Enabled = false;
+                Frame.TemplateConstructorButton.Enabled = false;
             else
             {
 #if true
@@ -52,13 +52,13 @@ namespace Teleform.ProjectMonitoring
                     var isUpdate = AuthorizationRules.TemplateResolution(ActionType.update, userID, templateID);
 
                     if (isUpdate)
-                        TemplateConstructorButton.Enabled = true;
+                        Frame.TemplateConstructorButton.Enabled = true;
                     else
-                        TemplateConstructorButton.Enabled = false;
+                        Frame.TemplateConstructorButton.Enabled = false;
                 }
 
 #else
-                var query = string.Format("SELECT [update] FROM [Permission].[IUTemplatePermission]({0}) where objID = {1}", Session["SystemUser.objID"].ToString(), TemplateList.SelectedValue);
+                var query = string.Format("SELECT [update] FROM [Permission].[IUTemplatePermission]({0}) where objID = {1}", Session["SystemUser.objID"].ToString(), Frame.TemplateList.SelectedValue);
                 
                 var dt = Storage.GetDataTable(query);
 
@@ -68,19 +68,19 @@ namespace Teleform.ProjectMonitoring
                     Boolean.TryParse(dt.Rows[0][0].ToString(), out result);
 
                     if (!result)
-                        TemplateConstructorButton.Enabled = false;
+                        Frame.TemplateConstructorButton.Enabled = false;
                     else
-                        TemplateConstructorButton.Enabled = true;
+                        Frame.TemplateConstructorButton.Enabled = true;
                 }
                 else
-                    TemplateConstructorButton.Enabled = false;
+                    Frame.TemplateConstructorButton.Enabled = false;
 #endif
             }
         }
 
         protected void TemplateConstructorButton_Click(object sender, EventArgs e)
         {
-            if (TemplateList.SelectedIndex == 0 || TemplateList.SelectedIndex == 1)
+            if (Frame.TemplateList.SelectedIndex == 0 || Frame.TemplateList.SelectedIndex == 1)
             {
                 if (!AuthorizationRules.TemplateResolution(ActionType.create, Session["SystemUser.objID"].ToString()))
                 {
@@ -92,7 +92,7 @@ namespace Teleform.ProjectMonitoring
             {
                 if (!AuthorizationRules.TemplateResolution(ActionType.read,
                     Session["SystemUser.objID"].ToString(),
-                    TemplateList.SelectedValue))
+                    Frame.TemplateList.SelectedValue))
                 {
                     WarningMessageBoxAuthorization.Show();
                     return;
@@ -103,7 +103,7 @@ namespace Teleform.ProjectMonitoring
                 oldTemplateName = TemplateDesigner.template.Name;
 
             TemplateDesigner.IsNotShowThis = false;
-            TemplateDesigner.TemplateID = TemplateList.SelectedValue;
+            TemplateDesigner.TemplateID = Frame.TemplateList.SelectedValue;
             TemplateDesigner.EntityID = Request["entity"];
             TemplateDesigner.userID = Convert.ToInt32(Session["SystemUser.objID"]);
             TemplateDesigner.DataBind();
@@ -125,7 +125,7 @@ namespace Teleform.ProjectMonitoring
                 entityList.Visible = entitiListLabel.Visible = p;
             }
 
-            GoToFilterDesignerButton.Visible = FilterList.Visible = p;
+            Frame.GoToFilterDesignerButton.Visible = Frame.FilterList.Visible = p;
         }
 
     }
