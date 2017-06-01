@@ -377,7 +377,7 @@ details[open] summary.no-det:before {
 }
 
 .navigationTagA:link, .navigationTagA:active, .navigationTagA:visited {
-    color: white;
+    /*color: white;*/
     text-decoration: blink;
 }
 
@@ -388,7 +388,7 @@ details[open] summary.no-det:before {
 }
 
 .navigationMainTagA:link, .navigationMainTagA:active, .navigationMainTagA:visited {
-    color: silver;
+    /*color: silver;*/
     text-decoration: blink;
 }
 

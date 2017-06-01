@@ -49,15 +49,6 @@ namespace Teleform.ProjectMonitoring.NavigationFrame {
         public global::System.Web.UI.WebControls.LinkButton SaveObjects;
         
         /// <summary>
-        /// TemplateConstructorButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.Button TemplateConstructorButton;
-        
-        /// <summary>
         /// TemplateListSource control.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,15 @@ namespace Teleform.ProjectMonitoring.NavigationFrame {
         public global::System.Web.UI.WebControls.DropDownList TemplateList;
         
         /// <summary>
+        /// TemplateConstructorButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        public global::System.Web.UI.WebControls.Button TemplateConstructorButton;
+        
+        /// <summary>
         /// ToGroupReportButton control.
         /// </summary>
         /// <remarks>
@@ -83,15 +83,6 @@ namespace Teleform.ProjectMonitoring.NavigationFrame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         public global::System.Web.UI.WebControls.LinkButton ToGroupReportButton;
-        
-        /// <summary>
-        /// GoToFilterDesignerButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.Button GoToFilterDesignerButton;
         
         /// <summary>
         /// FilterSource control.
@@ -110,6 +101,15 @@ namespace Teleform.ProjectMonitoring.NavigationFrame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         public global::System.Web.UI.WebControls.DropDownList FilterList;
+        
+        /// <summary>
+        /// GoToFilterDesignerButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        public global::System.Web.UI.WebControls.Button GoToFilterDesignerButton;
         
         /// <summary>
         /// ResetAllFilters control.
@@ -145,16 +145,25 @@ namespace Teleform.ProjectMonitoring.NavigationFrame {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ExcelReportButton;
+        public global::System.Web.UI.WebControls.LinkButton ExcelReportButton;
         
         /// <summary>
-        /// ImportReportButton control.
+        /// ImportFileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ImportReportButton;
+        public global::System.Web.UI.WebControls.FileUpload ImportFileUpload;
+        
+        /// <summary>
+        /// LoadImportFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        public global::System.Web.UI.WebControls.Button LoadImportFile;
         
         /// <summary>
         /// navigationDialog control.

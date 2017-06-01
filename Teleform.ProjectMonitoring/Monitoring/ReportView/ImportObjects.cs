@@ -20,7 +20,7 @@ namespace Teleform.ProjectMonitoring
 
         protected void DownloadImportFile_Click(object sender, EventArgs e)
         {
-            var typeFile = new BaseParseFile(ImportFileUpload).GetTypeFile();
+            var typeFile = new BaseParseFile(Frame.ImportFileUpload).GetTypeFile();
 
             if (typeFile == TypeFile.Excel)
                 PreparationExcelObjects();
@@ -34,15 +34,10 @@ namespace Teleform.ProjectMonitoring
 
         }
 
-        protected void CancelDownloadImportFile_Click(object sender, EventArgs e)
-        {
-            //ToDo Somethings
-        }
-
         #region Save excel object's to DataBase
         private void PreparationExcelObjects()
         {
-            excelList = new ExcelParser(ImportFileUpload.FileBytes, ImportFileUpload.FileName).StartParse(out excelTemplate);
+            excelList = new ExcelParser(Frame.ImportFileUpload.FileBytes, Frame.ImportFileUpload.FileName).StartParse(out excelTemplate);
 
             if (ValidateExcelObject())
             {
@@ -52,7 +47,7 @@ namespace Teleform.ProjectMonitoring
 
             entityID = excelTemplate.Entity.ID.ToString();
             excelList = null; excelTemplate = null;
-            ImportFileUpload = null;
+            Frame.ImportFileUpload = null;
             
         }
 

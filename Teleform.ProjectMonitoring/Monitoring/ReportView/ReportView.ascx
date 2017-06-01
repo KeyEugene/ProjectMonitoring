@@ -174,15 +174,6 @@
                 option.css("display", "block");
         }
     }
-
-    function ShowImportDialog() {
-        var div = $("[id*=importDialog").css("display");
-        if (div != "block")
-            $("[id*=importDialog").css("display", "block");
-        else
-            $("[id*=importDialog").css("display", "none");
-    }
-
 </script>
 <Dialog:MessageBox runat="server" ID="TemplateSavedMessageBox" Caption="Шаблон создан"
     Icon="Notification">
@@ -372,13 +363,3 @@
         У вас нет прав для совершение данного действия.
     </ContentTemplate>
 </Dialog:MessageBox>
-<div id="importDialog">
-    <br />
-    <br />
-    <asp:FileUpload ID="ImportFileUpload" runat="server" ForeColor="White" />
-    <br />
-    <br />
-    <br />
-    <asp:Button ID="DownloadImportFile" runat="server" Text="Загрузить файл" OnClick="DownloadImportFile_Click" />
-    <asp:Button ID="CancelDownloadImportFile" Text="Отмена" runat="server" OnClick="CancelDownloadImportFile_Click" />
-</div>

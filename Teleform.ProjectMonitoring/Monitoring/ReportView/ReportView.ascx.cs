@@ -374,6 +374,7 @@ namespace Teleform.ProjectMonitoring
             Frame.UserControl_ResetAllSortings_OnClick += ResetAllSortings_OnClick;
             Frame.UserControl_ToGroupReportButton_Click += ToGroupReportButton_Click;
             Frame.UserControl_CreateExcelReportButton_Click += CreateExcelReportButton_Click;
+            Frame.UserControl_LoadImportFile_Click += DownloadImportFile_Click;
 
             if (ViewState["templateCode"] != null)
             {

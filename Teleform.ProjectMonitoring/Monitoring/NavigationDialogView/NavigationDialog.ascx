@@ -1,28 +1,26 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NavigationDialog.ascx.cs" Inherits="Teleform.ProjectMonitoring.NavigationDialog" %>
 
-<%--<asp:UpdatePanel runat="server" ID="NavigationTreeDialog">
-    <ContentTemplate>
-        <div runat="server" class="navigationTreeDialog" onmouseover="onMouseOverNavigDialog(this);" onmouseout="onMouseOutNavigDialog(this);">
-            <div class="SettingsNavigation" id="SettingsNavig">
-                <asp:CheckBox ID="ShowAllNavigation" Text="Показать все" runat="server" AutoPostBack="true" />
-            </div>
-            <div class="SettingsButtonNavigation" onclick="showHideSettings(this);">Настройки</div>
-            <div class="movedialog" onclick="moveNavigationDialog(this);" id="MoveButtonNavigationPath">
-                >>>
-            </div>
-            <asp:TreeView runat="server" ID="treeView" ViewStateMode="Disabled" EnableViewState="false">
-            </asp:TreeView>
-        </div>
-    </ContentTemplate>
-</asp:UpdatePanel>--%>
-<asp:TreeView runat="server" ID="treeView" ViewStateMode="Disabled" EnableViewState="false">
-</asp:TreeView>
- <asp:CheckBox ID="ShowAllNavigation" Text="Показать все" runat="server" AutoPostBack="true" />
+<style>
+    .treeview a {
+        color: #999;
+        padding: 7px;
+    }
 
+        .treeview a:hover {
+            color: #fff;
+            background-color: #000;
+            text-decoration: none;
+        }
+</style>
+<asp:TreeView runat="server" ID="treeView" ViewStateMode="Disabled" EnableViewState="false" CssClass="treeview">
+</asp:TreeView>
+<div class="text-center" style="margin-top: 25px;">
+    <asp:CheckBox ID="ShowAllNavigation" Text="Показать все" runat="server" AutoPostBack="true" />
+</div>
 <asp:UpdatePanel runat="server" ID="NavigationObjects">
     <ContentTemplate>
 
-        <div class="navigationTreeDialog NavigationObjects" onmouseover="onMouseOverNavigDialog(this);" onmouseout="onMouseOutNavigDialog(this);" 
+        <div class="navigationTreeDialog NavigationObjects" onmouseover="onMouseOverNavigDialog(this);" onmouseout="onMouseOutNavigDialog(this);"
             onclick="moveNavigationDialog(this);">
             <div class="movedialog" onclick="moveNavigationDialog(this);" id="MoveButtonNavigationObjects">
                 >>>
@@ -39,13 +37,13 @@
     </ContentTemplate>
 </asp:UpdatePanel>
 
- <script>
-        $(document).ready(function () {
-            var navigation_object = $("[id*=NavigationObjects]");
-            var navigation_object_container = $("#object_treeview_conteiner");
-            navigation_object.appendTo(navigation_object_container);
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+        var navigation_object = $("[id*=NavigationObjects]");
+        var navigation_object_container = $("#object_treeview_conteiner");
+        navigation_object.appendTo(navigation_object_container);
+    });
+</script>
 
 <style>
     #IndexNodeTextBox {

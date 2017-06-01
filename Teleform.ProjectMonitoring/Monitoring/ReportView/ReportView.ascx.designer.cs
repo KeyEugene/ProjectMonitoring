@@ -461,32 +461,5 @@ namespace Teleform.ProjectMonitoring {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Phoenix.Web.UI.Dialogs.MessageBox WarningMessageBoxAuthorization;
-        
-        /// <summary>
-        /// ImportFileUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ImportFileUpload;
-        
-        /// <summary>
-        /// DownloadImportFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DownloadImportFile;
-        
-        /// <summary>
-        /// CancelDownloadImportFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelDownloadImportFile;
     }
 }

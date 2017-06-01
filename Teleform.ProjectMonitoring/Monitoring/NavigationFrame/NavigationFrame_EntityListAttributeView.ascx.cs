@@ -22,6 +22,7 @@ namespace Teleform.ProjectMonitoring.NavigationFrame
         public event EventHandler UserControl_ResetAllSortings_OnClick;
         public event EventHandler UserControl_ToGroupReportButton_Click;
         public event EventHandler UserControl_CreateExcelReportButton_Click;
+        public event EventHandler UserControl_LoadImportFile_Click;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -129,6 +130,13 @@ namespace Teleform.ProjectMonitoring.NavigationFrame
             if (UserControl_CreateExcelReportButton_Click != null)
             {
                 UserControl_CreateExcelReportButton_Click(sender, e);
+            }
+        }
+        protected void LoadImportFile_Click(object sender, EventArgs e)
+        {
+            if (UserControl_LoadImportFile_Click != null)
+            {
+                UserControl_LoadImportFile_Click(sender, e);
             }
         }
     }

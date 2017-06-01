@@ -176,7 +176,7 @@
     <Content Include="EntityView.aspx" />
     <Content Include="Events.aspx" />
     <Content Include="admin\ListManagement.aspx" />
-    <Content Include="environment.aspx" />
+    <Content Include="OLD_environment.aspx" />
     <Content Include="get.schema.aspx" />
     <Content Include="EntityListAttributeView.aspx" />
     <Content Include="ListAttributeView.aspx" />
@@ -308,7 +308,6 @@
     <Compile Include="admin\UserManagement.ascx.designer.cs">
       <DependentUpon>UserManagement.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="CodeExpressionBuilder.cs" />
     <Compile Include="CrossTemplate\CrossTemplateView.aspx.cs">
       <DependentUpon>CrossTemplateView.aspx</DependentUpon>
@@ -457,12 +456,12 @@
       <DependentUpon>ListManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="deprecated\CardMenuExtensions.cs" />
-    <Compile Include="environment.aspx.cs">
-      <DependentUpon>environment.aspx</DependentUpon>
+    <Compile Include="OLD_environment.aspx.cs">
+      <DependentUpon>OLD_environment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="environment.aspx.designer.cs">
-      <DependentUpon>environment.aspx</DependentUpon>
+    <Compile Include="OLD_environment.aspx.designer.cs">
+      <DependentUpon>OLD_environment.aspx</DependentUpon>
     </Compile>
     <Compile Include="deprecated\PageExtensions.cs" />
     <Compile Include="get.schema.aspx.cs">
