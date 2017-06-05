@@ -13,49 +13,13 @@ namespace Teleform.ProjectMonitoring.admin {
     public partial class Audit {
         
         /// <summary>
-        /// EntityListAudit control.
+        /// Frame control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList EntityListAudit;
-        
-        /// <summary>
-        /// UserListAudit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList UserListAudit;
-        
-        /// <summary>
-        /// DateFrom control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DateFrom;
-        
-        /// <summary>
-        /// DateTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox DateTo;
-        
-        /// <summary>
-        /// ViewButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ViewButton;
+        protected global::Teleform.ProjectMonitoring.NavigationFrame.admin.NavigationFrame_7 Frame;
         
         /// <summary>
         /// AuditSqlDataSource control.

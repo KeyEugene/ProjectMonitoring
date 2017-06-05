@@ -19,15 +19,23 @@ namespace Teleform.ProjectMonitoring.admin
     using System.Collections.Specialized;
     public partial class Audit : System.Web.UI.UserControl
     {
+        protected override void OnLoad(EventArgs e)
+        {
+            Frame.UserControl_EntityListAudit_Load += EntityListAudit_Load;
+            Frame.UserControl_UserListAudit_Load += UserListAudit_Load;
+            Frame.UserControl_ViewButton_Click += ViewButton_Click;
+
+            base.OnLoad(e);
+        }
 
         protected void EntityListAudit_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                EntityListAudit.DataSource = this.GetSchema().Entities.Where(o => o.IsEnumeration == false).ToList();
-                EntityListAudit.DataTextField = "Name";
-                EntityListAudit.DataValueField = "ID";
-                EntityListAudit.DataBind();
+                Frame.EntityListAudit.DataSource = this.GetSchema().Entities.Where(o => o.IsEnumeration == false).ToList();
+                Frame.EntityListAudit.DataTextField = "Name";
+                Frame.EntityListAudit.DataValueField = "ID";
+                Frame.EntityListAudit.DataBind();
             }
         }
 
@@ -38,8 +46,8 @@ namespace Teleform.ProjectMonitoring.admin
             {
                 string query = string.Empty;
 
-                UserListAudit.Items.Clear();
-                UserListAudit.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
+                Frame.UserListAudit.Items.Clear();
+                Frame.UserListAudit.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
 
                 query = string.Concat("SELECT [ObjID], [login],[typeID] FROM [_User]");
 
@@ -47,7 +55,7 @@ namespace Teleform.ProjectMonitoring.admin
 
                 foreach (DataRow item in dt.Rows)
                 {
-                    UserListAudit.Items.Add(new ListItem { Value = item[0].ToString(), Text = item[1].ToString() });
+                    Frame.UserListAudit.Items.Add(new ListItem { Value = item[0].ToString(), Text = item[1].ToString() });
                 }
             }
         }
@@ -62,7 +70,7 @@ namespace Teleform.ProjectMonitoring.admin
 
                 e.Row.Attributes.Add("class", "AlternativeRow");
 
-                var entityID = EntityListAudit.SelectedValue;
+                var entityID = Frame.EntityListAudit.SelectedValue;
 
                 e.Row.Attributes.Add("onclick", "switchSelectedRow(" + rowID + "," + entityID + "," + "true" + " )");
             }
@@ -85,7 +93,7 @@ namespace Teleform.ProjectMonitoring.admin
 #if Paging
         #region Paging
         public int PageIndex { get; set; }
-      
+
         private void TrackPageIndex()
         {
             var controlID = Page.Request["__EVENTTARGET"];
@@ -103,7 +111,7 @@ namespace Teleform.ProjectMonitoring.admin
                         if (!string.IsNullOrWhiteSpace(controlID) && controlID.StartsWith(UniqueID))
                         {
                             var pageIndex = controlArguments.Substring(agrumentIsFind + 5);
-                            PageIndex = int.Parse(pageIndex) -1;
+                            PageIndex = int.Parse(pageIndex) - 1;
                         }
                     }
                 }
@@ -123,19 +131,19 @@ namespace Teleform.ProjectMonitoring.admin
 
         protected void ViewButton_Click(object sender, EventArgs e)
         {
-            var entitySysName = Storage.Select<Entity>(EntityListAudit.SelectedValue).SystemName;
+            var entitySysName = Storage.Select<Entity>(Frame.EntityListAudit.SelectedValue).SystemName;
             if (entitySysName == "__Empty" || string.IsNullOrEmpty(entitySysName))
                 entitySysName = string.Empty;
             int userID;// = -1;
 
-            if (string.IsNullOrEmpty(UserListAudit.SelectedValue))
+            if (string.IsNullOrEmpty(Frame.UserListAudit.SelectedValue))
                 userID = -1;
             else
-                Int32.TryParse(UserListAudit.SelectedValue, out userID);
+                Int32.TryParse(Frame.UserListAudit.SelectedValue, out userID);
 
-            var dateFrom = DateFrom.Text.Replace("T", " ");
+            var dateFrom = Frame.DateFrom.Text.Replace("T", " ");
 
-            var dateTo = DateTo.Text.Replace("T", " ");
+            var dateTo = Frame.DateTo.Text.Replace("T", " ");
             var query = string.Format("set dateformat ymd;EXEC report.getAudit @entity ='{0}', @userID={1}, @from='{2}', @to='{3}'", entitySysName, userID, dateFrom, dateTo);
             var dt = QueryToDB(query);
 

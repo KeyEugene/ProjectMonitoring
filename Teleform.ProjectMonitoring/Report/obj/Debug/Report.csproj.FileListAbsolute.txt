@@ -6,3 +6,11 @@ D:\Development\Teleform_work\Teleform.ProjectMonitoring\Report\bin\Debug\Windows
 D:\Development\Teleform_work\Teleform.ProjectMonitoring\Report\obj\Debug\Report.csprojResolveAssemblyReference.cache
 D:\Development\Teleform_work\Teleform.ProjectMonitoring\Report\obj\Debug\Report.dll
 D:\Development\Teleform_work\Teleform.ProjectMonitoring\Report\obj\Debug\Report.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\bin\Debug\Report.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\bin\Debug\Report.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\bin\Debug\Report.tlb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\bin\Debug\WindowsBase.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\obj\Debug\Report.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\obj\Debug\Report.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\Teleform.ProjectMonitoring\Report\obj\Debug\Report.pdb

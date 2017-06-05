@@ -5,7 +5,6 @@ using System.Web;
 
 namespace Teleform.ProjectMonitoring
 {
-    [Obsolete("", true)]
     public static class PageExtensions
     {
         public static int GetSystemUser(this System.Web.UI.Page page)

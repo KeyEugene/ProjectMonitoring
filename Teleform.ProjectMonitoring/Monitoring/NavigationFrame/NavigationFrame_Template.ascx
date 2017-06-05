@@ -80,7 +80,7 @@
             OnSelectedIndexChanged="TemplateList_SelectedIndexChanged" ClientIDMode="Predictable"
             DataKeyNames="objID,body,code">
             <LayoutTemplate>
-                <ul id="inner_left_menu" class="nav navbar-nav side-nav">
+                <ul  class="nav navbar-nav side-nav">
                     <asp:PlaceHolder runat="server" ID="itemPlaceholder" />
                 </ul>
             </LayoutTemplate>

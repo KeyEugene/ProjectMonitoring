@@ -109,6 +109,10 @@
     <Content Include="404.jpg" />
     <Content Include="admin\Administration.aspx" />
     <Content Include="admin\Audit.ascx" />
+    <Content Include="admin\EventManagement.ascx" />
+    <Content Include="admin\ImportManagement.ascx" />
+    <Content Include="admin\SettingAttributesOfEntities.ascx" />
+    <Content Include="admin\SettingTheTypesOfObjects.ascx" />
     <Content Include="admin\Sharing.ascx" />
     <Content Include="admin\UserManagement.ascx" />
     <Content Include="CrossTemplate\CrossTemplateView.aspx" />
@@ -167,6 +171,14 @@
     <Content Include="images\word.png" />
     <Content Include="images\zip.png" />
     <Content Include="NavigationDialogView\NavigationDialog.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_1.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_2.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_3.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_4.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_5.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_6.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_7.ascx" />
+    <Content Include="NavigationFrame\admin\NavigationFrame_Administration.ascx" />
     <Content Include="NavigationFrame\Breadcrumbs.ascx" />
     <Content Include="NavigationFrame\NavigationFrame_EntityListAttributeView.ascx" />
     <Content Include="NavigationFrame\NavigationFrame_Home.ascx" />
@@ -287,13 +299,38 @@
     <Compile Include="admin\Audit.ascx.designer.cs">
       <DependentUpon>Audit.ascx</DependentUpon>
     </Compile>
-    <Compile Include="admin\PredicateBuilder.cs" />
-    <Compile Include="admin\EntityManager.cs">
+    <Compile Include="admin\EventManagement.ascx.cs">
+      <DependentUpon>EventManagement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="admin\EventManagement.ascx.designer.cs">
+      <DependentUpon>EventManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ImportManagement.ascx.cs">
+      <DependentUpon>ImportManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ImportManagement.ascx.designer.cs">
+      <DependentUpon>ImportManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\PredicateBuilder.cs" />
     <Compile Include="admin\ImportCompletedSyncResult.cs" />
     <Compile Include="admin\SeparationOfAccessRights\AuthorizationRules.cs" />
     <Compile Include="admin\SeparationOfAccessRights\Enums.cs" />
+    <Compile Include="admin\SettingAttributesOfEntities.ascx.cs">
+      <DependentUpon>SettingAttributesOfEntities.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\SettingAttributesOfEntities.ascx.designer.cs">
+      <DependentUpon>SettingAttributesOfEntities.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\SettingTheTypesOfObjects.ascx.cs">
+      <DependentUpon>SettingTheTypesOfObjects.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\SettingTheTypesOfObjects.ascx.designer.cs">
+      <DependentUpon>SettingTheTypesOfObjects.ascx</DependentUpon>
+    </Compile>
     <Compile Include="admin\Sharing.ascx.cs">
       <DependentUpon>Sharing.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -390,6 +427,62 @@
     </Compile>
     <Compile Include="NavigationDialogView\ObjectsTreeNode.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_1.ascx.cs">
+      <DependentUpon>NavigationFrame_1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_1.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_2.ascx.cs">
+      <DependentUpon>NavigationFrame_2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_2.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_3.ascx.cs">
+      <DependentUpon>NavigationFrame_3.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_3.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_3.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_4.ascx.cs">
+      <DependentUpon>NavigationFrame_4.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_4.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_4.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_5.ascx.cs">
+      <DependentUpon>NavigationFrame_5.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_5.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_5.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_6.ascx.cs">
+      <DependentUpon>NavigationFrame_6.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_6.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_6.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_7.ascx.cs">
+      <DependentUpon>NavigationFrame_7.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_7.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_7.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_Administration.ascx.cs">
+      <DependentUpon>NavigationFrame_Administration.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\admin\NavigationFrame_Administration.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_Administration.ascx</DependentUpon>
     </Compile>
     <Compile Include="NavigationFrame\Breadcrumbs.ascx.cs">
       <DependentUpon>Breadcrumbs.ascx</DependentUpon>

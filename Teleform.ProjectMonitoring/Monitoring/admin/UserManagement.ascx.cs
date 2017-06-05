@@ -16,16 +16,20 @@ namespace Teleform.ProjectMonitoring.admin
     public partial class UserManagement : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
+            Frame.UserControl_ButtonDelete_Click += ButtonDelete_Click;
+            Frame.UserControl_ButtonNew_Click += ButtonNew_Click;
+            Frame.UserControl_ButtonUpdate_Click += ButtonUpdate_Click;
+
             UpdateMainTable();
-            visibleUMdialogTableAndSaveButton("hidden");
+           // visibleUMdialogTableAndSaveButton("hidden");
         }
 
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
             ResetItems();
             FillForCraeteNewUser();
-            visibleUMdialogTableAndSaveButton("inherit");
+           // visibleUMdialogTableAndSaveButton("inherit");
             ObjIDTB.Text = string.Empty;
             textBoxLogin.ReadOnly = false;
         }
@@ -47,7 +51,7 @@ namespace Teleform.ProjectMonitoring.admin
                 return;
 
 
-            
+
             // проверяем на то что бы мы не могли удалить себя
             if (Session["SystemUser.objID"] != null)
             {
@@ -162,7 +166,7 @@ namespace Teleform.ProjectMonitoring.admin
         }
 
         private void UpdateUser()
-        {            
+        {
             var pwd = Encryption.Encrypt(textBoxPwd.Text);
             var person = string.IsNullOrEmpty(DDLperson.SelectedValue) ? "" : String.Format("[_personID] = {0}, ", DDLperson.SelectedValue);
 
@@ -224,6 +228,7 @@ values( {5} '{1}', '{2}', '{3}', {4})",
                 table.Attributes.Add("class", "usersTable");
                 var th = CreateHeaderForTable();
                 table.Rows.Add(th);
+                table.CssClass = "table table-striped table-bordered table-hover";
 
                 foreach (DataRow row in dt.Rows)
                 {

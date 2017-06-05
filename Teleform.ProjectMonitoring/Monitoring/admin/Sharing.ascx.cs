@@ -19,6 +19,14 @@ namespace Teleform.ProjectMonitoring.admin
     {
         protected override void OnInit(EventArgs e)
         {
+            Frame.UserControl_CloseTemplate_Click += CloseTemplate_Click;
+            Frame.UserControl_EntityList_IndexChanged += EntityList_IndexChanged;
+            Frame.UserControl_LinkBtnTemplate_Click += LinkBtnTemplate_Click;
+            Frame.UserControl_SaveButton_OnClick += SaveButton_OnClick;
+            Frame.UserControl_SaveTemplate_Click += SaveTemplate_Click;
+            Frame.UserControl_UserList_IndexChanged += UserList_IndexChanged;
+            Frame.UserControl_UserTypeList_IndexChanged += UserTypeList_IndexChanged;
+
             if (!IsPostBack)
             {
                 DataSourceUserTypeDDL();
@@ -32,11 +40,11 @@ namespace Teleform.ProjectMonitoring.admin
         private void DataSourcePermissionDDL()
         {
             var list = this.GetSchema().Entities.OrderBy(o => o.Name).ToList(); //.Where(o => o.IsMain)
-            EntityList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
+            Frame.EntityList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
             for (int i = 0; i < list.Count; i++)
-                EntityList.Items.Add(new ListItem { Text = list[i].Name, Value = list[i].ID.ToString() });
-            EntityList.AutoPostBack = true;
-            EntityList.DataBind();
+                Frame.EntityList.Items.Add(new ListItem { Text = list[i].Name, Value = list[i].ID.ToString() });
+            Frame.EntityList.AutoPostBack = true;
+            Frame.EntityList.DataBind();
 
         }
         private void DataSourceUserTypeDDL()
@@ -45,10 +53,10 @@ namespace Teleform.ProjectMonitoring.admin
 
             if (dt.Rows.Count == 0) return;
 
-            UserTypeList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
+            Frame.UserTypeList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
             foreach (DataRow item in dt.Rows)
             {
-                UserTypeList.Items.Add(new ListItem { Value = item[0].ToString(), Text = item[1].ToString() });
+                Frame.UserTypeList.Items.Add(new ListItem { Value = item[0].ToString(), Text = item[1].ToString() });
 
             }
         }
@@ -56,7 +64,7 @@ namespace Teleform.ProjectMonitoring.admin
         {
             string query = string.Empty;
 
-            UserList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
+            Frame.UserList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
 
             if (id == null)
                 return;
@@ -67,7 +75,7 @@ namespace Teleform.ProjectMonitoring.admin
 
             foreach (DataRow item in dt.Rows)
             {
-                UserList.Items.Add(new ListItem { Value = item[0].ToString(), Text = item[1].ToString() });
+                Frame.UserList.Items.Add(new ListItem { Value = item[0].ToString(), Text = item[1].ToString() });
             }
         }
 
@@ -77,22 +85,22 @@ namespace Teleform.ProjectMonitoring.admin
 
         protected void SaveButton_OnClick(object sender, EventArgs e)
         {
-            if (EntityList.SelectedValue != "")
+            if (Frame.EntityList.SelectedValue != "")
             {
                 //if (PredicateBuilder1.template.Fields.Count == 0)
                 //    return;
-                if (UserList.SelectedValue != "")
-                    SaveEntityFilter(UserList.SelectedValue, "[Z_EUFilter]", "[Z_EUFilterAttribute]", "[UserID]", "[Z_IUPermission]");
-                else if (UserTypeList.SelectedValue != "")
-                    SaveEntityFilter(UserTypeList.SelectedValue, "[Z_EUTFilter]", "[Z_EUTFilterAttribute]", "[userTypeID]", "[Z_IUTPermission]");
+                if (Frame.UserList.SelectedValue != "")
+                    SaveEntityFilter(Frame.UserList.SelectedValue, "[Z_EUFilter]", "[Z_EUFilterAttribute]", "[UserID]", "[Z_IUPermission]");
+                else if (Frame.UserTypeList.SelectedValue != "")
+                    SaveEntityFilter(Frame.UserTypeList.SelectedValue, "[Z_EUTFilter]", "[Z_EUTFilterAttribute]", "[userTypeID]", "[Z_IUTPermission]");
             }
-            else if (UserList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue != "")
             {
-                SavePermission(UserList.SelectedValue, "[Z_EUPermission]", "[userID]");
+                SavePermission(Frame.UserList.SelectedValue, "[Z_EUPermission]", "[userID]");
             }
-            else if (UserTypeList.SelectedValue != "")
+            else if (Frame.UserTypeList.SelectedValue != "")
             {
-                SavePermission(UserTypeList.SelectedValue, "[Z_EUTPermission]", "[userTypeID]");
+                SavePermission(Frame.UserTypeList.SelectedValue, "[Z_EUTPermission]", "[userTypeID]");
             }
 
             StorageUserObgects.ClearAllCache();
@@ -101,7 +109,7 @@ namespace Teleform.ProjectMonitoring.admin
 
             Storage.ClearBusinessContents();
 
-            
+
 
         }
 
@@ -245,14 +253,14 @@ namespace Teleform.ProjectMonitoring.admin
         }
         protected void SaveTemplate_Click(object sender, EventArgs e)
         {
-            if (UserTypeList.SelectedValue != "" && UserList.SelectedValue != "" && EntityList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue != "" && Frame.UserList.SelectedValue != "" && Frame.EntityList.SelectedValue == "")
             {
-                SaveTemplatePermission(UserList.SelectedValue, "[Z_IUPermission]", "[userID]");
+                SaveTemplatePermission(Frame.UserList.SelectedValue, "[Z_IUPermission]", "[userID]");
                 return;
             }
-            else if (UserTypeList.SelectedValue != "" && UserList.SelectedValue == "" && EntityList.SelectedValue == "")
+            else if (Frame.UserTypeList.SelectedValue != "" && Frame.UserList.SelectedValue == "" && Frame.EntityList.SelectedValue == "")
             {
-                SaveTemplatePermission(UserTypeList.SelectedValue, "[Z_IUTPermission]", "[userTypeID]");
+                SaveTemplatePermission(Frame.UserTypeList.SelectedValue, "[Z_IUTPermission]", "[userTypeID]");
                 return;
             }
         }
@@ -297,94 +305,98 @@ namespace Teleform.ProjectMonitoring.admin
         {
             VisibleButtonSaveTemplate(false);
 
-            if (UserTypeList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue == "")
             {
-                UserList.Items.Clear();
-                UserList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
-                imageSecond.Visible = false;
+                Frame.UserList.Items.Clear();
+                Frame.UserList.Items.Add(new ListItem { Text = "Не выбрано", Value = "" });
+                SetCss(Frame.UserList, "default_border");
 
-                if (UserTypeList.SelectedValue == "" && UserList.SelectedValue == "")
+                if (Frame.UserTypeList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
                 {
-                    EntityList.SelectedIndex = 0;
+                    Frame.EntityList.SelectedIndex = 0;
                     MView.ActiveViewIndex = 0;
-                    imageThird.Visible = imageFirst.Visible = false;
+                    SetCss(Frame.UserTypeList, "default_border");
+                    SetCss(Frame.EntityList, "default_border");
                 }
                 GVPermission.DataSource = null;
                 GVPermission.DataBind();
                 return;
             }
-            if (EntityList.SelectedValue != "")
+            if (Frame.EntityList.SelectedValue != "")
                 return;
 
-            UserList.Items.Clear();
-            DataSourceUserDDL(UserTypeList.SelectedValue);
+            Frame.UserList.Items.Clear();
+            DataSourceUserDDL(Frame.UserTypeList.SelectedValue);
 
             var query = string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserTypePermission({0},NULL)p 
                                         left join model.BTables b on b.name=p.entity 
                                         left join model.AppTypes t on t.object_id=b.appTypeID 
                                         where  p.objID is NULL
-                                        order by p.entityAlias", UserTypeList.SelectedValue);
+                                        order by p.entityAlias", Frame.UserTypeList.SelectedValue);
 
             FillGridView(query);
 
             MView.ActiveViewIndex = 0;
-            imageFirst.Visible = true;
+            SetCss(Frame.UserTypeList, "green_border");
         }
 
         protected void UserList_IndexChanged(object sender, EventArgs e)
         {
             VisibleButtonSaveTemplate(false);
 
-            if (UserList.SelectedValue == "")
+            if (Frame.UserList.SelectedValue == "")
             {
-                imageSecond.Visible = false;
-                if (UserList.SelectedValue == "" && EntityList.SelectedIndex == 0)
+                SetCss(Frame.UserList, "default_border");
+                if (Frame.UserList.SelectedValue == "" && Frame.EntityList.SelectedIndex == 0)
                 {
-                    imageSecond.Visible = imageThird.Visible = false;
+                    SetCss(Frame.EntityList, "default_border");
+                    SetCss(Frame.UserList, "default_border");
                     UserTypeList_IndexChanged(null, EventArgs.Empty);
                 }
                 return;
             }
-            else if (UserList.SelectedValue != "" && EntityList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue != "" && Frame.EntityList.SelectedValue != "")
             {
-                imageSecond.Visible = true;
+                SetCss(Frame.UserList, "green_border");
                 return;
             }
 
             MView.ActiveViewIndex = 0;
 
-            //FillGridView(string.Format("SELECT [entity], [entityAlias], [read], [create], [update],[delete] FROM [Permission].[UserPermission] ({0}, NULL)  WHERE [objID] IS NULL AND [entity] is not null order by [entityAlias]", UserList.SelectedValue));
+            //FillGridView(string.Format("SELECT [entity], [entityAlias], [read], [create], [update],[delete] FROM [Permission].[UserPermission] ({0}, NULL)  WHERE [objID] IS NULL AND [entity] is not null order by [entityAlias]", Frame.UserList.SelectedValue));
             var query = string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
                                         left join model.BTables b on b.name=p.entity
                                         left join model.AppTypes t on t.object_id=b.appTypeID
                                         where  p.objID is NULL
-                                        order by p.entityAlias", UserList.SelectedValue);
+                                        order by p.entityAlias", Frame.UserList.SelectedValue);
             FillGridView(query);
-
-            imageSecond.Visible = true;
+            SetCss(Frame.UserList, "green_border");
         }
 
         protected void EntityList_IndexChanged(object sender, EventArgs e)
         {
             VisibleButtonSaveTemplate(false);
-            if (UserTypeList.SelectedValue == "" && UserList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
-                EntityList.SelectedIndex = 0;
-                imageSecond.Visible = imageThird.Visible = imageFirst.Visible = false;
+                Frame.EntityList.SelectedIndex = 0;
+                SetCss(Frame.EntityList, "default_border");
+                SetCss(Frame.UserList, "default_border");
+                SetCss(Frame.UserTypeList, "default_border");
                 return;
             }
 
-            if (EntityList.SelectedValue == "" && UserList.SelectedValue == "")
+            if (Frame.EntityList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
                 UserTypeList_IndexChanged(null, EventArgs.Empty);
-                imageSecond.Visible = imageThird.Visible = false;
+                SetCss(Frame.EntityList, "default_border");
+                SetCss(Frame.UserList, "default_border");
                 return;
             }
 
-            if (EntityList.SelectedValue == "")
+            if (Frame.EntityList.SelectedValue == "")
             {
                 UserList_IndexChanged(null, EventArgs.Empty);
-                imageThird.Visible = false;
+                SetCss(Frame.EntityList, "default_border");
                 return;
             }
 
@@ -393,38 +405,40 @@ namespace Teleform.ProjectMonitoring.admin
             PredicateBuilder1.create.Checked = PredicateBuilder1.delete.Checked = PredicateBuilder1.read.Checked = PredicateBuilder1.update.Checked = false;
             PredicateBuilder1.comment.Text = "";
 
-            PredicateBuilder1.EntityID = EntityList.SelectedValue;
+            PredicateBuilder1.EntityID = Frame.EntityList.SelectedValue;
             PredicateBuilder1.template = GetTemplate();
             PredicateBuilder1.DataBind();
-            imageThird.Visible = true;
+
+            SetCss(Frame.EntityList, "green_border");
         }
 
         protected void LinkBtnTemplate_Click(object sender, EventArgs e)
         {
-            if (UserTypeList.SelectedValue == "" && UserList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
                 return;
 
             VisibleButtonSaveTemplate(true);
 
-            if (UserTypeList.SelectedValue != "" || UserList.SelectedValue != "")
+            if (Frame.UserTypeList.SelectedValue != "" || Frame.UserList.SelectedValue != "")
                 VisibleImage_LinkButton(true);
 
-            if (EntityList.SelectedValue != "")
+            if (Frame.EntityList.SelectedValue != "")
             {
-                EntityList.SelectedIndex = 0;
-                imageThird.Visible = false;
+                Frame.EntityList.SelectedIndex = 0;
+
+                SetCss(Frame.EntityList, "default_border");
             }
 
-            if (UserTypeList.SelectedValue != "" && UserList.SelectedValue != "")
+            if (Frame.UserTypeList.SelectedValue != "" && Frame.UserList.SelectedValue != "")
             {
-                GVTemplate.DataSource = QueryToDB(string.Format(@"SELECT * FROM [Permission].[IUTemplatePermission]({0}) order by name", UserList.SelectedValue));
+                GVTemplate.DataSource = QueryToDB(string.Format(@"SELECT * FROM [Permission].[IUTemplatePermission]({0}) order by name", Frame.UserList.SelectedValue));
                 GVTemplate.DataBind();
                 MView.ActiveViewIndex = 2;
                 return;
             }
-            else if (UserTypeList.SelectedValue != "" && UserList.SelectedValue == "")
+            else if (Frame.UserTypeList.SelectedValue != "" && Frame.UserList.SelectedValue == "")
             {
-                GVTemplate.DataSource = QueryToDB(string.Format(@"SELECT * FROM [Permission].[IUTTemplatePermission]({0}) order by name", UserTypeList.SelectedValue));
+                GVTemplate.DataSource = QueryToDB(string.Format(@"SELECT * FROM [Permission].[IUTTemplatePermission]({0}) order by name", Frame.UserTypeList.SelectedValue));
                 GVTemplate.DataBind();
                 MView.ActiveViewIndex = 2;
                 return;
@@ -434,9 +448,9 @@ namespace Teleform.ProjectMonitoring.admin
 
         protected void CloseTemplate_Click(object sender, EventArgs e)
         {
-            if (UserList.SelectedValue != "")
+            if (Frame.UserList.SelectedValue != "")
                 UserList_IndexChanged(null, EventArgs.Empty);
-            else if (UserTypeList.SelectedValue != "")
+            else if (Frame.UserTypeList.SelectedValue != "")
                 UserTypeList_IndexChanged(null, EventArgs.Empty);
 
             VisibleImage_LinkButton(false);
@@ -444,24 +458,24 @@ namespace Teleform.ProjectMonitoring.admin
 
         private Template GetTemplate()
         {
-            var entity = Storage.Select<Entity>(EntityList.SelectedValue);
+            var entity = Storage.Select<Entity>(Frame.EntityList.SelectedValue);
             var template = new Template(string.Empty, entity, "TableBased", new byte[0]);
             string Filter = "";
             string FilterAttribute = "";
 
-            if (UserList.SelectedValue != "")
+            if (Frame.UserList.SelectedValue != "")
             {
                 Filter = GetQueryStringFromTableFilter(
-                    UserList.SelectedValue, template.Entity.SystemName, "[UserID]", "[Z_EUFilter]");
+                    Frame.UserList.SelectedValue, template.Entity.SystemName, "[UserID]", "[Z_EUFilter]");
                 FilterAttribute = GetQueryStringFromTableFilterAttribute(
-                    UserList.SelectedValue, template.Entity.SystemName, "[UserID]", "[Z_EUFilterAttribute]");
+                    Frame.UserList.SelectedValue, template.Entity.SystemName, "[UserID]", "[Z_EUFilterAttribute]");
             }
-            else if (UserTypeList.SelectedValue != "")
+            else if (Frame.UserTypeList.SelectedValue != "")
             {
                 Filter = GetQueryStringFromTableFilter(
-                    UserTypeList.SelectedValue, template.Entity.SystemName, "[userTypeID]", "[Z_EUTFilter]");
+                    Frame.UserTypeList.SelectedValue, template.Entity.SystemName, "[userTypeID]", "[Z_EUTFilter]");
                 FilterAttribute = GetQueryStringFromTableFilterAttribute(
-                    UserTypeList.SelectedValue, template.Entity.SystemName, "[userTypeID]", "[Z_EUTFilterAttribute]");
+                    Frame.UserTypeList.SelectedValue, template.Entity.SystemName, "[userTypeID]", "[Z_EUTFilterAttribute]");
             }
 
             var table = QueryToDB(Filter);
@@ -527,7 +541,7 @@ entity
         protected void BtnResetOneObject_Click(object sender, EventArgs e)
         {
 
-            if (UserTypeList.SelectedValue == "" && UserList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
                 //
                 var query = @"DELETE FROM [Z_IUTPermission] WHERE [entity] != 'R$Template'
@@ -535,40 +549,40 @@ entity
                 QueryToDB(query);
                 return;
             }
-            else if (EntityList.SelectedValue == "" && UserList.SelectedValue == "")
+            else if (Frame.EntityList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
                 var query = String.Format(@"DELETE FROM [Z_EUTFilterAttribute] WHERE [userTypeID] = {0}
                                             DELETE FROM [Z_EUTFilter] WHERE [userTypeID] = {0}  
-                                            DELETE FROM [Z_IUTPermission] WHERE [userTypeID] = {0} AND [entity] != 'R$Template' ", UserTypeList.SelectedValue);
+                                            DELETE FROM [Z_IUTPermission] WHERE [userTypeID] = {0} AND [entity] != 'R$Template' ", Frame.UserTypeList.SelectedValue);
                 QueryToDB(query);
                 return;
             }
-            else if (UserList.SelectedValue != "" && EntityList.SelectedValue == "")
+            else if (Frame.UserList.SelectedValue != "" && Frame.EntityList.SelectedValue == "")
             {
                 var query = String.Format(@"DELETE FROM [Z_EUFilterAttribute] WHERE [userID] = {0} 
                                             DELETE FROM [Z_EUFilter] WHERE [userID] = {0}  
                                             DELETE FROM [Z_IUPermission] WHERE [userID] = {0} AND [entity] != 'R$Template' ",
-                UserList.SelectedValue);
+                Frame.UserList.SelectedValue);
                 QueryToDB(query);
                 return;
             }
-            else if (UserList.SelectedValue != "" && EntityList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue != "" && Frame.EntityList.SelectedValue != "")
             {
                 var query = String.Format(@"DELETE FROM [Z_EUFilterAttribute] WHERE [userID] = {0} AND [entity] = '{1}' 
                                             DELETE FROM [Z_EUFilter] WHERE [userID] = {0} AND [entity] = '{1}'  
                                             DELETE FROM [Z_IUPermission] WHERE [userID] = {0} AND [entity] = '{1}'",
-                                    UserList.SelectedValue,
+                                    Frame.UserList.SelectedValue,
                                     PredicateBuilder1.template.Entity.SystemName);
                 QueryToDB(query);
                 EntityList_IndexChanged(null, EventArgs.Empty);
                 return;
             }
-            else if (UserList.SelectedValue == "" && EntityList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue == "" && Frame.EntityList.SelectedValue != "")
             {
                 var query = String.Format(@"DELETE FROM [Z_EUTFilterAttribute] WHERE [userTypeID] = {0} AND [entity] = '{1}' 
                                             DELETE FROM [Z_EUTFilter] WHERE [userTypeID] = {0} AND [entity] = '{1}'  
                                             DELETE FROM [Z_IUTPermission] WHERE [userTypeID] = {0} AND [entity] = '{1}'",
-                                    UserTypeList.SelectedValue,
+                                    Frame.UserTypeList.SelectedValue,
                                     PredicateBuilder1.template.Entity.SystemName);
                 QueryToDB(query);
                 EntityList_IndexChanged(null, EventArgs.Empty);
@@ -578,42 +592,42 @@ entity
 
         protected void BtnResetALotOfObjects_Click(object sender, EventArgs e)
         {
-            if (UserTypeList.SelectedValue == "" && UserList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
                 var query = "DELETE FROM [Z_EUTPermission]";
                 QueryToDB(query);
                 return;
             }
-            else if (EntityList.SelectedValue == "" && UserList.SelectedValue == "")
+            else if (Frame.EntityList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
-                var query = String.Format("DELETE FROM [Z_EUTPermission] WHERE [userTypeID] = {0} ", UserTypeList.SelectedValue);
+                var query = String.Format("DELETE FROM [Z_EUTPermission] WHERE [userTypeID] = {0} ", Frame.UserTypeList.SelectedValue);
                 QueryToDB(query);
                 UserTypeList_IndexChanged(null, EventArgs.Empty);
                 return;
             }
-            else if (UserList.SelectedValue != "" && EntityList.SelectedValue == "")
+            else if (Frame.UserList.SelectedValue != "" && Frame.EntityList.SelectedValue == "")
             {
-                var query = String.Format("DELETE FROM [Z_EUPermission] WHERE [userID] = {0}", UserList.SelectedValue);
+                var query = String.Format("DELETE FROM [Z_EUPermission] WHERE [userID] = {0}", Frame.UserList.SelectedValue);
                 QueryToDB(query);
-                DataSourceUserDDL(UserList.SelectedValue);
+                DataSourceUserDDL(Frame.UserList.SelectedValue);
                 UserList_IndexChanged(null, EventArgs.Empty);
                 return;
 
             }
-            else if (UserList.SelectedValue != "" && EntityList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue != "" && Frame.EntityList.SelectedValue != "")
             {
                 var query = String.Format("DELETE FROM [Z_EUPermission] WHERE [userID] = {0} AND [entity] = '{1}'",
-                    UserList.SelectedValue,
+                    Frame.UserList.SelectedValue,
                     PredicateBuilder1.template.Entity.SystemName);
                 DataSourcePermissionDDL();
                 QueryToDB(query);
                 EntityList_IndexChanged(null, EventArgs.Empty);
                 return;
             }
-            else if (UserList.SelectedValue == "" && EntityList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue == "" && Frame.EntityList.SelectedValue != "")
             {
                 var query = String.Format("DELETE FROM [Z_EUTPermission] WHERE [userTypeID] = {0} AND [entity] = '{1}'",
-                    UserTypeList.SelectedValue,
+                    Frame.UserTypeList.SelectedValue,
                     PredicateBuilder1.template.Entity.SystemName);
                 QueryToDB(query);
                 EntityList_IndexChanged(null, EventArgs.Empty);
@@ -623,7 +637,7 @@ entity
 
         protected void BtnResetTemplates_Click(object sender, EventArgs e)
         {
-            if (UserTypeList.SelectedValue == "" && UserList.SelectedValue == "")
+            if (Frame.UserTypeList.SelectedValue == "" && Frame.UserList.SelectedValue == "")
             {
                 var query = @"DELETE FROM [Z_IUPermission] WHERE [entity] = 'R$Template'
                               DELETE FROM [Z_IUTPermission] WHERE [entity] = 'R$Template'";
@@ -635,12 +649,12 @@ entity
                 //OR RETURN
                 //
             }
-            else if (UserTypeList.SelectedValue != "" && UserList.SelectedValue == "")
+            else if (Frame.UserTypeList.SelectedValue != "" && Frame.UserList.SelectedValue == "")
             {
-                var query = string.Format(@"DELETE FROM [Z_IUTPermission] WHERE [entity] = 'R$Template' AND userTypeID = {0}", UserTypeList.SelectedValue);
+                var query = string.Format(@"DELETE FROM [Z_IUTPermission] WHERE [entity] = 'R$Template' AND userTypeID = {0}", Frame.UserTypeList.SelectedValue);
                 QueryToDB(query);
-                
-                if (SaveButton.Visible)
+
+                if (Frame.SaveButton.Visible)
                     UserTypeList_IndexChanged(null, EventArgs.Empty);
                 else
                     LinkBtnTemplate_Click(null, EventArgs.Empty);
@@ -652,12 +666,12 @@ entity
                 //OR RETURN
                 //
             }
-            else if (UserList.SelectedValue != "")
+            else if (Frame.UserList.SelectedValue != "")
             {
-                var query = string.Format(@"DELETE FROM [Z_IUPermission] WHERE [entity] = 'R$Template' AND userID = {0}", UserList.SelectedValue);
+                var query = string.Format(@"DELETE FROM [Z_IUPermission] WHERE [entity] = 'R$Template' AND userID = {0}", Frame.UserList.SelectedValue);
                 QueryToDB(query);
 
-                if (SaveButton.Visible)
+                if (Frame.SaveButton.Visible)
                     UserList_IndexChanged(null, EventArgs.Empty);
                 else
                     LinkBtnTemplate_Click(null, EventArgs.Empty);
@@ -699,8 +713,8 @@ entity
         #region Visible elements
         private void VisibleButtonSaveTemplate(bool p)
         {
-            SaveTemplate.Visible = p;
-            SaveButton.Visible = !p;
+            Frame.SaveTemplate.Visible = p;
+            Frame.SaveButton.Visible = !p;
 
             VisibleImage_LinkButton(p);
         }
@@ -709,14 +723,35 @@ entity
         {
             Image ImageCloseTemplate;
 
-            if (CloseTemplate_LinkButton.Controls[0] is Image)
+            if (Frame.CloseTemplate_LinkButton.Controls[0] is Image)
             {
-                ImageCloseTemplate = CloseTemplate_LinkButton.Controls[0] as Image;
+                ImageCloseTemplate = Frame.CloseTemplate_LinkButton.Controls[0] as Image;
                 ImageCloseTemplate.Visible = visible;
             }
         }
         #endregion
 
+
+        /// <summary>
+        /// Устанавливаем border или удалем для сонтрола
+        /// </summary>
+        /// <param name="button"> кнопка для которой устанавливаем\удаляем CssClass</param>
+        /// <param name="cssclsss">установить или удалить</param>
+        private void SetCss(WebControl control, string cssclsss)
+        {
+            string currentCss = control.CssClass;
+
+            if (currentCss.Contains("green_border"))
+            {
+                control.CssClass = currentCss.Replace("green_border", "");
+            }
+            if (currentCss.Contains("default_border"))
+            {
+                control.CssClass = currentCss.Replace("default_border", "");
+            }
+
+            control.CssClass += " " + cssclsss;
+        }
     }
 
 }

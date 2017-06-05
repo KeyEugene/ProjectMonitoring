@@ -13,94 +13,13 @@ namespace Monitoring {
     public partial class Administration {
         
         /// <summary>
-        /// DeleteWarningDialog control.
+        /// Frame control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox DeleteWarningDialog;
-        
-        /// <summary>
-        /// OptionsDiv control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl OptionsDiv;
-        
-        /// <summary>
-        /// EventManagementButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EventManagementButton;
-        
-        /// <summary>
-        /// ImportManagementBunnon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ImportManagementBunnon;
-        
-        /// <summary>
-        /// SettingTheTypesOfObjects control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SettingTheTypesOfObjects;
-        
-        /// <summary>
-        /// AliasManagementButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AliasManagementButton;
-        
-        /// <summary>
-        /// EnumerationManagement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EnumerationManagement;
-        
-        /// <summary>
-        /// UserManagementButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UserManagementButton;
-        
-        /// <summary>
-        /// SeparationOfAccessRights control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SeparationOfAccessRights;
-        
-        /// <summary>
-        /// AuditButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AuditButton;
+        protected global::Teleform.ProjectMonitoring.NavigationFrame.admin.NavigationFrame_Administration Frame;
         
         /// <summary>
         /// AdministrationOptionsMulti control.
@@ -121,76 +40,13 @@ namespace Monitoring {
         protected global::System.Web.UI.WebControls.View EventView;
         
         /// <summary>
-        /// EventListSource control.
+        /// EventManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource EventListSource;
-        
-        /// <summary>
-        /// EventDialog control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.Form EventDialog;
-        
-        /// <summary>
-        /// EventSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource EventSource;
-        
-        /// <summary>
-        /// EventForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FormView EventForm;
-        
-        /// <summary>
-        /// EventAddButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EventAddButton;
-        
-        /// <summary>
-        /// EventEditButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EventEditButton;
-        
-        /// <summary>
-        /// EventDeleteButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EventDeleteButton;
-        
-        /// <summary>
-        /// EventGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Controls.GridView EventGridView;
+        protected global::Teleform.ProjectMonitoring.admin.EventManagement EventManagement;
         
         /// <summary>
         /// ImportView control.
@@ -202,94 +58,13 @@ namespace Monitoring {
         protected global::System.Web.UI.WebControls.View ImportView;
         
         /// <summary>
-        /// SuccessfulImportMessageBox control.
+        /// ImportManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox SuccessfulImportMessageBox;
-        
-        /// <summary>
-        /// NoFileMessageBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox NoFileMessageBox;
-        
-        /// <summary>
-        /// UnSuccessfulImportMessageBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox UnSuccessfulImportMessageBox;
-        
-        /// <summary>
-        /// ImportBusyMessageBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox ImportBusyMessageBox;
-        
-        /// <summary>
-        /// ImportSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ImportSource;
-        
-        /// <summary>
-        /// ImportUpload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload ImportUpload;
-        
-        /// <summary>
-        /// ImportModeList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ImportModeList;
-        
-        /// <summary>
-        /// ImportButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ImportButton;
-        
-        /// <summary>
-        /// HistoryUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel HistoryUpdate;
-        
-        /// <summary>
-        /// ImportGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Controls.GridView ImportGridView;
+        protected global::Teleform.ProjectMonitoring.admin.ImportManagement ImportManager;
         
         /// <summary>
         /// TypesOfObjectsView control.
@@ -301,22 +76,13 @@ namespace Monitoring {
         protected global::System.Web.UI.WebControls.View TypesOfObjectsView;
         
         /// <summary>
-        /// TableObjects control.
+        /// SettingTheTypesOfObjects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TableObjects;
-        
-        /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::Teleform.ProjectMonitoring.admin.SettingTheTypesOfObjects SettingTheTypesOfObjects;
         
         /// <summary>
         /// AliasView control.
@@ -326,132 +92,6 @@ namespace Monitoring {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View AliasView;
-        
-        /// <summary>
-        /// AddAttriabute control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.Form AddAttriabute;
-        
-        /// <summary>
-        /// NameColumn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NameColumn;
-        
-        /// <summary>
-        /// NameAttribute control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NameAttribute;
-        
-        /// <summary>
-        /// ListType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListType;
-        
-        /// <summary>
-        /// ListTypeSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ListTypeSource;
-        
-        /// <summary>
-        /// ValidatorNameAttribute control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidatorNameAttribute;
-        
-        /// <summary>
-        /// ValidatorForNameColumn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidatorForNameColumn;
-        
-        /// <summary>
-        /// EntityList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList EntityList;
-        
-        /// <summary>
-        /// ButtonAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAdd;
-        
-        /// <summary>
-        /// EntitySource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource EntitySource;
-        
-        /// <summary>
-        /// AliasSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource AliasSource;
-        
-        /// <summary>
-        /// ChangeAliasSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource ChangeAliasSource;
-        
-        /// <summary>
-        /// AliasGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AliasGridView;
-        
-        /// <summary>
-        /// ChangeAlias control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ChangeAlias;
         
         /// <summary>
         /// userManagement control.

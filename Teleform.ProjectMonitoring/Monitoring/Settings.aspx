@@ -10,11 +10,11 @@
             <td>
                 <div class="optionDiv">
                     <asp:Button ID="ChangePasswordButton" Text="Сменить пароль" runat="server" OnClick="ChangePasswordButton_Click"
-                        CssClass="optionButton" />
+                       />
                     <%--<asp:Button ID="MainEntityButton" Text="Основные сущности и шаблоны" runat="server"
-                        OnClick="MainEntityButton_Click" CssClass="optionButton" />--%>
+                        OnClick="MainEntityButton_Click"/>--%>
                     <asp:Button ID="OnOffNavigation" Text="Вкл./Откл. навигацию" runat="server" OnClick="OnOffNavigationButton_Click"
-                        CssClass="optionButton" />
+                       />
                 </div>
             </td>
             <td>

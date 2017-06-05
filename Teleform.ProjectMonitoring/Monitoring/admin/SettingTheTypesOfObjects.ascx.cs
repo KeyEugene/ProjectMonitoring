@@ -1,66 +1,27 @@
-﻿#define Alex
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Web.UI.WebControls;
-using System.Data;
+using System.Linq;
 using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Teleform.ProjectMonitoring.HttpApplication;
-using Teleform.ProjectMonitoring;
 
-namespace Monitoring
+namespace Teleform.ProjectMonitoring.admin
 {
+    using System.Data;
+    using System.Data.SqlClient;
     using CheckBoxBase = System.Web.UI.WebControls.CheckBox;
 
-    partial class Administration
+    public partial class SettingTheTypesOfObjects : System.Web.UI.UserControl
     {
-        protected void ButtonAdd_Attribute(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NameColumn.Text))
-                throw new InvalidOperationException("Поле «Псевдоним» не может содержать пустую строку.");
-
-            if (string.IsNullOrWhiteSpace(NameAttribute.Text))
-                throw new InvalidOperationException("Поле «Код» не может содержать пустую строку.");
-
-            List<char> num = new List<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
-            if (num.Contains(NameAttribute.Text[0]))
-                throw new InvalidOperationException("«Код» не может начинатсья с цифры.");
-
-            var query = string.Format(@"EXEC [model].[UserAttributeAdd] '{0}', '{1}', '{2}', '{3}'",
-                EntityList.SelectedValue, NameAttribute.Text.Trim(), ListType.SelectedValue, NameColumn.Text.Trim());
-
-            using (var conn = new SqlConnection(Global.ConnectionString))
-            using (var cmd = new SqlCommand(query, conn))
-            {
-                try
-                {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException(String.Format("Не удалось добавить атрибут в таблицу.\n{0}.", ex.Message));
-                }
-            }
-
-            NameColumn.Text = NameAttribute.Text = null;
-            AddAttriabute.Close();
-            AliasGridView.DataBind();
-        }
-
-        protected void ButtonAdd_Close(object sender, EventArgs e)
-        {
-            NameColumn.Text = NameAttribute.Text = null;
-            AddAttriabute.Close();
+            Frame.UserControl_SaveObjectsViewNew_Click += SaveObjectsViewNew_Click;
         }
 
 
-        #region Setting The Types Of Objects
-#if Alex
-        protected void DataBindCheckBoxForTypesOfObjects(object sender, EventArgs e)
+        public void DataBindCheckBoxForTypesOfObjects(object sender, EventArgs e)
         {
             if (TableObjects.Rows.Count > 2)
                 return;
@@ -71,6 +32,7 @@ join model.AppTypes at on at.name='Base' and b.appTypeID=at.object_ID order by b
             var bTables = Global.GetDataTable(query);
 
             var ddl = new DropDownList();
+           
 
             for (int i = 0; i < bTables.Rows.Count; i++)
             {
@@ -94,6 +56,7 @@ join model.AppTypes at on at.name='Base' and b.appTypeID=at.object_ID order by b
         protected DropDownList GetEntityTemplatesDDL(object tblID)
         {
             var ddl = new DropDownList();
+            ddl.CssClass = "form-control";
 
             using (var con = new SqlConnection(Kernel.ConnectionString))
             using (var ad = new SqlDataAdapter("SELECT t.[objID],t.[name], (case when b.templateID is null then 0 else 1 end) isTemplateDefault FROM [model].[R$Template] t left join model.BTables b on b.templateID = t.objID WHERE [entityID] = @entityID", con))
@@ -140,17 +103,9 @@ join model.AppTypes at on at.name='Base' and b.appTypeID=at.object_ID order by b
             Synchronize(null, EventArgs.Empty);
         }
 
-
-#endif
-
-        #endregion
-
-#if Alex
-        protected void RowDeleted_OnClick(object sender, EventArgs e)
+        protected void Synchronize(object sender, EventArgs e)
         {
-            Synchronize(null, EventArgs.Empty);
+            Teleform.ProjectMonitoring.HttpApplication.Global.UpdateSchema();
         }
-
-#endif
     }
 }
