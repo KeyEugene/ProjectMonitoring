@@ -31,17 +31,24 @@ namespace Monitoring
         {
             Frame.UserControl_AdminManagementButton_Click += AdminManagementButton_Click;
             Frame.UserControl_EnumerationManagement_Click += EnumerationManagement_Click;
-            
+
             if (!IsPostBack)
             {
                 //_IsImportWork = false;
                 AdministrationOptionsMulti.ActiveViewIndex = 0;
                 Frame.EventManagementButton.CssClass = "button_active";
 
-                var userTypeID = Session["SystemUser.typeID"].ToString();
+                if (Session["SystemUser.typeID"] != null)
+                {
+                    var userTypeID = Session["SystemUser.typeID"].ToString();
 
-                //Если пользователь случайно забрел на страницу администрирования - выкинуть его на страницу 404 и вернуть в систему
-                if (string.IsNullOrEmpty(userTypeID) || userTypeID != "1")
+                    //Если пользователь случайно забрел на страницу администрирования - выкинуть его на страницу 404 и вернуть в систему
+                    if (string.IsNullOrEmpty(userTypeID) || userTypeID != "1")
+                    {
+                        Server.Transfer("~/ErrorPage2.aspx");
+                    }
+                }
+                else
                 {
                     Server.Transfer("~/ErrorPage2.aspx");
                 }
@@ -53,32 +60,6 @@ namespace Monitoring
         }
 
 
-        [Obsolete("Не используется")]
-        public bool getCheckedList(string colName)
-        {
-            List<DataRow> list;
-            using (SqlConnection conn = new SqlConnection(Global.ConnectionString))
-            {
-                var cmd = new SqlCommand("select [read] from Permission.UserTypePermission(1,null)", conn);
-
-                var adapter = new SqlDataAdapter(cmd);
-                var dt = new DataTable();
-                adapter.Fill(dt);
-                list = dt.AsEnumerable().ToList();
-            }
-
-            foreach (var item in list)
-            {
-                var check1 = item[0];
-            }
-            return true;
-
-        }
-        [Obsolete("Не используется")]
-        private bool getChecked(List<DataRow> list)
-        {
-            return true;
-        }
 
 
         protected void AdminManagementButton_Click(object sender, EventArgs e)

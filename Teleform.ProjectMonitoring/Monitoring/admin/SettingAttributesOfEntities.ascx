@@ -1,16 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SettingAttributesOfEntities.ascx.cs" Inherits="Teleform.ProjectMonitoring.admin.SettingAttributesOfEntities" %>
 
-<%@ Register TagPrefix="Navigation1" TagName="Frame" Src="~/NavigationFrame/admin/NavigationFrame_4.ascx" %>
+<%@ Register TagPrefix="Navigation" TagName="Frame" Src="~/NavigationFrame/admin/NavigationFrame_4.ascx" %>
 
-<Navigation1:Frame ID="Frame" runat="server"></Navigation1:Frame>
-
-<asp:SqlDataSource ID="EntitySource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
-    SelectCommand="SELECT alias name, name entity FROM model.BTables ORDER BY [alias] " />
-<asp:DropDownList ID="EntityList" runat="server" AutoPostBack="true" DataSourceID="EntitySource"
-    DataTextField="name" DataValueField="entity" CssClass="font-control" />
-<asp:Button Text="Добавление атрибута" ID="ButtonAdd" OnClick="AddAttriabute.Show"
-    runat="server" CssClass="btn btn-default" />
-<asp:Button Text="Синхронизировать" runat="server" OnClick="Synchronize" CssClass="btn btn-default" />
+<Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
 
 <Dialog:Form ID="AddAttriabute" runat="server" Caption="Добавление атрибута">
     <ContentTemplate>
@@ -19,15 +11,14 @@
                 <td>Псевдоним :
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="NameColumn" ToolTip="A-z, А-я, 0-9, - _" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="NameColumn" ToolTip="A-z, А-я, 0-9, - _" />
                 </td>
             </tr>
             <tr>
                 <td>Код :
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="NameAttribute" CssClass="form-control"
-                        ToolTip="Введите название латинскими буквами, возможно добавление специальных знаков: - или _" />
+                    <asp:TextBox runat="server" ID="NameAttribute" ToolTip="Введите название латинскими буквами, возможно добавление специальных знаков: - или _" />
                 </td>
             </tr>
             <tr>
@@ -35,11 +26,7 @@
                 </td>
                 <td>
                     <asp:DropDownList ID="ListType" runat="server" DataSourceID="ListTypeSource" DataTextField="name"
-                        DataValueField="sysName" SkinID="List" ViewStateMode="Disabled" />
-                    <%-- <script>
-                        //Из-за SkinID="List" не получается применить css class form-control
-                        $("[id*=ListType]").addClass("form-control btn-sm");
-                    </script>--%>
+                        DataValueField="sysName" Width="155" SkinID="List" ViewStateMode="Disabled" />
                     <asp:SqlDataSource ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
                         ID="ListTypeSource" runat="server" SelectCommand="SELECT alias name,name sysName FROM model.Types WHERE name != sName and alias is not NULL ORDER BY alias" />
                 </td>
@@ -60,7 +47,22 @@
     </Buttons>
 </Dialog:Form>
 
-
+<div class="column_left col-md-12 text-center" id="entity_controls">
+    <asp:DropDownList ID="EntityList" runat="server" AutoPostBack="true" DataSourceID="EntitySource"
+        DataTextField="name" DataValueField="entity" CssClass="form-control" />
+    <br />
+    <asp:Button Text="Добавление атрибута" ID="ButtonAdd" OnClick="AddAttriabute.Show"
+        runat="server" CssClass="btn btn-default" />
+    <asp:Button Text="Синхронизировать" runat="server" OnClick="Synchronize" CssClass="btn btn-default" />
+</div>
+<script>
+    //переносим вручную тк. приходится много тащить с собой контролов не относящихся к панеле действия
+    var action_container = $("#action_container");
+    var entity_controls = $("#entity_controls");
+    entity_controls.appendTo(action_container);
+</script>
+<asp:SqlDataSource ID="EntitySource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
+    SelectCommand="SELECT alias name, name entity FROM model.BTables ORDER BY [alias] " />
 <asp:SqlDataSource ID="AliasSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
     SelectCommand="SELECT a.name attribute, a.alias udpValue, a.isTitle title, a.isUserMade flUserMade FROM  model.vo_TableColumns a where tbl=@entity and a.isOwn=1 and a.name<>a.alias order by a.alias"
     UpdateCommand="UPDATE c set alias=@udpValue, isTitle=@title from model.Columns c join model.BTables t on t.name=@entity and c.object_id=t.object_id"
@@ -94,7 +96,7 @@
             <asp:GridView ID="AliasGridView" runat="server" DataSourceID="AliasSource" AutoGenerateColumns="false"
                 DataKeyNames="attribute" AutoGenerateEditButton="true" ToolTip="Атрибут является пользовательским элементом."
                 Caption='<h3 style="font: italic bold 17px/30px Georgia, serif;">Список атрибутов:</h3>'
-                OnRowDeleted="RowDeleted_OnClick">
+                OnRowDeleted="RowDeleted_OnClick" CssClass="table table-bordered table-hover">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -117,7 +119,7 @@
                 <ContentTemplate>
                     <asp:GridView runat="server" ID="ChangeAlias" DataSourceID="ChangeAliasSource" AutoGenerateColumns="false"
                         AutoGenerateEditButton="true" Caption='<h3 style="font: italic bold 17px/30px Georgia, serif;">Список псевдонимов:</h3>'
-                        DataKeyNames="tbl" AllowPaging="true" PageSize="15">
+                        DataKeyNames="tbl" AllowPaging="true" PageSize="15" CssClass="table table-bordered table-hover">
                         <Columns>
                             <asp:BoundField DataField="tblAlias" HeaderText="Псевдоним" />
                             <asp:BoundField DataField="tbl" HeaderText="Код" ReadOnly="true" />
@@ -128,5 +130,3 @@
         </td>
     </tr>
 </table>
-
-

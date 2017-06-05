@@ -22,33 +22,6 @@ namespace Teleform.ProjectMonitoring.admin {
         protected global::Teleform.ProjectMonitoring.NavigationFrame.admin.NavigationFrame_4 Frame;
         
         /// <summary>
-        /// EntitySource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource EntitySource;
-        
-        /// <summary>
-        /// EntityList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList EntityList;
-        
-        /// <summary>
-        /// ButtonAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAdd;
-        
-        /// <summary>
         /// AddAttriabute control.
         /// </summary>
         /// <remarks>
@@ -110,6 +83,33 @@ namespace Teleform.ProjectMonitoring.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidatorForNameColumn;
+        
+        /// <summary>
+        /// EntityList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList EntityList;
+        
+        /// <summary>
+        /// ButtonAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAdd;
+        
+        /// <summary>
+        /// EntitySource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource EntitySource;
         
         /// <summary>
         /// AliasSource control.

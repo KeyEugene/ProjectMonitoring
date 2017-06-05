@@ -115,8 +115,7 @@
         </asp:View>
         <%-- Setting attributes of entities view --%>
         <asp:View ID="AliasView" runat="server">
-            <%--<View:Alias runat="server" />--%>
-            <div>Hello</div>
+            <View:Alias runat="server" />
         </asp:View>
         <%--Setting UserManagement --%>
         <asp:View runat="server" ID="userManagement">

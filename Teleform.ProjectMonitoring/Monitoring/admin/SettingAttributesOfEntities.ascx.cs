@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -13,9 +14,10 @@ namespace Teleform.ProjectMonitoring.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //UserControl_ButtonAdd_Attribute += ButtonAdd_Attribute;
-            //UserControl_ButtonAdd_Close += ButtonAdd_Close;
-            //UserControl_Synchronize += Synchronize;
+            //Frame.UserControl_ButtonAdd_Attribute += ButtonAdd_Attribute;
+            //Frame.UserControl_ButtonAdd_Close += ButtonAdd_Close;
+            //Frame.UserControl_Synchronize += Synchronize;
+            //Frame.UserControl_AddAttributeShow_Click +=
         }
 
 
@@ -68,6 +70,34 @@ namespace Teleform.ProjectMonitoring.admin
         protected void Synchronize(object sender, EventArgs e)
         {
             Teleform.ProjectMonitoring.HttpApplication.Global.UpdateSchema();
+        }
+
+
+        [Obsolete("Не используется")]
+        public bool getCheckedList(string colName)
+        {
+            List<DataRow> list;
+            using (SqlConnection conn = new SqlConnection(Global.ConnectionString))
+            {
+                var cmd = new SqlCommand("select [read] from Permission.UserTypePermission(1,null)", conn);
+
+                var adapter = new SqlDataAdapter(cmd);
+                var dt = new DataTable();
+                adapter.Fill(dt);
+                list = dt.AsEnumerable().ToList();
+            }
+
+            foreach (var item in list)
+            {
+                var check1 = item[0];
+            }
+            return true;
+
+        }
+        [Obsolete("Не используется")]
+        private bool getChecked(List<DataRow> list)
+        {
+            return true;
         }
     }
 }

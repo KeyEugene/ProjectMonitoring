@@ -27,7 +27,7 @@ namespace Teleform.Reporting.Web
                 ID = field.Attribute.FPath + "TableCellContorl" + field.Order.ToString() + rowInPage.Row.ItemArray[0],
                 ReadOnly = true,
                 TextMode = TextBoxMode.MultiLine,
-                Height = Unit.Pixel(15),
+                //Height = Unit.Pixel(15),
                 BorderWidth = Unit.Pixel(0),
                 Text = string.Format(field.Format.Provider, field.Format.FormatString, rowInPage.Row.ItemArray[fieldIndices[field]])
             };
@@ -123,7 +123,7 @@ namespace Teleform.Reporting.Web
             {
                 ID = field.Attribute.FPath + "TableCellDateTextBox" + field.Order.ToString() + rowInPage.Row.ItemArray[0],
                 ReadOnly = false,
-                Height = Unit.Pixel(15),
+                //Height = Unit.Pixel(15),
                 BorderWidth = Unit.Pixel(0),
                 Text = text
             };
@@ -162,7 +162,7 @@ namespace Teleform.Reporting.Web
                 ID = field.Attribute.FPath + "TableCellContorl" + field.Order.ToString() + rowInPage.Row.ItemArray[0],
                 ReadOnly = false,
                 TextMode = TextBoxMode.MultiLine,
-                Height = Unit.Pixel(15),
+                //Height = Unit.Pixel(15),
                 BorderWidth = Unit.Pixel(0),
                 Text = text
             };
@@ -201,7 +201,7 @@ namespace Teleform.Reporting.Web
             {
                 ID = field.Attribute.FPath + "TableCellContorl" + field.Order.ToString() + rowInPage.Row.ItemArray[0],
                 ReadOnly = false,
-                Height = Unit.Pixel(15),
+                //Height = Unit.Pixel(15),
                 BorderWidth = Unit.Pixel(0),
                 Text = text
             };
