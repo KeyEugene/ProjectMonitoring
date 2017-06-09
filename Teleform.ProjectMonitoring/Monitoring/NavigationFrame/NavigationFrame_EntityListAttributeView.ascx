@@ -87,6 +87,8 @@
             <asp:FileUpload ID="ImportFileUpload" runat="server" onchange="$('[id*=LoadImportFile]').click(); return false;" Style="display: none;" />
         </label>
         <asp:Button ID="LoadImportFile" runat="server" Text="Загрузить файл" OnClick="LoadImportFile_Click" Style="display: none;" />
+        <br />
+        <input type="button" onclick="$('[id*=openMenuDialog]').click(); return false;" value="Показать меню по объектам" class="btn btn-sm btn-default" />
     </div>
 </div>
 

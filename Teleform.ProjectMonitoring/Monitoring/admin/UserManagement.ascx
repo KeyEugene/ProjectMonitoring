@@ -5,7 +5,7 @@
 <Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
 
 <style>
-    #dialog_div {
+   .dialog_div {
         width: 30%;
     }
 
@@ -32,7 +32,7 @@
 <div class="table-responsive">
     <asp:PlaceHolder runat="server" ID="ph" />
 </div>
-<div id="dialog_div" class="panel panel-primary">
+<div id="dialog_div" class="panel panel-primary dialog_div" runat="server" >
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Создание\Редактирование пользователя</h3>
     </div>

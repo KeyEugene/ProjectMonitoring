@@ -170,6 +170,7 @@
     <Content Include="images\WaitForRightNaviControl.gif" />
     <Content Include="images\word.png" />
     <Content Include="images\zip.png" />
+    <Content Include="NavigationDialogView\NavigationByObjects.ascx" />
     <Content Include="NavigationDialogView\NavigationDialog.ascx" />
     <Content Include="NavigationFrame\admin\NavigationFrame_1.ascx" />
     <Content Include="NavigationFrame\admin\NavigationFrame_2.ascx" />
@@ -415,6 +416,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NavigationDialogView\LowerTreeNode.cs" />
+    <Compile Include="NavigationDialogView\NavigationByObjects.ascx.cs">
+      <DependentUpon>NavigationByObjects.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationDialogView\NavigationByObjects.ascx.designer.cs">
+      <DependentUpon>NavigationByObjects.ascx</DependentUpon>
+    </Compile>
     <Compile Include="NavigationDialogView\NavigationTreeNode.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

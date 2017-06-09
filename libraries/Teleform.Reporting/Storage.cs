@@ -54,7 +54,7 @@ namespace Teleform.Reporting
                 if (System.Web.HttpContext.Current != null)
                 {
 #warning // Отключать когда везем к заказчику
-                   System.Web.HttpContext.Current.Session["ConnectionString"] = string.Format(ConfigurationManager.ConnectionStrings["Server"].ConnectionString, "sa", "345");
+                   System.Web.HttpContext.Current.Session["ConnectionString"] = string.Format(ConfigurationManager.ConnectionStrings["Server"].ConnectionString, "admin1", "YWRtaW4x");
                    System.Web.HttpContext.Current.Session["SystemUser.objID"] = "0";
 
 

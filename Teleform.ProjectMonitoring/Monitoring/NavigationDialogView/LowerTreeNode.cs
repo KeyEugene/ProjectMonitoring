@@ -107,7 +107,7 @@ namespace Teleform.ProjectMonitoring.NavigationDialogView
 
                 //Определяем на каком TreeNode мы находимся 
                 if (href.Equals(this.currentPath))
-                    cssClass = "navigationTagASelected";
+                    cssClass = "item_selected";
 
                 href = string.Concat(getLeftUrl, "ListAttributeView.aspx", href);
                 isExpanded = true;

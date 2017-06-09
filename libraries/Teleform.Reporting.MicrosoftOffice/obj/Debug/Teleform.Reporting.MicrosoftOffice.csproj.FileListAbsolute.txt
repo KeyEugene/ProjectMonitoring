@@ -6,3 +6,11 @@ D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\obj\De
 D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.dll
 D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.pdb
 D:\Development\Teleform_work\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.MicrosoftOffice.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.MicrosoftOffice.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\bin\Debug\Teleform.Reporting.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.Reporting.MicrosoftOffice\obj\Debug\Teleform.Reporting.MicrosoftOffice.pdb

@@ -53,21 +53,17 @@ namespace Teleform.ProjectMonitoring
                 return Session["checkBoxMainNavigation"] == null ? true : Convert.ToBoolean(Session["checkBoxMainNavigation"]);
             }
         }
-        /// <summary>
-        /// Вкл./Откл. навигации по объектам 
-        /// </summary>
-        private bool isOnObjectsNavigation
+     
+
+        private BottomTreeNodeBase LeftTreeNode;
+        private DataTreeNode data;
+        private IEnumerable<Entity> GetSchemaEntitys
         {
             get
             {
-                return Session["checkBoxObjectsNavigation"] == null ? true : Convert.ToBoolean(Session["checkBoxObjectsNavigation"]);
+                return this.GetSchema().Entities;
             }
         }
-
-        private BottomTreeNodeBase LeftTreeNode;
-        private BottomTreeNodeBase RightTreeNode;
-        private DataTreeNode data;
-        private IEnumerable<Entity> GetSchemaEntitys;
 
         #region Cycle life page
         protected override void OnInit(EventArgs e)
@@ -89,8 +85,6 @@ namespace Teleform.ProjectMonitoring
 
         protected override void OnPreRender(EventArgs e)
         {
-            GetSchemaEntitys = this.GetSchema().Entities;
-
             if (isOnNavigation)
             {
                 //NavigationTreeDialog.Visible = true;
@@ -100,74 +94,23 @@ namespace Teleform.ProjectMonitoring
                 FillTreeView();
             }
             //else
-                //NavigationTreeDialog.Visible = false;
-
-            if (isOnObjectsNavigation)
-            {
-                NavigationObjects.Visible = true;
-                //Если находимся в мониторинге и entity определен
-                var entity = Request["entity"];
-
-                if (!string.IsNullOrEmpty(entity))
-                {
-                    InitializationRightTreeNode(entity);
-                    CreateObjectTree();
-                }
-                else
-                {
-                    NavigationObjects.Visible = false;
-                }
-            }
-            else
-                NavigationObjects.Visible = false;
+            //NavigationTreeDialog.Visible = false;
 
             Page.Session["TableFromPage"] = null;
         }
 
         #endregion
-
+        
         private void FillTreeView()
         {
             treeView.Nodes.Clear();
-            objectTreeView.Nodes.Clear();
-
-            //Вход в админку и "Шаблоны" только Типу Администратор
-            //var typeID = Convert.ToInt32(Session["SystemUser.typeID"]);
-            //var userID = Convert.ToInt32(Session["SystemUser.objID"]);
 
             FillMonitoring();
-            //treeView.Nodes.Add(FillMonitoring());
-
-            //var templatePermission = StorageUserObgects.Select<UserTemplatePermission>(userID, userID).Permission;
-
-            //if (typeID == 1 || typeID == 0) //typeID == 0 - временно
-            //    treeView.Nodes.Add(CreateMainNode("Шаблоны", "Templates/TemplateManager.aspx"));
-
-            //if (typeID == 0 || typeID == 1)
-            //{
-            //    var reportsNode = CreateMainNode("Специальные отчеты", "Reporting/Reports.aspx");
-            //    reportsNode.ChildNodes.Add(CreateMainNode("Древовидное представление", "HardTemplate/HardTemplateView.aspx"));
-            //    reportsNode.ChildNodes.Add(CreateMainNode("Перекрестное представление", "CrossTemplate/CrossTemplateView.aspx"));
-            //    reportsNode.Expanded = false;
-            //    treeView.Nodes.Add(reportsNode);
-            //}
-
-            //if (typeID == 2 || typeID == 5 || typeID == 1 || typeID == 0)  //typeID == 0 - временно
-            //    treeView.Nodes.Add(CreateMainNode("Маршруты документов", "Routes/Routes.aspx"));
-
-            //treeView.Nodes.Add(CreateMainNode("Уведомления", "events.aspx"));
-            //treeView.Nodes.Add(CreateMainNode("Личные настройки", "Settings.aspx"));
-
-            //if (typeID == 1 || typeID == 0) //typeID == 0 - временно
-            //    treeView.Nodes.Add(CreateMainNode("Администрирование", "admin/administration.aspx"));
-            
         }
 
         #region  Fill navigation Tree Node
         private TreeNode FillMonitoring()
         {
-            //var nodeMonitoring = CreateMainNode("Функционал АРМ", "EntityListAttributeView.aspx");// new TreeNode();//
-
 #if alexj
 
             #region Отсеивание Entity без права доступа
@@ -197,7 +140,7 @@ namespace Teleform.ProjectMonitoring
 
                 //Делает для того что бы был открыт главный Node, если мы находимся внутри его
                 node.Expanded = GetExpandedMainNode();
-               //node.Expanded = GetExpandedMainNode();
+                //node.Expanded = GetExpandedMainNode();
             }
             return null;
         }
@@ -227,26 +170,7 @@ namespace Teleform.ProjectMonitoring
         #endregion
 
         #region Bild for FronEnd (Node)
-
-
-        private TreeNode CreateMainNode(string namePage, string leftPath)
-        {
-            var href = string.Concat(GetLeftUrl, leftPath);
-            var cssClass = "navigationMainTagA";
-
-            if (href == GetCurrentUrl)
-            {
-                cssClass = "navigationTagASelected";
-                SelectedEntity = "xyz";
-                HashCollection = new Hashtable(); ;
-            }
-            var s = string.Concat("<a href='", href,
-                "' class='", cssClass,
-                "'>", namePage, "</a>");
-            var treeNode = new TreeNode { Text = s, SelectAction = TreeNodeSelectAction.None };
-            return treeNode;
-        }
-
+        
         private void FillThisNode(Reporting.Entity entity, ref TreeNode node, string countInstance, bool isObjects = false)
         {
             var entityID = entity.ID.ToString();
@@ -268,7 +192,7 @@ namespace Teleform.ProjectMonitoring
                 isExpanded = true;
                 if ((Request["entity"] == null ? "" : Request["entity"].ToString()) == entityID)
                 {
-                    cssClass = "navigationTagASelected";
+                    cssClass = "item_selected";
 
                     //Обнуляем  пару ConstrID and InstanceID, если ненаходимся в карточке и главном ноде Мониторинга
                     if (!data.isDynamicCard && Request.Path == "/monitoring/EntityListAttributeView.aspx" && !isObjects)
@@ -279,7 +203,7 @@ namespace Teleform.ProjectMonitoring
             //Отмечаем как выбранный Node в навигации по объектам
             if (isObjects)
             {
-                cssClass = "navigationTagASelected";
+                cssClass = "item_selected";
                 isExpanded = true;
             }
 
@@ -300,26 +224,7 @@ namespace Teleform.ProjectMonitoring
 
             return String.IsNullOrEmpty(count) ? false : true;
         }
-
-        private void CreateObjectTree()
-        {
-            var node = new TreeNode();
-
-            FillThisNode(RightTreeNode.entity, ref node, "", true);
-
-            if (!RightTreeNode.entity.IsHierarchic)
-                for (int i = 0; i < RightTreeNode.dataTreeNode.ReportTableView.Rows.Count; i++)
-                    node.ChildNodes.Add(RightTreeNode.CreateNode(RightTreeNode.dataTreeNode.ReportTableView.Rows[i], 0));
-            else
-                for (int i = 0; i < RightTreeNode.dataTreeNode.ReportTableView.Rows.Count; i++)
-                {
-                    RightTreeNode.currentIndexNode = 0;
-                    var collectionNode = RightTreeNode.BuildChildNodes(RightTreeNode.dataTreeNode.ReportTableView.Rows[i], null);
-                    RightTreeNode.FillNode(collectionNode, ref node);
-                }
-
-            objectTreeView.Nodes.Add(node);
-        }
+        
 
         private string GetInstanceID(string parentID, string childID)
         {

@@ -34,12 +34,7 @@ namespace Teleform.ProjectMonitoring.Dynamics
         }
 
         private Dictionary<int, Card> Cards { get; set; }
-
-
-
-
-
-
+        
         private void ControlParameters()
         {
 

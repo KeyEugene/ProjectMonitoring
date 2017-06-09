@@ -7,3 +7,12 @@ D:\Development\Teleform_work\libraries\DynamicCardControl\bin\Debug\Teleform.Rep
 D:\Development\Teleform_work\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.csprojResolveAssemblyReference.cache
 D:\Development\Teleform_work\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.dll
 D:\Development\Teleform_work\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\bin\Debug\DynamicCardControl.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\bin\Debug\DynamicCardControl.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\bin\Debug\DynamicCardModel.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\bin\Debug\Teleform.Reporting.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\bin\Debug\DynamicCardModel.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\bin\Debug\Teleform.Reporting.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardControl\obj\Debug\DynamicCardControl.pdb

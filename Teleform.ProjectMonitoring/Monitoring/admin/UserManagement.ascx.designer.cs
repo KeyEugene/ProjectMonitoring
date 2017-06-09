@@ -40,6 +40,15 @@ namespace Teleform.ProjectMonitoring.admin {
         protected global::System.Web.UI.WebControls.PlaceHolder ph;
         
         /// <summary>
+        /// dialog_div control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dialog_div;
+        
+        /// <summary>
         /// validText control.
         /// </summary>
         /// <remarks>

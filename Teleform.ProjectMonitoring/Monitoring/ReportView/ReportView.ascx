@@ -1,9 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportView.ascx.cs" Inherits="Teleform.ProjectMonitoring.ReportView" %>
 <%@ Register Src="~/project/FilterDesigner.ascx" TagPrefix="Project" TagName="FilterDesigner" %>
+<%@ Register TagPrefix="Menu" TagName="Objects" Src="~/NavigationDialogView/NavigationByObjects.ascx" %>
 
 <%@ Register TagPrefix="Navigation" TagName="Frame" Src="~/NavigationFrame/NavigationFrame_EntityListAttributeView.ascx" %>
 
 <Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
+<Menu:Objects runat="server" ID="MenuByObject" />
 <%--
 <%@ Register TagPrefix="Dynamic" Namespace="DynamicCardControl.Controls" Assembly="DynamicCardControl" %>
 --%>

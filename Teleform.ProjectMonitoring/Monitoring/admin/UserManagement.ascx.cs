@@ -22,14 +22,14 @@ namespace Teleform.ProjectMonitoring.admin
             Frame.UserControl_ButtonUpdate_Click += ButtonUpdate_Click;
 
             UpdateMainTable();
-           // visibleUMdialogTableAndSaveButton("hidden");
+            visibleUMdialogTableAndSaveButton("hidden");
         }
 
         protected void ButtonNew_Click(object sender, EventArgs e)
         {
             ResetItems();
             FillForCraeteNewUser();
-           // visibleUMdialogTableAndSaveButton("inherit");
+            visibleUMdialogTableAndSaveButton("inherit");
             ObjIDTB.Text = string.Empty;
             textBoxLogin.ReadOnly = false;
         }
@@ -286,7 +286,8 @@ values( {5} '{1}', '{2}', '{3}', {4})",
 
         private void visibleUMdialogTableAndSaveButton(string hiddenOrInherit)
         {
-            UMdialogTable.Attributes.CssStyle.Add("visibility", hiddenOrInherit);
+            // dialog_divUMdialogTable
+            dialog_div.Attributes.CssStyle.Add("visibility", hiddenOrInherit);
             Save.Attributes.CssStyle.Add("visibility", hiddenOrInherit); //hidden inherit
         }
 

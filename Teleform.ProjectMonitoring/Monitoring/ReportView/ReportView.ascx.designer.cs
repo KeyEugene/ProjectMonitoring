@@ -22,6 +22,15 @@ namespace Teleform.ProjectMonitoring {
         protected global::Teleform.ProjectMonitoring.NavigationFrame.NavigationFrame_EntityListAttributeView Frame;
         
         /// <summary>
+        /// MenuByObject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Teleform.ProjectMonitoring.NavigationDialogView.NavigationByObjects MenuByObject;
+        
+        /// <summary>
         /// TemplateSavedMessageBox control.
         /// </summary>
         /// <remarks>

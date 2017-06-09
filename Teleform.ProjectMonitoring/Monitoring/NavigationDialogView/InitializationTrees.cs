@@ -95,54 +95,7 @@ namespace Teleform.ProjectMonitoring
                 }
             }
         }
-
-        private void InitializationRightTreeNode(string entity)
-        {
-            RightTreeNode = new ObjectsTreeNode();
-            RightTreeNode.dataTreeNode = data;
-            RightTreeNode.entity = GetSchemaEntitys.FirstOrDefault(x => (string)x.ID == entity);
-
-            if (RightTreeNode.entity.IsHierarchic)
-            {
-                int i = 0;
-                var Iresult = int.TryParse(IndexNodeTextBox.Text, out i);
-
-                if (i == 0)
-                {
-                    IndexNodeTextBox.Text = "1";
-                    i = 1;
-                }
-                RightTreeNode.totalIndexNode = i;
-
-                //Получаем таблицу и применяем к ней фильтр (Разделения прав доступа)
-                //objectsTreeNode.MainTable = Storage.Select<BusinessContent>(objectsTreeNode.entity.ID).Table;
-                var userID = Convert.ToInt32(HttpContext.Current.Session["SystemUser.objID"]);
-                RightTreeNode.MainTable = Storage.Select<BusinessContent>(RightTreeNode.entity.ID).GetTable(userID);
-
-                GetContrID();
-                RightTreeNode.nameColParent = RightTreeNode.entity.Attributes.FirstOrDefault(x => x.AppType == AppType.parentid).ID.ToString();
-                RightTreeNode.hashNameCol = RightTreeNode.entity.Attributes.FirstOrDefault(x => x.FPath.ToLower() == "name").ID.ToString();
-
-            }
-            else
-            {
-                LevelContainer.Visible = false;
-            }
-
-            RightTreeNode.titles = RightTreeNode.entity.Attributes.Where(x => x.AppType == AppType.title).Select(x => x.ID.ToString()).ToList();
-        }
-
-        private void GetContrID()
-        {
-            for (int i = 0; i < LeftTreeNode.MainTable.Rows.Count; i++)
-            {
-                if (LeftTreeNode.MainTable.Rows[i]["parentID"].ToString() == RightTreeNode.entity.ID.ToString() &&
-                   Convert.ToBoolean(LeftTreeNode.MainTable.Rows[i]["isHierarchic"]))
-                {
-                    RightTreeNode.constrID = LeftTreeNode.MainTable.Rows[i]["constrID"].ToString();
-                }
-            }
-        }
+        
 
         #endregion
     }

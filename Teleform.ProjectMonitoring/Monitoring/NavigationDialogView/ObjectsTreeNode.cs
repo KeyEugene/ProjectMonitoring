@@ -89,7 +89,7 @@ namespace Teleform.ProjectMonitoring.NavigationDialogView
             if (string.Concat(this.dataTreeNode.getLeftUrl, "Dynamics/XDynamicCard.aspx", this.dataTreeNode.currentPath) == hrefCard ||
                             string.Concat(this.dataTreeNode.getLeftUrl, "ListAttributeView.aspx", this.dataTreeNode.currentPath) == hrefAttrView)
             {
-                cssClass = "navigationTagASelected";
+                cssClass = "item_selected";
                 isExpanded = true;
             }
 

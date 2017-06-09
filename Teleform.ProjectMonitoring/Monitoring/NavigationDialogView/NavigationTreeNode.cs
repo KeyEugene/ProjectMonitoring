@@ -42,7 +42,7 @@ namespace Teleform.ProjectMonitoring.NavigationDialogView
 
                 for (int i = 0; i < MainTable.Rows.Count; i++)
                 {
-                    if (MainTable.Rows[i]["parentID"].ToString() == childID && Convert.ToBoolean( MainTable.Rows[i]["isIdentified"]) != false)
+                    if (MainTable.Rows[i]["parentID"].ToString() == childID && Convert.ToBoolean(MainTable.Rows[i]["isIdentified"]) != false)
                     {
                         //Задаем id на будущую ступень
                         if (childID == dataTreeNode.selectedEntityID && row["constrID"].ToString() == dataTreeNode.selectedConstrID
@@ -73,22 +73,22 @@ namespace Teleform.ProjectMonitoring.NavigationDialogView
             string href = String.Empty;
             bool isExpanded = false;
             string cssClass = "navigationTagA";
-           // var tooltipCount = "";
+            // var tooltipCount = "";
 
             if (collection.ContainsKey(constrID + level))
             {
-href = string.Concat(dataTreeNode.getLeftUrl, "ListAttributeView.aspx1?entity=", row["childID"], "&constraint=", constrID, "&id=", collection[constrID + level],
-                    "&level=", level);
+                href = string.Concat(dataTreeNode.getLeftUrl, "ListAttributeView.aspx?entity=", row["childID"], "&constraint=", constrID, "&id=", collection[constrID + level],
+                                    "&level=", level);
 
                 //Определяем на каком TreeNode мы находимся 
                 if (href == (string.Concat(dataTreeNode.getLeftUrl, "ListAttributeView.aspx", dataTreeNode.currentPath)) ||
                     row["childID"].ToString() == dataTreeNode.selectedEntityID)
                 {
-                    cssClass = "navigationTagASelected";
+                    cssClass = "item_selected";
                 }
 
                 isExpanded = true;
-               // tooltipCount = GetCountInstance(row, collection[constrID + level].ToString());
+                // tooltipCount = GetCountInstance(row, collection[constrID + level].ToString());
             }
             else
             {
@@ -107,7 +107,7 @@ href = string.Concat(dataTreeNode.getLeftUrl, "ListAttributeView.aspx1?entity=",
                 Expanded = isExpanded
 #else
                 Text = string.Concat("<a href='", href,
-                "' class='", cssClass," ent", row["parentID"].ToString(),
+                "' class='", cssClass, " ent", row["parentID"].ToString(),
                 "'>", NamePath, " </a>"),
                 SelectAction = TreeNodeSelectAction.None,
                 Expanded = isExpanded

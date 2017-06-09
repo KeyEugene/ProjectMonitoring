@@ -5,3 +5,10 @@ D:\Development\Teleform_work\libraries\DynamicCardModel\bin\Debug\Teleform.Repor
 D:\Development\Teleform_work\libraries\DynamicCardModel\obj\Debug\DynamicCardModel.csprojResolveAssemblyReference.cache
 D:\Development\Teleform_work\libraries\DynamicCardModel\obj\Debug\DynamicCardModel.dll
 D:\Development\Teleform_work\libraries\DynamicCardModel\obj\Debug\DynamicCardModel.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\bin\Debug\DynamicCardModel.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\bin\Debug\DynamicCardModel.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\bin\Debug\Teleform.Reporting.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\bin\Debug\Teleform.Reporting.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\obj\Debug\DynamicCardModel.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\obj\Debug\DynamicCardModel.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\DynamicCardModel\obj\Debug\DynamicCardModel.pdb
