@@ -183,6 +183,7 @@
     <Content Include="NavigationFrame\Breadcrumbs.ascx" />
     <Content Include="NavigationFrame\NavigationFrame_EntityListAttributeView.ascx" />
     <Content Include="NavigationFrame\NavigationFrame_Home.ascx" />
+    <Content Include="NavigationFrame\NavigationFrame_Routes.ascx" />
     <Content Include="NavigationFrame\NavigationFrame_Template.ascx" />
     <Content Include="NavigationPanel.ascx" />
     <Content Include="documents\preview.aspx" />
@@ -512,6 +513,13 @@
     </Compile>
     <Compile Include="NavigationFrame\NavigationFrame_Home.ascx.designer.cs">
       <DependentUpon>NavigationFrame_Home.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="NavigationFrame\NavigationFrame_Routes.ascx.cs">
+      <DependentUpon>NavigationFrame_Routes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NavigationFrame\NavigationFrame_Routes.ascx.designer.cs">
+      <DependentUpon>NavigationFrame_Routes.ascx</DependentUpon>
     </Compile>
     <Compile Include="NavigationFrame\NavigationFrame_Template.ascx.cs">
       <DependentUpon>NavigationFrame_Template.ascx</DependentUpon>
