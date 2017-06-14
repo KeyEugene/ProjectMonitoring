@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="Маршруты документов" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
  CodeBehind="Routes.aspx.cs" Inherits="Teleform.ProjectMonitoring.Routes.Routes" %>
+<%@ Register TagPrefix="Navigation" TagName="Frame" Src="~/NavigationFrame/NavigationFrame_Routes.ascx" %>
+
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     
@@ -8,19 +11,15 @@
     <link href="../Styles/routestyles.css" rel="Stylesheet" />
 </asp:Content>
 
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server" ViewStateMode="Enabled">
+
+    <Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
     <div>
         <br />
        <%-- <label>Раздел находится в разработке</label>--%>
         <br />
         <br />
-        <asp:LinkButton runat="server" ID="BuildRoute" PostBackUrl="~/Routes/BuildingRoute.aspx" Text="Построить маршрут"></asp:LinkButton>
-        <br />
-        <br />
-        <label>Тип документа: </label>
-        <asp:DropDownList runat="server" ID="TypesList" AutoPostBack="true" OnSelectedIndexChanged="TypesList_SelectedIndexChanged"></asp:DropDownList>
-        <br />
+  
         <br />
         <asp:MultiView runat="server" ID="WorkPlaces">
             <asp:View ID="View1" runat="server">

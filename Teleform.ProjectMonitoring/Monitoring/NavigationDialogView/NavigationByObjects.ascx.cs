@@ -222,14 +222,15 @@ namespace Teleform.ProjectMonitoring.NavigationDialogView
 
         private void GetContrID()
         {
-            //for (int i = 0; i < LeftTreeNode.MainTable.Rows.Count; i++)
-            //{
-            //    if (LeftTreeNode.MainTable.Rows[i]["parentID"].ToString() == RightTreeNode.entity.ID.ToString() &&
-            //       Convert.ToBoolean(LeftTreeNode.MainTable.Rows[i]["isHierarchic"]))
-            //    {
-            //        RightTreeNode.constrID = LeftTreeNode.MainTable.Rows[i]["constrID"].ToString();
-            //    }
-            //}
+            if (Session["TableNovigationPath"] != null)
+            {
+                var MainTable = (DataTable)Session["TableNovigationPath"];
+                for (int i = 0; i < MainTable.Rows.Count; i++)
+                    if (MainTable.Rows[i]["parentID"].ToString() == RightTreeNode.entity.ID.ToString() &&
+                       Convert.ToBoolean(MainTable.Rows[i]["isHierarchic"]))
+                        RightTreeNode.constrID = MainTable.Rows[i]["constrID"].ToString();
+            }
+            else throw new NotImplementedException();
         }
     }
 }

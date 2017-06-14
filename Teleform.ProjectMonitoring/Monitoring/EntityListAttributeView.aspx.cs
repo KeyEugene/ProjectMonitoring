@@ -65,8 +65,15 @@ namespace Teleform.ProjectMonitoring
         {
             Predicate<Entity> predicate;
 #if Alex
-            predicate = DefaultMode;
-            FillEntityList(predicate);
+            var isClassifier = Request["checker"] != null;
+            if (isClassifier)
+            {
+                predicate = EnumMode;
+                CurrentPageTitle = "Классификаторы";
+            }
+            else predicate = DefaultMode;
+            FillEntityList(predicate, isClassifier);
+
 #else
             var isClassifier = Request["checker"] != null;
 
@@ -83,18 +90,24 @@ namespace Teleform.ProjectMonitoring
 #endif
         }
 
-        private void FillEntityList( Predicate<Entity> predicate)
+        private void FillEntityList( Predicate<Entity> predicate, bool isClassifier)
         {
 #if Alex
-            var dt = Storage.GetDataTable(string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
-                                                left join model.BTables b on b.name=p.entity
-                                                left join model.AppTypes t on t.object_id=b.appTypeID
-                                                where  p.objID is NULL
-                                                order by p.entityAlias", Session["SystemUser.objID"].ToString()));
+            //var dt = Storage.GetDataTable(string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
+            //                                    left join model.BTables b on b.name=p.entity
+            //                                    left join model.AppTypes t on t.object_id=b.appTypeID
+            //                                    where  p.objID is NULL
+            //                                    order by p.entityAlias", Session["SystemUser.objID"].ToString()));
 
-            var permittedEntities = dt.AsEnumerable().Where(ent => Convert.ToBoolean(ent["read"]));
-            var Entities = this.GetSchema().Entities.Where(ent => predicate(ent)).OrderBy(ent => ent.Name);
-
+            //var permittedEntities = dt.AsEnumerable().Where(ent => Convert.ToBoolean(ent["read"]));
+            //var Entities = this.GetSchema().Entities.Where(ent => predicate(ent)).OrderBy(ent => ent.Name);
+            
+            //if (entityID != null && check.ContainsKey(entityID)) { }
+            //EntityList.SelectedIndex = check[entityID];
+            //else
+            //{
+                //EntityList.SelectedIndex = 0;
+            //}
             Session["ReportCondition"] = "null";
 #else 
              if (Session["EntityDropDownList"] != null && Session["EntityDropDownList.isClassifier"] != null)

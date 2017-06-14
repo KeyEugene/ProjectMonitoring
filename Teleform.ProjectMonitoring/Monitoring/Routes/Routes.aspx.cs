@@ -51,6 +51,8 @@ namespace Teleform.ProjectMonitoring.Routes
         protected void Page_Load(object sender, EventArgs e)
         {
             //var a = Global.Schema.Entities.Where(x => x.SystemName.Contains("Route") || x.SystemName.Contains("Application"));
+            Frame.UserControl_DocTypeList_SelectedIndexChanged += DocTypeList_SelectedIndexChanged;
+            Frame.UserControl_BuildRouteButton_Click += BuildRouteButton_Click;
 
             if (!IsPostBack)
             {
@@ -62,53 +64,53 @@ namespace Teleform.ProjectMonitoring.Routes
                     throw new Exception(string.Concat(userTypeID," таким типам пользователей доступ на эту страницу запрещен"));
 
                 WorkPlaces.ActiveViewIndex = -1;
-                var queryTypes = "SELECT [objID], [name] FROM [_ApplicationType]";
-                var da = new SqlDataAdapter(queryTypes, ConString);
-                var dt = new DataTable();
-                da.Fill(dt);
+                //var queryTypes = "SELECT [objID], [name] FROM [_ApplicationType]";
+                //var da = new SqlDataAdapter(queryTypes, ConString);
+                //var dt = new DataTable();
+                //da.Fill(dt);
 
-                TypesList.Items.Add(new ListItem()
-                {
-                    Text = "не выбрано",
-                    Value = "-1"
-                });
-                TypesList.DataSource = dt;
-                TypesList.DataTextField = "name";
-                TypesList.DataValueField = "objID";
-                TypesList.AppendDataBoundItems = true;
-                TypesList.DataBind();
+                //TypesList.Items.Add(new ListItem()
+                //{
+                //    Text = "не выбрано",
+                //    Value = "-1"
+                //});
+                //TypesList.DataSource = dt;
+                //TypesList.DataTextField = "name";
+                //TypesList.DataValueField = "objID";
+                //TypesList.AppendDataBoundItems = true;
+                //TypesList.DataBind();
             }
         }
 
 
         protected void TypesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (TypesList.SelectedValue)
-            {
-                case "-1":
-                    WorkPlaces.ActiveViewIndex = -1;
-                    break;
-                default:
-                    PointList = null;
-                    AppList = null;
-                    EventList = null;
-                    TablePlace.Controls.Clear();
-                    FillRoute();
-                    FillLists();
-                    TablePlace.Controls.Clear();
-                    BuildRouteEvents();
-                    WorkPlaces.ActiveViewIndex = 0;
-                    break;
-            }
+            //switch (TypesList.SelectedValue)
+            //{
+            //    case "-1":
+            //        WorkPlaces.ActiveViewIndex = -1;
+            //        break;
+            //    default:
+            //        PointList = null;
+            //        AppList = null;
+            //        EventList = null;
+            //        TablePlace.Controls.Clear();
+            //        FillRoute();
+            //        FillLists();
+            //        TablePlace.Controls.Clear();
+            //        BuildRouteEvents();
+            //        WorkPlaces.ActiveViewIndex = 0;
+            //        break;
+            //}
         }
 
         protected override void CreateChildControls()
         {
-            if (TypesList.SelectedValue != "-1")
-            {
-                TablePlace.Controls.Clear();
-                BuildRouteEvents();
-            }
+            //if (TypesList.SelectedValue != "-1")
+            //{
+            //    TablePlace.Controls.Clear();
+            //    BuildRouteEvents();
+            //}
             //base.CreateChildControls();
         }
 
@@ -125,28 +127,31 @@ namespace Teleform.ProjectMonitoring.Routes
         {
             //заполнить список документов
             string queryApplication;
-
-            if (hasWork)
-                queryApplication = string.Format("SELECT [objID], [number] FROM [_Application] WHERE [TypeID] = {0}", TypesList.SelectedValue);
+            if (Frame.DocTypeList.SelectedDataKey["objID"] == null) throw new Exception("Не выбран тип документа");
             else
-                queryApplication = string.Format("SELECT [objID], [name] FROM [_Application] WHERE [TypeID] = {0}", TypesList.SelectedValue);
-
-            var da = new SqlDataAdapter(queryApplication, ConString);
-            var dt = new DataTable();
-            da.Fill(dt);
-            ApplicationList.DataSource = dt;
-            if (hasWork)
-                ApplicationList.DataTextField = "number";
-            else
-                ApplicationList.DataTextField = "name";
-
-            ApplicationList.DataValueField = "objID";
-            ApplicationList.DataBind();
-
-            foreach (ListItem item in ApplicationList.Items)
             {
-                if (AppList != null && AppList.Find(x => x.ID == item.Value) != null)
-                    item.Enabled = false;
+                if (hasWork)
+                    queryApplication = string.Format("SELECT [objID], [number] FROM [_Application] WHERE [TypeID] = {0}", Frame.DocTypeList.SelectedDataKey["objID"]);
+                else
+                    queryApplication = string.Format("SELECT [objID], [name] FROM [_Application] WHERE [TypeID] = {0}", Frame.DocTypeList.SelectedDataKey["objID"]);
+
+                var da = new SqlDataAdapter(queryApplication, ConString);
+                var dt = new DataTable();
+                da.Fill(dt);
+                ApplicationList.DataSource = dt;
+                if (hasWork)
+                    ApplicationList.DataTextField = "number";
+                else
+                    ApplicationList.DataTextField = "name";
+
+                ApplicationList.DataValueField = "objID";
+                ApplicationList.DataBind();
+
+                foreach (ListItem item in ApplicationList.Items)
+                {
+                    if (AppList != null && AppList.Find(x => x.ID == item.Value) != null)
+                        item.Enabled = false;
+                }
             }
         }
 
@@ -156,27 +161,31 @@ namespace Teleform.ProjectMonitoring.Routes
         private void FillRoute()
         {
             //заполнить список точек
-            var queryPoints = string.Format(@"SELECT a.[objID], a.[stateID], c.[name], a.[_divisionID], b.[name], a.[position] FROM [_RoutePoint] a, [{1}] b, [_ApplicationState] c
-                                            WHERE a.[_divisionID] = b.[objID] AND c.[objID] = a.[stateID] AND a.[TypeID] = {0} AND (a.[isArchived] is NULL OR a.[isArchived] = 'false')", TypesList.SelectedValue,
-                                            hasWork ? "_Division" : "Division");
-            var da = new SqlDataAdapter(queryPoints, ConString);
-            var dt = new DataTable();
-            da.Fill(dt);
-            PointList = new List<RoutePoint>();
-            foreach (DataRow item in dt.Rows)
+            if (Frame.DocTypeList.SelectedDataKey["objID"] == null) throw new Exception("Не выбран тип документа");
+            else
             {
-                PointList.Add(new RoutePoint()
+                var queryPoints = string.Format(@"SELECT a.[objID], a.[stateID], c.[name], a.[_divisionID], b.[name], a.[position] FROM [_RoutePoint] a, [{1}] b, [_ApplicationState] c
+                                            WHERE a.[_divisionID] = b.[objID] AND c.[objID] = a.[stateID] AND a.[TypeID] = {0} AND (a.[isArchived] is NULL OR a.[isArchived] = 'false')", Frame.DocTypeList.SelectedDataKey["objID"],
+                                                hasWork ? "_Division" : "Division");
+                var da = new SqlDataAdapter(queryPoints, ConString);
+                var dt = new DataTable();
+                da.Fill(dt);
+                PointList = new List<RoutePoint>();
+                foreach (DataRow item in dt.Rows)
                 {
-                    ID = item.ItemArray[0].ToString(),
-                    stateID = item.ItemArray[1].ToString(),
-                    state = item.ItemArray[2].ToString(),
-                    divisionID = item.ItemArray[3].ToString(),
-                    divisionName = item.ItemArray[4].ToString(),
-                    position = Convert.ToInt32(item.ItemArray[5]),
-                    typeID = TypesList.SelectedValue
-                });
+                    PointList.Add(new RoutePoint()
+                    {
+                        ID = item.ItemArray[0].ToString(),
+                        stateID = item.ItemArray[1].ToString(),
+                        state = item.ItemArray[2].ToString(),
+                        divisionID = item.ItemArray[3].ToString(),
+                        divisionName = item.ItemArray[4].ToString(),
+                        position = Convert.ToInt32(item.ItemArray[5]),
+                        //   typeID = TypesList.SelectedValue
+                    });
+                }
+                PointList = PointList.OrderBy(x => x.position).ToList();
             }
-            PointList = PointList.OrderBy(x => x.position).ToList();
         }
 
         ///<summary>
@@ -478,7 +487,7 @@ namespace Teleform.ProjectMonitoring.Routes
                 item.SaveStateToDB();
             }
 
-            TypesList.SelectedValue = "-1";
+            //TypesList.SelectedValue = "-1";
             WorkPlaces.ActiveViewIndex = -1;
 
         }
@@ -548,9 +557,25 @@ namespace Teleform.ProjectMonitoring.Routes
         ///</summary>
         protected void cancelButton_Click(object sender, EventArgs e)
         {
-            TypesList.SelectedValue = "-1";
+            //TypesList.SelectedValue = "-1";
             WorkPlaces.ActiveViewIndex = -1;
         }
+        protected void DocTypeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PointList = null;
+            AppList = null;
+            EventList = null;
+            TablePlace.Controls.Clear();
+            FillRoute();
+            FillLists();
+            TablePlace.Controls.Clear();
+            BuildRouteEvents();
+            WorkPlaces.ActiveViewIndex = 0;
+        }
 
+        protected void BuildRouteButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

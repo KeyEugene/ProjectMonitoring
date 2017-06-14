@@ -89,6 +89,7 @@ namespace Teleform.ProjectMonitoring
             {
                 //NavigationTreeDialog.Visible = true;
                 Session["ShowAllNavigation"] = ShowAllNavigation.Checked;
+                //var isClassifier = Request["checker"] != null;
                 InitializationDataTree();
                 InitializationLeftTreeNode();
                 FillTreeView();
@@ -114,16 +115,38 @@ namespace Teleform.ProjectMonitoring
 #if alexj
 
             #region Отсеивание Entity без права доступа
-            var dt = Storage.GetDataTable(string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
+            var isClassifier = Request["checker"] != null;
+            DataTable dt;
+            var allEntities = GetSchemaEntitys.Where(o => o.IsMain && !o.IsEnumeration).OrderBy(o => o.Name);
+            EnumerableRowCollection<DataRow> permittedEntities;
+            IEnumerable<Entity> Entities;
+            if (!isClassifier)
+            {
+                dt = Storage.GetDataTable(string.Format(@"select iif(t.alias is NULL,'Шаблон',t.alias) typeAlias, p.* from Permission.UserPermission({0},NULL)p 
                                                 left join model.BTables b on b.name=p.entity
                                                 left join model.AppTypes t on t.object_id=b.appTypeID
                                                 where  p.objID is NULL
                                                 order by p.entityAlias", Session["SystemUser.objID"].ToString()));
+                permittedEntities = dt.AsEnumerable().Where(ent => Convert.ToBoolean(ent["read"]));
+                allEntities = GetSchemaEntitys.Where(o => o.IsMain && !o.IsEnumeration).OrderBy(o => o.Name);
+                Entities = allEntities.Where(ent => permittedEntities.Select(o => o["entity"].ToString()).Contains(ent.SystemName));
+            }
+            else
+            {
+                dt = Storage.GetDataTable(@"SELECT  bt.object_ID ID, bt.name as entity, bt.alias as name 
+                            FROM model.BTables bt
+                            join model.AppTypes at on at.object_ID=bt.appTypeID and at.name='Enum'");
+                permittedEntities = dt.AsEnumerable().OrderBy(o => o["name"]);
+                var list = new List<Entity>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                    list.Add(this.GetSchema().Entities.OrderBy(o => o.SystemName).FirstOrDefault(x => x.ID.ToString() == dt.Rows[i]["ID"].ToString()));
+                Entities = list;
+                //var entityID = Request["entity"];
+                //Response.Redirect(string.Format("~/EntityListAttributeView.aspx?entity={0}&checker=isClassifier", entityID));
+            }
 
-            var permittedEntities = dt.AsEnumerable().Where(ent => Convert.ToBoolean(ent["read"]));
-            var allEntities = GetSchemaEntitys.Where(o => o.IsMain && !o.IsEnumeration).OrderBy(o => o.Name);
-
-            var Entities = allEntities.Where(ent => permittedEntities.Select(o => o["entity"].ToString()).Contains(ent.SystemName));
+            Session["ReportCondition"] = "null";
+            Session["EntityDropDownList.isClassifier"] = isClassifier;
             #endregion
 
 
@@ -133,7 +156,7 @@ namespace Teleform.ProjectMonitoring
 #endif
             {
                 var node = new TreeNode();
-                FillThisNode(entity, ref node, GetCountInstance(entity.SystemName));
+                FillThisNode(entity, ref node, isClassifier, GetCountInstance(entity.SystemName));
                 FilledNavigationNode(entity, ref node);
                 treeView.Nodes.Add(node);
                 //nodeMonitoring.ChildNodes.Add(node);
@@ -171,11 +194,12 @@ namespace Teleform.ProjectMonitoring
 
         #region Bild for FronEnd (Node)
         
-        private void FillThisNode(Reporting.Entity entity, ref TreeNode node, string countInstance, bool isObjects = false)
+        private void FillThisNode(Reporting.Entity entity, ref TreeNode node, bool isClassifier, string countInstance, bool isObjects = false)
         {
             var entityID = entity.ID.ToString();
             bool isExpanded = false;
             var href = string.Concat(GetLeftUrl, string.Concat("EntityListAttributeView.aspx?entity=", entityID));
+            if (isClassifier)  href=string.Concat(href, "&checker=isClassifier"); 
 
             if (entity.IsHierarchic && isObjects)
             {

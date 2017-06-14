@@ -13,22 +13,13 @@ namespace Teleform.ProjectMonitoring.Routes {
     public partial class Routes {
         
         /// <summary>
-        /// BuildRoute элемент управления.
+        /// Frame элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BuildRoute;
-        
-        /// <summary>
-        /// TypesList элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TypesList;
+        protected global::Teleform.ProjectMonitoring.NavigationFrame.NavigationFrame_Routes Frame;
         
         /// <summary>
         /// WorkPlaces элемент управления.
