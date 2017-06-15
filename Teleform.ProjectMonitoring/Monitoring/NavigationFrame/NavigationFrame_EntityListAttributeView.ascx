@@ -17,7 +17,7 @@
 </style>
 
 <div class="action_container row" id="action_container">
-    <div class="col-lg-2 text-center border_rigth">
+    <div class="col-lg-3 text-center border_rigth">
         <div class="margin-top ">
             <asp:LinkButton ID="InsertInstance" CssClass="btn btn-sm btn-default" runat="server" Text="Добавить" OnClick="InsertInstance_Click" />
             <asp:LinkButton ID="DeleteInstance" CssClass="btn btn-sm btn-danger" runat="server" Text="Удалить" OnClick="DeleteInstance_Click" />
@@ -78,7 +78,7 @@
             <asp:LinkButton ID="ResetAllSortings" CssClass="btn btn-sm btn-warning" runat="server" Text="Сброс сортировок" OnClick="ResetAllSortings_OnClick" ToolTip="Сбрасывает все сортировки." />
         </div>
     </div>
-    <div class="col-lg-4 text-center  border_rigth">
+    <div class="col-lg-3 text-center  border_rigth">
         <asp:CheckBox runat="server" Title="создать отчет Excel, без учета оперативных фильтров" ID="IsNeedAllInstances" Style="position: relative; top: 4px; left: 0px" />
         <asp:LinkButton ID="ExcelReportButton" CssClass="btn btn-sm btn-default" runat="server" Text="Экспорт в Excel" EnableViewState="false" OnClick="CreateExcelReportButton_Click" />
         <%--<label runat="server" style="cursor: pointer; color: blue;" onclick="ShowImportDialog()" id="ImportReportButton">Импорт файл:</label>--%>
@@ -87,10 +87,8 @@
             <asp:FileUpload ID="ImportFileUpload" runat="server" onchange="$('[id*=LoadImportFile]').click(); return false;" Style="display: none;" />
         </label>
         <asp:Button ID="LoadImportFile" runat="server" Text="Загрузить файл" OnClick="LoadImportFile_Click" Style="display: none;" />
-        <input type="button" class="btn btn-sm btn-default" id="myInput" onclick="openModelDialog();" value="Экспорт в Word\Excel" />
-        <input type="button" onclick="$('[id*=openMenuDialog]').click(); return false;" 
-            value="Показать меню по объектам" class="btn btn-sm btn-primary" />
-
+        <br />
+        <input type="button" onclick="$('[id*=openMenuDialog]').click(); return false;" value="Показать меню по объектам" class="btn btn-sm btn-default" />
     </div>
 </div>
 
@@ -98,61 +96,3 @@
     <Project:NavigationDialog runat="server" ID="navigationDialog" EnableViewState="false" ViewStateMode="Disabled" />
 </div>
 
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Создание</h3>
-                    </div>
-                    <div class="panel-body">
-                        <asp:Button ID="CreateTemplateButton" runat="server" Text="Создать шаблон" OnClick="CreateTemplateButton_Click"
-                            CssClass="btn btn-default" />
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Редактирование</h3>
-                    </div>
-                    <div class="panel-body">
-                        <asp:DropDownList OnSelectedIndexChanged="ReportsTemplatesList_OnSelectedIndexChanged"
-                            OnLoad="ReportsTemplatesList_OnLoad" AutoPostBack="true" runat="server" ID="ReportsTemplatesList"
-                            DataValueField="Value" DataTextField="Text" CssClass="form-control" />
-                        <asp:Button ID="EditTemplateButton" runat="server" Text="Редактировать шаблон" OnClick="EditTemplateButton_Click"
-                            CssClass="btn btn-default" />
-
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Выгрузка отсчета (Word, Excel)</h3>
-                    </div>
-                    <div class="panel-body">
-                        <asp:Label Visible="false" runat="server" ID="ArchiveNameLabel">Имя архива:</asp:Label>
-                        <asp:TextBox Visible="false" runat="server" ID="ArchiveNameBox" placeholder="" CssClass="form-control" />
-                        <asp:Button Visible="false" ID="DownloadButton" runat="server" Text="Загрузить отчет" CssClass="btn btn-default"
-                            OnClick="DownloadButton_Click" />
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" value="Закрыть" class="btn btn-default" onclick="$('#myModal').modal('hide'); return false;" />
-            </div>
-        </div>
-    </div>
-    <script src="Scripts/bootstrap/Dialog/modal.js"></script>
-    <script src="Scripts/bootstrap/Dialog/util.js"></script>
-    <script>
-        function openModelDialog() {
-            $('#myModal').modal('show');
-        }
-    </script>
-    <style>
-        .form-control {
-            display: inline !important;
-        }
-    </style>
-
-</div>

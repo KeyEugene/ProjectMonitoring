@@ -173,59 +173,5 @@ namespace Teleform.ProjectMonitoring.NavigationFrame {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Teleform.ProjectMonitoring.NavigationDialog navigationDialog;
-
-        /// <summary>
-        /// CreateTemplateButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.Button CreateTemplateButton;
-
-        /// <summary>
-        /// ReportsTemplatesList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.DropDownList ReportsTemplatesList;
-
-        /// <summary>
-        /// EditTemplateButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.Button EditTemplateButton;
-        
-        /// <summary>
-        /// ArchiveNameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.Label ArchiveNameLabel;
-
-        /// <summary>
-        /// ArchiveNameBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.TextBox ArchiveNameBox;
-
-        /// <summary>
-        /// DownloadButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        public global::System.Web.UI.WebControls.Button DownloadButton;
     }
 }

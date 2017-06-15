@@ -3,8 +3,3 @@ D:\Development\Teleform_work\libraries\Teleform.SqlServer.Formatting\Teleform.Sq
 D:\Development\Teleform_work\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\obj\Debug\Teleform.SqlServer.Formatting.csprojResolveAssemblyReference.cache
 D:\Development\Teleform_work\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\obj\Debug\Teleform.SqlServer.Formatting.dll
 D:\Development\Teleform_work\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\obj\Debug\Teleform.SqlServer.Formatting.pdb
-C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\bin\Debug\Teleform.SqlServer.Formatting.dll
-C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\bin\Debug\Teleform.SqlServer.Formatting.pdb
-C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\obj\Debug\Teleform.SqlServer.Formatting.csprojResolveAssemblyReference.cache
-C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\obj\Debug\Teleform.SqlServer.Formatting.dll
-C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.SqlServer.Formatting\Teleform.SqlServer.Formatting\obj\Debug\Teleform.SqlServer.Formatting.pdb

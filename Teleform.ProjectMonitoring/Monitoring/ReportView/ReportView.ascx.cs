@@ -1,4 +1,14 @@
-﻿using System;
+﻿#define Viktor
+
+#define DEPRECATED_CODE
+#define Dasha
+#define Alex
+#define AlexNewConstructor
+#define noGetFilterExpression
+#define alexj
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,16 +16,26 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 using System.Text;
 using System.IO;
+using System.Xml.Linq;
+using System.Xml;
 
 using Teleform.Reporting.MicrosoftOffice;
 using Teleform.Reporting;
 using Teleform.IO.Compression;
 using Phoenix.Web.UI.Dialogs;
+using System.Threading;
+using Teleform.ProjectMonitoring.HttpApplication;
 using Teleform.Reporting.Web;
+using Dialogs = Phoenix.Web.UI.Dialogs;
+using Teleform.Reporting.DynamicCard;
 
+using System.Web.Script.Serialization;
+using System.Net;
 using Teleform.ProjectMonitoring.admin.SeparationOfAccessRights;
+
 using Teleform.ProjectMonitoring.Templates;
 
 using EnumTypeCode = Teleform.Reporting.Reporting.Template.EnumTypeCode;
@@ -24,7 +44,8 @@ namespace Teleform.ProjectMonitoring
 {
     public partial class ReportView : System.Web.UI.UserControl, INamingContainer
     {
-        #region Property
+        StringBuilder idList = new StringBuilder();
+
         public string EntityID { get; set; }
 
         public string ObjectID
@@ -62,7 +83,268 @@ namespace Teleform.ProjectMonitoring
             }
         }
 
+        #region вспомогательные методы для загрузки и подготовки отчетов
+
+
+
+
+
+
+        private string GetTypeName(int templateID)
+        {
+            using (var c = new SqlConnection(Kernel.ConnectionString))
+            using (var cmd = new SqlCommand("SELECT [RTT].[internal] [typeName] FROM [model].[R$Template] [RT]" +
+                                                "JOIN [model].[R$TemplateType] [RTT]  ON [RT].[typeID] = [RTT].[objID]" +
+                                                    "WHERE [RT].[objID] = @templateID", c))
+            {
+                c.Open();
+                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
+                return cmd.ExecuteScalar().ToString();
+            }
+        }
+
+        private Teleform.Reporting.GroupReport GetExcelReport(int templateID, out string file)
+        {
+            Teleform.Reporting.Template template = Storage.Select<Template>(templateID);
+            string constraint = Request["constraint"], instance = Request["id"];
+            /*, @constrID={1}, @instanceID={2}*/
+            using (var c = new SqlConnection(Kernel.ConnectionString))
+            {
+
+                var command = new SqlCommand("EXEC [report].[getBObjectData] @templateID = @tid, @flFormat = 0, @flHeader = 0", c);
+
+                command.Parameters.AddRange(new[]
+                {
+                    new SqlParameter { ParameterName = "tid", Value = template.ID, DbType = DbType.Int32 }
+
+                });
+
+                var adapter = new SqlDataAdapter(command);
+                var table = new DataTable();
+                adapter.Fill(table);
+                file = template.FileName;
+
+                return Teleform.Reporting.GroupReport.Make(template, table, Session["SystemUser.objID"].ToString());
+            }
+
+        }
+
+        private string GetFileName(int templateID)
+        {
+            var textBox = GroupReportForm2.FindControl("ArchiveNameBox") as TextBox;
+            if (!string.IsNullOrEmpty(textBox.Text)) return textBox.Text + ".xlsx";
+
+            using (var c = new SqlConnection(Kernel.ConnectionString))
+            using (var cmd = new SqlCommand("SELECT [fileName] FROM [model].[R$Template] where [objID] =  @templateID", c))
+            {
+                c.Open();
+                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
+                return cmd.ExecuteScalar().ToString() + ".xlsx";
+            }
+        }
+
+        private Teleform.Reporting.GroupReport GetGroupReport()
+        {
+
+            var objIDList = new StringBuilder();
+            var filterTable = ReportViewControl.DataView.ToTable();
+
+
+            foreach (DataRow row in filterTable.Rows)
+                objIDList.Append(row["objID"] + ",");
+
+            if (objIDList.Length == 0)
+                return null;
+
+            objIDList.Length--;
+
+            string instanceList = objIDList.ToString();
+
+            var ddl = GroupReportForm2.FindControl("ReportsTemplatesList") as DropDownList;
+
+            Teleform.Reporting.Template template = Storage.Select<Template>(ddl.SelectedValue);
+            string constraint = Request["constraint"], instance = Request["id"];
+            /*, @constrID={1}, @instanceID={2}*/
+            using (var c = new SqlConnection(Kernel.ConnectionString))
+            {
+                var command = new SqlCommand("EXEC [report].[getListAttributeData] @templateID = @tid, @flFormat = 0, @flHeader = 0, @instances = @list", c); //, @_flTitle = 1", c);
+
+                command.Parameters.AddRange(new[]
+                {
+                    new SqlParameter { ParameterName = "tid", Value = template.ID, DbType = DbType.Int32 },
+                    new SqlParameter { ParameterName = "list", Value = instanceList }
+                });
+
+                var adapter = new SqlDataAdapter(command);
+                var table = new DataTable();
+
+                adapter.Fill(table);
+
+
+                return Teleform.Reporting.GroupReport.Make(template, table);
+            }
+        }
         #endregion
+        #region загрузить отчет
+        protected void DownloadButton_Click(object sender, EventArgs e)
+        {
+
+            if (ReportsTemplatesList.Items.Count == 0) return;
+            var templateID = int.Parse(ReportsTemplatesList.SelectedValue);
+
+            var typeName = GetTypeName(templateID);
+
+            if (string.IsNullOrEmpty(typeName)) return;
+
+            if (typeName == "Excel")
+                DownLoadExcel(templateID);
+            else
+                DownLoadZip();
+
+            GroupReportForm2.Close();
+        }
+
+        private void DownLoadExcel(int templateID)
+        {
+            var output = new MemoryStream();
+
+            string file = string.Empty;
+            var report = GetExcelReport(templateID, out file);
+
+            if (report == null) return;
+
+            using (var stream = new MemoryStream())
+            {
+                var builder = new ReportViewExcelBuilder();
+                builder.Create(stream, report);
+
+                Response.Clear();
+                Response.ContentType = "text/html";
+                Response.AddHeader("content-disposition", string.Format("attachment;fileName={0}.xlsx", file));
+                Response.ContentEncoding = Encoding.UTF8;
+                Response.BinaryWrite(stream.ToArray());
+                Response.Flush();
+                Response.End();
+            }
+        }
+
+        private void DownLoadZip()
+        {
+            var nameBox = GroupReportForm2.FindControl("ArchiveNameBox") as TextBox;
+
+            var report = GetGroupReport();
+
+            var builder = new ArchiveReportBuilder(new WordReportBuilder(),
+                         new SevenZipArchivator(), MapPath("~/app_data/zip/"));
+
+            string file;
+
+            if (string.IsNullOrEmpty(nameBox.Text))
+                file = string.Format("отчёт_{0}", DateTime.Now.ToShortTimeString().Replace(":", "."));
+            else file = nameBox.Text;
+
+            Response.Clear();
+            Response.ContentType = "application/x-zip-compressed";
+            Response.AddHeader("content-disposition", string.Format("attachment;fileName={0}.zip", file));
+
+            builder.Create(Response.OutputStream, report);
+
+            Response.End();
+        }
+        #endregion
+        #region подготовить отчеты
+        protected void PrepareReport_Click(object sender, EventArgs e)
+        {
+            if (ReportsTemplatesList.Items.Count == 0) return;
+
+            var nameBox = GroupReportForm2.FindControl("ArchiveNameBox") as TextBox;
+
+            var templateID = int.Parse(ReportsTemplatesList.SelectedValue);
+
+            var typeName = GetTypeName(templateID);
+
+            if (string.IsNullOrEmpty(typeName)) return;
+
+            using (var c = new SqlConnection(Kernel.ConnectionString))
+            using (var cmd = new SqlCommand("EXEC [model].[R$ReportInsert] @templateID, @created, @userID, @link, @name", c))
+            {
+                c.Open();
+
+                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
+                cmd.Parameters.Add("created", SqlDbType.DateTime).Value = DateTime.Now.ToString();
+                cmd.Parameters.Add("userID", SqlDbType.Int).Value = this.Page.GetSystemUser();
+                cmd.Parameters.Add("link", SqlDbType.VarChar).Value = PutReportInMemory(templateID, typeName);
+                cmd.Parameters.Add("name", SqlDbType.VarChar).Value = nameBox.Text;
+
+                cmd.ExecuteNonQuery();
+            }
+
+            GroupReportForm2.Close();
+        }
+
+        private string PutReportInMemory(int templateID, string typeName)
+        {
+            var extension = typeName == "Word" ? ".zip" : GetReportExtension(templateID);
+            var guid = Guid.NewGuid();
+            //var link = string.Format(@"~\App_data\reports\{0}{1}", guid, extension);
+            var link = string.Format(@"~\temp_data\reports\{0}{1}", guid, extension);
+
+            var reportPath = HttpContext.Current.Server.MapPath(link);
+
+            FileStream fileStream;
+            try
+            {
+                var dir = Path.GetDirectoryName(reportPath);
+                if (!Directory.Exists(dir))
+                    Directory.CreateDirectory(dir);
+
+                fileStream = System.IO.File.Create(reportPath);
+            }
+            catch
+            {
+                throw new Exception(string.Format("Не удалось создать файл {0} с расширением {1}, полный путь {2}", guid, extension, reportPath));
+            }
+
+            if (typeName == "Excel")
+            {
+                string file = string.Empty;
+                var report = GetExcelReport(templateID, out file);
+
+                //var builder = new ExcelReportBuilder();
+                var builder = new ReportViewExcelBuilder();
+                builder.Create(fileStream, report);
+            }
+            else if (typeName == "Word")
+            {
+                var report = GetGroupReport();
+                var builder = new ArchiveReportBuilder(new WordReportBuilder(),
+                        new SevenZipArchivator(), MapPath("~/App_Data/zip"));
+
+                builder.Create(fileStream, report);
+            }
+
+            fileStream.Flush();
+            fileStream.Close();
+
+            return link;
+        }
+
+        private string GetReportExtension(int templateID)
+        {
+            using (var c = new SqlConnection(Kernel.ConnectionString))
+            using (var cmd = new SqlCommand("SELECT [MT].[extension] FROM [model].[R$Template] [RT]" +
+                                               "JOIN [MimeType] [MT] ON [MT].[objID] = [RT].[mimeTypeID]" +
+                                                   "WHERE [RT].[objID] = @templateID", c))
+            {
+                c.Open();
+                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
+
+                return cmd.ExecuteScalar().ToString();
+            }
+        }
+        #endregion
+
+
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -90,19 +372,9 @@ namespace Teleform.ProjectMonitoring
             Frame.UserControl_GoToFilterDesignerButton_Click += GoToFilterDesignerButton_Click;
             Frame.UserControl_ResetAllFilters_OnClick += ResetAllFilters_OnClick;
             Frame.UserControl_ResetAllSortings_OnClick += ResetAllSortings_OnClick;
-            // Frame.UserControl_ToGroupReportButton_Click += ToGroupReportButton_Click;
+            Frame.UserControl_ToGroupReportButton_Click += ToGroupReportButton_Click;
             Frame.UserControl_CreateExcelReportButton_Click += CreateExcelReportButton_Click;
             Frame.UserControl_LoadImportFile_Click += DownloadImportFile_Click;
-
-            #region Диалоговое окно создание, редактирование отчетов Word\Excel
-
-            Frame.UserControl_CreateTemplateButton_Click += CreateTemplateButton_Click;
-            Frame.UserControl_ReportsTemplatesList_OnSelectedIndexChanged += ReportsTemplatesList_OnSelectedIndexChanged;
-            Frame.UserControl_ReportsTemplatesList_OnLoad += ReportsTemplatesList_OnLoad;
-            Frame.UserControl_EditTemplateButton_Click += EditTemplateButton_Click;
-            Frame.UserControl_DownloadButton_Click += DownloadButton_Click;
-
-            #endregion
 
             if (ViewState["templateCode"] != null)
             {
@@ -117,7 +389,11 @@ namespace Teleform.ProjectMonitoring
 
                 var templateDesigner = new TemplateFactory(ViewState["templateCode"].ToString(), templateID, entityID).InstantiateIn();
                 PlaceHolder1.Controls.Add(templateDesigner);
+
+
             }
+
+            var requestEntity = Request["entity"];
             var someEntity = SomeEntity;
 
             if (SomeEntity != Request["entity"])
@@ -125,6 +401,7 @@ namespace Teleform.ProjectMonitoring
 
             if (!Page.IsPostBack)
             {
+
                 FillDropDownList();
                 if (ReportMultiView.GetActiveView() == TemplateView)
                 {
@@ -135,6 +412,7 @@ namespace Teleform.ProjectMonitoring
             }
             else
             {
+
                 Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "CallJS", "afterpostback();", true);
 
                 var actView = ReportMultiView.GetActiveView();
@@ -196,7 +474,9 @@ namespace Teleform.ProjectMonitoring
                 goToReportView();
             }
         }
-        
+
+#if true
+
         protected void TemplateList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(Frame.TemplateList.SelectedValue))
@@ -224,6 +504,65 @@ namespace Teleform.ProjectMonitoring
             }
             GetInstanceList();
         }
+
+#else
+        protected void TemplateList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Frame.TemplateList.SelectedValue))
+            {
+
+                var userID = Session["SystemUser.objID"].ToString();
+                var templateID = Frame.TemplateList.SelectedValue.ToString();
+
+
+                if (templateID.Contains("AttributesTemplate"))
+                {
+                    if (!AuthorizationRulesTemplate.Resolution(ActionType.create, Session["SystemUser.objID"].ToString()))
+                    {
+                        WarningMessageBoxAuthorization.Show();
+                        return;
+                    }
+                }
+                else
+                {
+                    if (!AuthorizationRulesTemplate.Resolution(ActionType.read, Session["SystemUser.objID"].ToString(), Frame.TemplateList.SelectedValue))
+                    {
+                        WarningMessageBoxAuthorization.Show();
+                        return;
+                    }
+                }
+
+               
+
+                var tContr = TemplateDesigner.Controls.Count;
+                var entID = TemplateDesigner.EntityID;
+                var tempID = TemplateDesigner.TemplateID;
+
+                TemplateDesigner.TemplateID = templateID;
+                TemplateDesigner.template = null;
+                TemplateDesigner.DataBind();
+                if (TemplateDesigner.template != null)
+                    oldTemplateName = TemplateDesigner.template.Name;
+
+                Session[MakeUniqueKey("TemplateList")] = templateID;
+            }
+            else
+            {
+                if (!AuthorizationRulesTemplate.Resolution(ActionType.create, Session["SystemUser.objID"].ToString()))
+                {
+                    WarningMessageBoxAuthorization.Show();
+                    return;
+                }
+
+                var entityID = Request.QueryString["entity"];
+
+
+                var templateID = string.Format("{0}_{1}", "titleAttributesTemplate", entityID);
+                Session[MakeUniqueKey("TemplateList")] = templateID;
+            }
+            GetInstanceList();
+        }
+#endif
 
         /// <summary>
         /// Получает данные из БД, кладет их в контрол и в оперативную память на Web сервере
@@ -315,7 +654,11 @@ namespace Teleform.ProjectMonitoring
                 ReportViewControl.SetSelfColumnsValue(SaveObjectsJeysonBox.Text);
             ReportViewControl.SetTemplateFieldsSize(ResizableTableControlBox.Text);
             ResizableTableControlBox.Text = null;
-            
+
+            //ColResizableBox.Text = null;
+
+
+
             ReportViewControl.DataSource = refTbl;
             ReportViewControl.NavigatFilterExpression = GetNavigatFilterExpression();
             ReportViewControl.TemplateID = templateID;
@@ -378,11 +721,15 @@ namespace Teleform.ProjectMonitoring
                 ErrorMessageBox.Show();
                 (ErrorMessageBox.FindControl("ErrorLabel") as Label).Text = ex.Message;
             }
+
+
+
             SaveObjectsJeysonBox.Text = null;
 
             GetInstanceList();
         }
-        
+
+
         protected void InsertInstance_Click(object sender, EventArgs e)
         {
             if (Session["isPermission"] != null)
@@ -392,6 +739,7 @@ namespace Teleform.ProjectMonitoring
                 Session["isPermission"] = null;
             }
         }
+
 
         private DataTable GetHierarchicObjects(Entity entity, DataTable refTbl)
         {
@@ -425,7 +773,8 @@ namespace Teleform.ProjectMonitoring
 
             return refTbl;
         }
-        
+
+
         protected void PageCountList_SelectedIndexChanged(object sender, EventArgs e)
         {
             var value = PageCountList.SelectedValue;
@@ -442,11 +791,13 @@ namespace Teleform.ProjectMonitoring
             ReportViewControl.Reset(true);
             ReportViewControl.DataBind();
         }
-        
+
+
         protected string GetTitleTemplateID(string entityID)
         {
             var entityName = this.GetSchema().Entities.SingleOrDefault(x => x.ID.ToString().Equals(entityID)).Name;
-            
+
+
             var isClassifier = Request.QueryString["checker"];
 
             var query = string.Empty;
@@ -460,7 +811,17 @@ namespace Teleform.ProjectMonitoring
 
             return templateID;
         }
-        
+
+
+
+
+
+
+        //protected void DynamicCard_CardClosed(object sender, EventArgs e)
+        //{
+        //    InsertInstanceDialog.Close();
+        //}
+
         protected void ReportView_RowCreated(object sender, GridViewRowEventArgs e)
         {
             throw new NotImplementedException();
@@ -490,6 +851,7 @@ namespace Teleform.ProjectMonitoring
                 e.Command.Parameters["@id"].Value = DBNull.Value;
         }
 
+
         protected void ReportViewControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Session["isPermission"] != null)
@@ -507,6 +869,10 @@ namespace Teleform.ProjectMonitoring
 
         }
 
+
+
+
+
         protected void DynamicCard_Accepted(object sender, EventArgs e)
         {
             Cache[WebEntityName] = new object();
@@ -515,10 +881,12 @@ namespace Teleform.ProjectMonitoring
 
         protected void CreateExcelReportButton_Click(object sender, EventArgs e)
         {
+
             if (Frame.TemplateList.Items.Count == 0)
                 return;
             else
             {
+
                 int userID;
                 bool result = int.TryParse(Session["SystemUser.objID"].ToString(), out userID);
                 if (true)
@@ -536,6 +904,9 @@ namespace Teleform.ProjectMonitoring
 
         protected void goToReportView()
         {
+
+            //TemplateDesigner.Dispose();
+
             ReportViewControl.DataBind();
             ReportMultiView.SetActiveView(TemplateView);
             var EntityListAttributeView = this.Parent;
@@ -555,6 +926,8 @@ namespace Teleform.ProjectMonitoring
 
             Frame.TemplateList.Visible = true;
             Frame.TemplateConstructorButton.Visible = true;
+
+
         }
 
         protected void GoToFilterDesignerButton_Click(object sender, EventArgs e)
@@ -595,7 +968,8 @@ namespace Teleform.ProjectMonitoring
             FilterDialog.Close();
             goToFilterDesigner();
         }
-        
+
+
         public void FilterReNameButton_Click(object sender, EventArgs e)
         {
             ReNameFilterDialog.Caption = "Переименование фильтра";
@@ -653,8 +1027,10 @@ namespace Teleform.ProjectMonitoring
 
             Frame.TemplateConstructorButton.Visible = false;
             Frame.TemplateList.Visible = false;
+
         }
-        
+
+
         protected void IsEditModeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             var checkBox = sender as System.Web.UI.WebControls.CheckBox;
@@ -664,9 +1040,11 @@ namespace Teleform.ProjectMonitoring
                 ReportViewControl.SessionContent.EntityInstances.Clear();
 
             SaveObjectsJeysonBox.Text = null;
+
             ReportViewControl.DataBind();
         }
-        
+
+
         protected void ResetAllFilters_OnClick(object sender, EventArgs e)
         {
             ReportViewControl.RejectAllFiltration();
@@ -714,24 +1092,37 @@ namespace Teleform.ProjectMonitoring
                 goToReportView();
             }
         }
-        
+
+
+
+
+
         #region Work with edit and ctreate templates
 
 
         protected void ReportsTemplatesList_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            var templateID = Frame.ReportsTemplatesList.SelectedValue;
+            var templateID = ReportsTemplatesList.SelectedValue;
 
             var template = Storage.Select<Template>(templateID);
 
             var postBackUrl = getPostBackUrl(template);
 
-            Frame.EditTemplateButton.PostBackUrl = postBackUrl;
+            EditTemplateButton.PostBackUrl = postBackUrl;
         }
+
+
+
+        protected void ToGroupReportButton_Click(object sender, EventArgs e)
+        {
+            GroupReportForm2.Show();
+        }
+
+
 
         protected List<object> GetPermittedTemplates(string lexem, string typeCode)
         {
-            var ReportsTemplatesList = new List<object>();
+            var ReportsTemplateslist = new List<object>();
 
             entityID = Request.QueryString["entity"];
             var userID = Session["SystemUser.objID"].ToString();
@@ -757,10 +1148,10 @@ namespace Teleform.ProjectMonitoring
                     entityName = deniedEntity.FirstOrDefault(e => e == field.NativeEntityName);
 
                 if (entityName == null)
-                    Frame.ReportsTemplatesList.Items.Add(new ListItem{ Value = templateID.ToString(), Text = string.Format("({0}){1}", typeName, templateName) });
+                    ReportsTemplateslist.Add(new { Value = templateID, Text = string.Format("({0}){1}", typeName, templateName) });
 
             }
-            return ReportsTemplatesList;
+            return ReportsTemplateslist;
         }
 
         protected void TemplateList_Load(object sender, EventArgs e)
@@ -827,7 +1218,7 @@ namespace Teleform.ProjectMonitoring
         {
             entityID = Request.QueryString["entity"];
             var userID = Session["SystemUser.objID"].ToString();
-            var templateID = Frame.ReportsTemplatesList.SelectedValue;
+            var templateID = ReportsTemplatesList.SelectedValue;
             Template template;
 
             if (string.IsNullOrEmpty(templateID))
@@ -836,28 +1227,28 @@ namespace Teleform.ProjectMonitoring
                 var templateList = UserTemlatePermission.GetPermittedTemplates(entityID, userID, " != ", "InputExcelBased");
                 if (templateList.Count == 0)
                 {
-                    Frame.EditTemplateButton.Visible = false;
-                    Frame.ReportsTemplatesList.Visible = false;
+                    EditTemplateButton.Visible = false;
+                    ReportsTemplatesList.Visible = false;
                     return;
                 }
                 else
                 {
-                    Frame.EditTemplateButton.Visible = true;
-                    Frame.ReportsTemplatesList.Visible = true;
+                    EditTemplateButton.Visible = true;
+                    ReportsTemplatesList.Visible = true;
                 }
 
 
-                Frame.ReportsTemplatesList.Items.Clear();
-                Frame.ReportsTemplatesList.DataSource = templateList;
-                Frame.ReportsTemplatesList.DataBind();
+                ReportsTemplatesList.Items.Clear();
+                ReportsTemplatesList.DataSource = templateList;
+                ReportsTemplatesList.DataBind();
 
-                templateID = Frame.ReportsTemplatesList.SelectedValue;
+                templateID = ReportsTemplatesList.SelectedValue;
 
                 template = Storage.Select<Template>(templateID);
 
                 var postBackUrl = getPostBackUrl(template);
 
-                Frame.EditTemplateButton.PostBackUrl = postBackUrl;
+                EditTemplateButton.PostBackUrl = postBackUrl;
             }
 
             template = Storage.Select<Template>(templateID);
@@ -865,27 +1256,57 @@ namespace Teleform.ProjectMonitoring
             #region Для файловый шаблонов, показать загрузчик файла
             if (template.TypeCode == EnumTypeCode.WordBased || template.TypeCode == EnumTypeCode.ExcelBased)
             {
-                Frame.DownloadButton.Visible = true;
+                DownloadButton.Visible = true;
 
                 if (template.TypeCode == EnumTypeCode.WordBased)
                 {
-                    Frame.ArchiveNameLabel.Visible = true;
-                    Frame.ArchiveNameBox.Visible = true;
+                    ArchiveNameLabel.Visible = true;
+                    ArchiveNameBox.Visible = true;
                 }
                 else
                 {
-                    Frame.ArchiveNameLabel.Visible = false;
-                    Frame.ArchiveNameBox.Visible = false;
+                    ArchiveNameLabel.Visible = false;
+                    ArchiveNameBox.Visible = false;
                 }
             }
             else
             {
-                Frame.DownloadButton.Visible = false;
-                Frame.ArchiveNameLabel.Visible = false;
-                Frame.ArchiveNameBox.Visible = false;
+                DownloadButton.Visible = false;
+                ArchiveNameLabel.Visible = false;
+                ArchiveNameBox.Visible = false;
             }
 
             #endregion
+
+#if trueWWW
+  
+            if (AuthorizationRulesTemplate.Resolution(ActionType.create, userID))
+            {
+                CreateTemplateButton.Visible = true;
+            }
+            else
+                CreateTemplateButton.Visible = false;
+         
+
+            if (AuthorizationRulesTemplate.Resolution(ActionType.update, userID, templateID))
+            {
+                EditTemplateButton.Visible = true;
+                ReportsTemplatesList.Visible = true;
+            }
+            else
+                EditTemplateButton.Visible = false;
+
+
+   
+            if (template.TypeCode == EnumTypeCode.screenTree || template.TypeCode == EnumTypeCode.crossReport)
+            {
+                EditTemplateButton.Visible = true;
+            }
+        
+#endif
+
+
+
         }
 
 
@@ -897,7 +1318,7 @@ namespace Teleform.ProjectMonitoring
         protected void EditTemplateButton_Click(object sender, EventArgs e)
         {
             var userID = Session["SystemUser.objID"].ToString();
-            var templateID = Frame.ReportsTemplatesList.SelectedValue;
+            var templateID = ReportsTemplatesList.SelectedValue;
             var template = Storage.Select<Template>(templateID);
 
             if (template.TypeCode == EnumTypeCode.crossReport || template.TypeCode == EnumTypeCode.screenTree)
@@ -1007,10 +1428,10 @@ namespace Teleform.ProjectMonitoring
             entityID = Request.QueryString["entity"];
             var userID = Session["SystemUser.objID"].ToString();
 
-            Frame.ReportsTemplatesList.Items.Clear();
+            ReportsTemplatesList.Items.Clear();
 
-            Frame.ReportsTemplatesList.DataSource = UserTemlatePermission.GetPermittedTemplates(entityID, userID, " != ", "InputExcelBased");
-            Frame.ReportsTemplatesList.DataBind();
+            ReportsTemplatesList.DataSource = UserTemlatePermission.GetPermittedTemplates(entityID, userID, " != ", "InputExcelBased");
+            ReportsTemplatesList.DataBind();
 
 
         }
@@ -1055,255 +1476,6 @@ namespace Teleform.ProjectMonitoring
             }
         }
 
-        #endregion
-
-        #region подготовить отчеты
-        protected void PrepareReport_Click(object sender, EventArgs e)
-        {
-            if (Frame.ReportsTemplatesList.Items.Count == 0) return;
-
-            var templateID = int.Parse(Frame.ReportsTemplatesList.SelectedValue);
-
-            var typeName = GetTypeName(templateID);
-
-            if (string.IsNullOrEmpty(typeName)) return;
-
-            using (var c = new SqlConnection(Kernel.ConnectionString))
-            using (var cmd = new SqlCommand("EXEC [model].[R$ReportInsert] @templateID, @created, @userID, @link, @name", c))
-            {
-                c.Open();
-
-                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
-                cmd.Parameters.Add("created", SqlDbType.DateTime).Value = DateTime.Now.ToString();
-                cmd.Parameters.Add("userID", SqlDbType.Int).Value = this.Page.GetSystemUser();
-                cmd.Parameters.Add("link", SqlDbType.VarChar).Value = PutReportInMemory(templateID, typeName);
-                cmd.Parameters.Add("name", SqlDbType.VarChar).Value = Frame.ArchiveNameBox.Text;
-
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        private string PutReportInMemory(int templateID, string typeName)
-        {
-            var extension = typeName == "Word" ? ".zip" : GetReportExtension(templateID);
-            var guid = Guid.NewGuid();
-            //var link = string.Format(@"~\App_data\reports\{0}{1}", guid, extension);
-            var link = string.Format(@"~\temp_data\reports\{0}{1}", guid, extension);
-
-            var reportPath = HttpContext.Current.Server.MapPath(link);
-
-            FileStream fileStream;
-            try
-            {
-                var dir = Path.GetDirectoryName(reportPath);
-                if (!Directory.Exists(dir))
-                    Directory.CreateDirectory(dir);
-
-                fileStream = System.IO.File.Create(reportPath);
-            }
-            catch
-            {
-                throw new Exception(string.Format("Не удалось создать файл {0} с расширением {1}, полный путь {2}", guid, extension, reportPath));
-            }
-
-            if (typeName == "Excel")
-            {
-                string file = string.Empty;
-                var report = GetExcelReport(templateID, out file);
-
-                //var builder = new ExcelReportBuilder();
-                var builder = new ReportViewExcelBuilder();
-                builder.Create(fileStream, report);
-            }
-            else if (typeName == "Word")
-            {
-                var report = GetGroupReport();
-                var builder = new ArchiveReportBuilder(new WordReportBuilder(),
-                        new SevenZipArchivator(), MapPath("~/App_Data/zip"));
-
-                builder.Create(fileStream, report);
-            }
-
-            fileStream.Flush();
-            fileStream.Close();
-
-            return link;
-        }
-
-        private string GetReportExtension(int templateID)
-        {
-            using (var c = new SqlConnection(Kernel.ConnectionString))
-            using (var cmd = new SqlCommand("SELECT [MT].[extension] FROM [model].[R$Template] [RT]" +
-                                               "JOIN [MimeType] [MT] ON [MT].[objID] = [RT].[mimeTypeID]" +
-                                                   "WHERE [RT].[objID] = @templateID", c))
-            {
-                c.Open();
-                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
-
-                return cmd.ExecuteScalar().ToString();
-            }
-        }
-        #endregion
-        
-        #region вспомогательные методы для загрузки и подготовки отчетов
-
-        private string GetTypeName(int templateID)
-        {
-            using (var c = new SqlConnection(Kernel.ConnectionString))
-            using (var cmd = new SqlCommand("SELECT [RTT].[internal] [typeName] FROM [model].[R$Template] [RT]" +
-                                                "JOIN [model].[R$TemplateType] [RTT]  ON [RT].[typeID] = [RTT].[objID]" +
-                                                    "WHERE [RT].[objID] = @templateID", c))
-            {
-                c.Open();
-                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
-                return cmd.ExecuteScalar().ToString();
-            }
-        }
-
-        private Teleform.Reporting.GroupReport GetExcelReport(int templateID, out string file)
-        {
-            Teleform.Reporting.Template template = Storage.Select<Template>(templateID);
-            string constraint = Request["constraint"], instance = Request["id"];
-            /*, @constrID={1}, @instanceID={2}*/
-            using (var c = new SqlConnection(Kernel.ConnectionString))
-            {
-
-                var command = new SqlCommand("EXEC [report].[getBObjectData] @templateID = @tid, @flFormat = 0, @flHeader = 0", c);
-
-                command.Parameters.AddRange(new[]
-                {
-                    new SqlParameter { ParameterName = "tid", Value = template.ID, DbType = DbType.Int32 }
-
-                });
-
-                var adapter = new SqlDataAdapter(command);
-                var table = new DataTable();
-                adapter.Fill(table);
-                file = template.FileName;
-
-                return Teleform.Reporting.GroupReport.Make(template, table, Session["SystemUser.objID"].ToString());
-            }
-
-        }
-
-        private string GetFileName(int templateID)
-        {
-            if (!string.IsNullOrEmpty(Frame.ArchiveNameBox.Text)) return Frame.ArchiveNameBox.Text + ".xlsx";
-
-            using (var c = new SqlConnection(Kernel.ConnectionString))
-            using (var cmd = new SqlCommand("SELECT [fileName] FROM [model].[R$Template] where [objID] =  @templateID", c))
-            {
-                c.Open();
-                cmd.Parameters.Add("templateID", SqlDbType.Int).Value = templateID;
-                return cmd.ExecuteScalar().ToString() + ".xlsx";
-            }
-        }
-
-        private Teleform.Reporting.GroupReport GetGroupReport()
-        {
-
-            var objIDList = new StringBuilder();
-            var filterTable = ReportViewControl.DataView.ToTable();
-
-
-            foreach (DataRow row in filterTable.Rows)
-                objIDList.Append(row["objID"] + ",");
-
-            if (objIDList.Length == 0)
-                return null;
-
-            objIDList.Length--;
-
-            string instanceList = objIDList.ToString();
-
-            var ddl = Frame.ReportsTemplatesList;
-
-            Teleform.Reporting.Template template = Storage.Select<Template>(ddl.SelectedValue);
-            string constraint = Request["constraint"], instance = Request["id"];
-            /*, @constrID={1}, @instanceID={2}*/
-            using (var c = new SqlConnection(Kernel.ConnectionString))
-            {
-                var command = new SqlCommand("EXEC [report].[getListAttributeData] @templateID = @tid, @flFormat = 0, @flHeader = 0, @instances = @list", c); //, @_flTitle = 1", c);
-
-                command.Parameters.AddRange(new[]
-                {
-                    new SqlParameter { ParameterName = "tid", Value = template.ID, DbType = DbType.Int32 },
-                    new SqlParameter { ParameterName = "list", Value = instanceList }
-                });
-
-                var adapter = new SqlDataAdapter(command);
-                var table = new DataTable();
-
-                adapter.Fill(table);
-
-
-                return Teleform.Reporting.GroupReport.Make(template, table);
-            }
-        }
-        #endregion
-
-        #region загрузить отчет
-        protected void DownloadButton_Click(object sender, EventArgs e)
-        {
-
-            if (Frame.ReportsTemplatesList.Items.Count == 0) return;
-            var templateID = int.Parse(Frame.ReportsTemplatesList.SelectedValue);
-
-            var typeName = GetTypeName(templateID);
-
-            if (string.IsNullOrEmpty(typeName)) return;
-
-            if (typeName == "Excel")
-                DownLoadExcel(templateID);
-            else
-                DownLoadZip();
-        }
-
-        private void DownLoadExcel(int templateID)
-        {
-            var output = new MemoryStream();
-
-            string file = string.Empty;
-            var report = GetExcelReport(templateID, out file);
-
-            if (report == null) return;
-
-            using (var stream = new MemoryStream())
-            {
-                var builder = new ReportViewExcelBuilder();
-                builder.Create(stream, report);
-
-                Response.Clear();
-                Response.ContentType = "text/html";
-                Response.AddHeader("content-disposition", string.Format("attachment;fileName={0}.xlsx", file));
-                Response.ContentEncoding = Encoding.UTF8;
-                Response.BinaryWrite(stream.ToArray());
-                Response.Flush();
-                Response.End();
-            }
-        }
-
-        private void DownLoadZip()
-        {
-            var report = GetGroupReport();
-
-            var builder = new ArchiveReportBuilder(new WordReportBuilder(),
-                         new SevenZipArchivator(), MapPath("~/app_data/zip/"));
-
-            string file;
-
-            if (string.IsNullOrEmpty(Frame.ArchiveNameBox.Text))
-                file = string.Format("отчёт_{0}", DateTime.Now.ToShortTimeString().Replace(":", "."));
-            else file = Frame.ArchiveNameBox.Text;
-
-            Response.Clear();
-            Response.ContentType = "application/x-zip-compressed";
-            Response.AddHeader("content-disposition", string.Format("attachment;fileName={0}.zip", file));
-
-            builder.Create(Response.OutputStream, report);
-
-            Response.End();
-        }
         #endregion
 
 

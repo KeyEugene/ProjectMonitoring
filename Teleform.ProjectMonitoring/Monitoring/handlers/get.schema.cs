@@ -31,11 +31,9 @@ namespace Teleform.ProjectMonitoring
 
         public override void ProcessRequest(HttpContext context)
         {
-            var url = context.Request.Url;
 
             var login = context.Request.QueryString["login"];
             var password = context.Request.QueryString["password"];
-
             //var secureSring = context.Request.QueryString["secureSring"];
 
             var connString = string.Format(ConfigurationManager.ConnectionStrings["Server"].ConnectionString, login, password);
@@ -48,7 +46,7 @@ namespace Teleform.ProjectMonitoring
 
 
         private bool TryAuthenticate(string login, string password)
-        {
+        {            
             using (var conn = new SqlConnection(Storage.ConnectionString))
             {
                 var command = new SqlCommand
@@ -66,7 +64,7 @@ namespace Teleform.ProjectMonitoring
                 var dt = new DataTable();
 
                 try
-                {
+                {                    
                     adapter.Fill(dt);
                 }
                 catch (Exception ex)
@@ -75,20 +73,20 @@ namespace Teleform.ProjectMonitoring
                     return false;
                 }
 
-                //var personID = dt.Rows[0]["_personID"].ToString();
-                //var objID = dt.Rows[0]["objID"].ToString();
-                //Session["SystemUser"] = true;
-                //Session["SystemUser.ID"] = string.IsNullOrEmpty(personID) ? "" : personID;
-                //Session["SystemUser.objID"] = objID;
-                //Session["SystemUser.Name"] = dt.Rows[0]["FullName"];
-                //Session["SystemUser.typeID"] = dt.Rows[0]["typeID"];
+                var personID = dt.Rows[0]["_personID"].ToString();
+                var objID = dt.Rows[0]["objID"].ToString();
+                Session["SystemUser"] = true;
+                Session["SystemUser.ID"] = string.IsNullOrEmpty(personID) ? "" : personID;
+                Session["SystemUser.objID"] = objID;
+                Session["SystemUser.Name"] = dt.Rows[0]["FullName"];
+                Session["SystemUser.typeID"] = dt.Rows[0]["typeID"];
 
-                //if (dt.Columns["TypeName"] != null)
-                //    Session["SystemUser.typeName"] = dt.Rows[0]["TypeName"];
+                if (dt.Columns["TypeName"] != null)
+                    Session["SystemUser.typeName"] = dt.Rows[0]["TypeName"];
+                
 
-
-                //string query = string.Format("INSERT INTO [Log].[ServerSession] ([sessionID], [username], [start]) VALUES ('{0}','{1}',GETDATE())", Session.SessionID, login);
-                //Storage.GetDataTable(query);              
+                string query = string.Format("INSERT INTO [Log].[ServerSession] ([sessionID], [username], [start]) VALUES ('{0}','{1}',GETDATE())", Session.SessionID, login);
+                Storage.GetDataTable(query);              
 
                 return true;
             }
