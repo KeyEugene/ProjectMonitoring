@@ -6,9 +6,184 @@
 
 <Navigation:Frame ID="Frame" runat="server"></Navigation:Frame>
 <Menu:Objects runat="server" ID="MenuByObject" />
+
 <%--
 <%@ Register TagPrefix="Dynamic" Namespace="DynamicCardControl.Controls" Assembly="DynamicCardControl" %>
 --%>
+
+<asp:HiddenField ID="hfScrollPosition" runat="server" Value="0" ClientIDMode="Static" />
+<asp:Button Visible="false" ID="FilterReNameButton" runat="server" Text="Переименовать"
+    OnClick="FilterReNameButton_Click" />
+<asp:Button Visible="false" ID="FilterDeleteButton" runat="server" Text="Удалить"
+    OnClick="FilterDeleteButton_Click" BackColor="#DAE2F5" />
+<asp:SqlDataSource ID="NavigationDataSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
+    SelectCommand="SELECT * FROM [model].[ListAttribute](@entity)  where isIndexed = 1">
+    <SelectParameters>
+        <asp:QueryStringParameter Name="entity" ConvertEmptyStringToNull="true" QueryStringField="entity" />
+    </SelectParameters>
+</asp:SqlDataSource>
+<input type="hidden" id="IsNavigationListSelectedIndexChanged" runat="server" value="false"
+    clientidmode="Static" />
+<asp:LinkButton ID="navigationLink" runat="server" Text="ClientIDMode=Static" Style="display: none"
+    ClientIDMode="Static" PostBackUrl=""></asp:LinkButton>
+
+<div>
+    Отображать по:
+        <asp:DropDownList runat="server" ID="PageCountList" AutoPostBack="true" ClientIDMode="Static"
+            OnSelectedIndexChanged="PageCountList_SelectedIndexChanged">
+            <asp:ListItem Text="10" Value="10" Selected="True" />
+            <asp:ListItem Text="20" Value="20" />
+            <asp:ListItem Text="50" Value="50" />
+            <asp:ListItem Text="Все" Value="all" />
+        </asp:DropDownList>
+</div>
+
+<asp:MultiView ID="ReportMultiView" runat="server" ActiveViewIndex="0">
+
+    <asp:View ID="TemplateView" runat="server">
+
+        <%--<Dialog:Form runat="server" ID="GroupReportForm2" Caption="Подготовка отчета по шаблону"
+            CancelButtonID="CancelButton">
+            <ContentTemplate>
+            </ContentTemplate>
+            <Buttons>
+                <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" OnClick="CencelButton_Click" />
+            </Buttons>
+        </Dialog:Form>--%>
+        <Dialog:Form ID="TemplateDesignerDialog" runat="server" CancelButtonID="CancelButton"
+            ButtonsAlign="Center" OnClosed="TemplateDialog_Closed">
+            <ContentTemplate>
+                <asp:SqlDataSource ID="TemplateTypeDataSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
+                    SelectCommand="SELECT [name],[code] FROM [model].[R$TemplateType]" />
+                <asp:RadioButtonList ID="RadioList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="TemplateTypeRadioButton_Click"
+                    DataSourceID="TemplateTypeDataSource" DataTextField="name" DataValueField="code" />
+                <asp:PlaceHolder ID="PlaceHolder1" runat="server" />
+            </ContentTemplate>
+            <Buttons>
+                <Dialog:ButtonItem Text="Сохранить" ControlID="SaveButton" OnClick="SaveButton_Click" />
+                <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" />
+            </Buttons>
+        </Dialog:Form>
+
+        <asp:UpdatePanel ID="ReportViewUpdatePanel" runat="server">
+            <ContentTemplate>
+                <Report:TableViewControl runat="server" ID="ReportViewControl" PageSize="10" CssClass="gridviewStyle"
+                    OnSelectedItemCreating="ReportViewControl_SelectedIndexChanged" OnDataReady="ReportViewControl_DataReady"
+                    Width="100%">
+                    <filterstyle cssclass="FilterBox" />
+                    <predicatecontrolstyle cssclass="PredicateControl" />
+                    <activestyle cssclass="Active" />
+                    <pagestyle cssclass="pageStyle" />
+                    <activepagestyle cssclass="activePageStyle" />
+                </Report:TableViewControl>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <asp:TextBox Style="display: none" ID="ResizableTableControlBox" Width="1000" runat="server" />
+        <asp:TextBox Style="display: none" ID="ColResizableTempIDBox" Width="100" runat="server" />
+        <asp:TextBox Style="display: none" ID="SelectedRowIDBox" runat="server"></asp:TextBox>
+        <asp:TextBox Style="display: none" ID="SaveObjectsJeysonBox" runat="server" Width="1800" />
+    </asp:View>
+    <asp:View ID="TemplateDesignerView" runat="server">
+        <Template:TableTemplateDesigner ID="TemplateDesigner" runat="server" OnCloseButtonClick="CloseButtonClick_Click"
+            ShowCloseButton="true" ShowSaveButton="true" ShowSaveAsButton="true" ShowCreateNewTemplateButton="true" />
+    </asp:View>
+    <asp:View ID="FilterDesignerView" runat="server">
+        <Project:FilterDesigner ID="FilterDesigner" runat="server" OnDesigningFinished="FilterDesigner_DesigningFinished" />
+    </asp:View>
+</asp:MultiView>
+<Dialog:Form ID="FilterDialog" runat="server">
+    <ContentTemplate>
+        <table>
+            <tr>
+                <td>Имя фильтра
+                </td>
+                <td>
+                    <asp:TextBox ID="InsertNameFilter" Width="250px" runat="server" placeholder="обязательно для заполнения" />
+                </td>
+            </tr>
+        </table>
+    </ContentTemplate>
+    <Buttons>
+        <Dialog:ButtonItem Text="Применить" ControlID="ApplyNewFilterButton" OnClick="ApplyNewFilterButton_Click" />
+        <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" OnClick="FilterDialog.Close" />
+    </Buttons>
+</Dialog:Form>
+<Dialog:Form ID="ReNameFilterDialog" runat="server" OnClosed="ReNameFilterDialogCloseHandler">
+    <ContentTemplate>
+        <table>
+            <tr>
+                <td>Имя фильтра
+                </td>
+                <td>
+                    <asp:TextBox ID="RenameNameBox" Width="250px" runat="server" placeholder="обязательно для заполнения" />
+                </td>
+            </tr>
+        </table>
+    </ContentTemplate>
+    <Buttons>
+        <Dialog:ButtonItem Text="Применить" ControlID="ApplyReNameFilterButton" OnClick="ApplyReNameFilterButton_Click" />
+        <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" OnClick="ReNameFilterDialog.Close" />
+    </Buttons>
+</Dialog:Form>
+<Dialog:MessageBox ID="DeleteWarningDialog" runat="server" Icon="Warning" Buttons="YesNo"
+    OnClosed="DeleteWarningDialog_Close">
+    <ContentTemplate>
+        Объект будет удалён. Продолжить?
+    </ContentTemplate>
+</Dialog:MessageBox>
+<Dialog:MessageBox ID="WarningMessageBox" runat="server" Icon="Notification">
+    <ContentTemplate>
+        <asp:Label ID="WarningLabel" runat="server" />
+    </ContentTemplate>
+</Dialog:MessageBox>
+<Dialog:MessageBox ID="ErrorMessageBox" runat="server" Icon="Error">
+    <ContentTemplate>
+        <asp:Label ID="ErrorLabel" runat="server" />
+    </ContentTemplate>
+</Dialog:MessageBox>
+<Dialog:Form ID="ReferenceTableControlDialog" runat="server">
+    <ContentTemplate>
+        <asp:PlaceHolder ID="PlaceHolder" runat="server" />
+    </ContentTemplate>
+</Dialog:Form>
+<Dialog:MessageBox runat="server" ID="WarningMessageBoxAuthorization" Caption="Внимание !"
+    Icon="Warning" Buttons="OK">
+    <ContentTemplate>
+        У вас нет прав для совершение данного действия.
+    </ContentTemplate>
+</Dialog:MessageBox>
+<Dialog:MessageBox runat="server" ID="TemplateSavedMessageBox" Caption="Шаблон создан"
+    Icon="Notification">
+    <ContentTemplate>
+        Шаблон успешно сохранен.
+    </ContentTemplate>
+</Dialog:MessageBox>
+<Dialog:MessageBox ID="DeleteMessage" Icon="Question" Buttons="YesNo" runat="server"
+    Caption="Внимание" OnClosed="DeleteMessage_Closed">
+    <ContentTemplate>
+        Объект будет безвозвратно удалён. Продолжить?
+    </ContentTemplate>
+</Dialog:MessageBox>
+<Dialog:Form ID="CreateDialog" runat="server" Caption="Добавить элемент" CancelButtonID="CancelButton">
+    <ContentTemplate>
+        <asp:Table ID="DialogTable" runat="server">
+        </asp:Table>
+    </ContentTemplate>
+    <Buttons>
+        <Dialog:ButtonItem ControlID="AcceptButton" Text="Применить" />
+        <Dialog:ButtonItem ControlID="CancelButton" Text="Отмена" />
+    </Buttons>
+</Dialog:Form>
+
+<asp:UpdatePanel ID="RecordsNumberUpPanel" runat="server">
+    <ContentTemplate>
+        <asp:Label ID="Wcf_summator" runat="server" />
+        <asp:Label ID="RecordsNumberLabel" runat="server" />
+    </ContentTemplate>
+</asp:UpdatePanel>
+
+
+
 <script type="text/javascript">
     var afterPost = 0;
 
@@ -177,191 +352,3 @@
         }
     }
 </script>
-<Dialog:MessageBox runat="server" ID="TemplateSavedMessageBox" Caption="Шаблон создан"
-    Icon="Notification">
-    <ContentTemplate>
-        Шаблон успешно сохранен.
-    </ContentTemplate>
-</Dialog:MessageBox>
-<Dialog:MessageBox ID="DeleteMessage" Icon="Question" Buttons="YesNo" runat="server"
-    Caption="Внимание" OnClosed="DeleteMessage_Closed">
-    <ContentTemplate>
-        Объект будет безвозвратно удалён. Продолжить?
-    </ContentTemplate>
-</Dialog:MessageBox>
-<Dialog:Form ID="CreateDialog" runat="server" Caption="Добавить элемент" CancelButtonID="CancelButton">
-    <ContentTemplate>
-        <asp:Table ID="DialogTable" runat="server">
-        </asp:Table>
-    </ContentTemplate>
-    <Buttons>
-        <Dialog:ButtonItem ControlID="AcceptButton" Text="Применить" />
-        <Dialog:ButtonItem ControlID="CancelButton" Text="Отмена" />
-    </Buttons>
-</Dialog:Form>
-<asp:HiddenField ID="hfScrollPosition" runat="server" Value="0" ClientIDMode="Static" />
-<asp:UpdatePanel ID="RecordsNumberUpPanel" runat="server">
-    <ContentTemplate>
-        <asp:Label ID="Wcf_summator" runat="server" />
-        <asp:Label ID="RecordsNumberLabel" runat="server" />
-    </ContentTemplate>
-</asp:UpdatePanel>
-<div>
-    Отображать по:
-        <asp:DropDownList runat="server" ID="PageCountList" AutoPostBack="true" ClientIDMode="Static"
-            OnSelectedIndexChanged="PageCountList_SelectedIndexChanged">
-            <asp:ListItem Text="10" Value="10" Selected="True" />
-            <asp:ListItem Text="20" Value="20" />
-            <asp:ListItem Text="50" Value="50" />
-            <asp:ListItem Text="Все" Value="all" />
-        </asp:DropDownList>
-</div>
-<asp:Button Visible="false" ID="FilterReNameButton" runat="server" Text="Переименовать"
-    OnClick="FilterReNameButton_Click" />
-<asp:Button Visible="false" ID="FilterDeleteButton" runat="server" Text="Удалить"
-    OnClick="FilterDeleteButton_Click" BackColor="#DAE2F5" />
-<asp:SqlDataSource ID="NavigationDataSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
-    SelectCommand="SELECT * FROM [model].[ListAttribute](@entity)  where isIndexed = 1">
-    <SelectParameters>
-        <asp:QueryStringParameter Name="entity" ConvertEmptyStringToNull="true" QueryStringField="entity" />
-    </SelectParameters>
-</asp:SqlDataSource>
-<input type="hidden" id="IsNavigationListSelectedIndexChanged" runat="server" value="false"
-    clientidmode="Static" />
-<asp:LinkButton ID="navigationLink" runat="server" Text="ClientIDMode=Static" Style="display: none"
-    ClientIDMode="Static" PostBackUrl=""></asp:LinkButton>
-
-<asp:MultiView ID="ReportMultiView" runat="server" ActiveViewIndex="0">
-
-    <asp:View ID="TemplateView" runat="server">
-
-        <Dialog:Form runat="server" ID="GroupReportForm2" Caption="Подготовка отчета по шаблону"
-            CancelButtonID="CancelButton">
-            <ContentTemplate>
-                <table cellspacing="10">
-                    <tr>
-                        <td>
-                            <asp:Button ID="CreateTemplateButton" runat="server" Text="Создать шаблон" OnClick="CreateTemplateButton_Click" />
-                            <asp:Button ID="EditTemplateButton" runat="server" Text="Редактировать шаблон" OnClick="EditTemplateButton_Click" />
-                            <asp:DropDownList OnSelectedIndexChanged="ReportsTemplatesList_OnSelectedIndexChanged"
-                                OnLoad="ReportsTemplatesList_OnLoad" AutoPostBack="true" runat="server" ID="ReportsTemplatesList"
-                                DataValueField="Value" DataTextField="Text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:Label Visible="false" runat="server" ID="ArchiveNameLabel">Имя архива:</asp:Label>
-                            <asp:TextBox Visible="false" runat="server" ID="ArchiveNameBox" placeholder="" />
-                            <asp:Button Visible="false" ID="DownloadButton" runat="server" Text="Загрузить отчет"
-                                OnClick="DownloadButton_Click" />
-                        </td>
-                    </tr>
-                </table>
-            </ContentTemplate>
-            <Buttons>
-                <%--      <Dialog:ButtonItem Text="Загрузить" OnClick="DownloadButton_Click" />--%>
-                <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" OnClick="CencelButton_Click" />
-            </Buttons>
-        </Dialog:Form>
-        <Dialog:Form ID="TemplateDesignerDialog" runat="server" CancelButtonID="CancelButton"
-            ButtonsAlign="Center" OnClosed="TemplateDialog_Closed">
-            <ContentTemplate>
-                <asp:SqlDataSource ID="TemplateTypeDataSource" runat="server" ConnectionString='<%$ Connection:Teleform.ProjectMonitoring.HttpApplication.Global.ConnectionString %>'
-                    SelectCommand="SELECT [name],[code] FROM [model].[R$TemplateType]" />
-                <asp:RadioButtonList ID="RadioList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="TemplateTypeRadioButton_Click"
-                    DataSourceID="TemplateTypeDataSource" DataTextField="name" DataValueField="code" />
-                <asp:PlaceHolder ID="PlaceHolder1" runat="server" />
-            </ContentTemplate>
-            <Buttons>
-                <Dialog:ButtonItem Text="Сохранить" ControlID="SaveButton" OnClick="SaveButton_Click" />
-                <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" />
-            </Buttons>
-        </Dialog:Form>
-
-        <asp:UpdatePanel ID="ReportViewUpdatePanel" runat="server">
-            <ContentTemplate>
-                <Report:TableViewControl runat="server" ID="ReportViewControl" PageSize="10" CssClass="gridviewStyle"
-                    OnSelectedItemCreating="ReportViewControl_SelectedIndexChanged" OnDataReady="ReportViewControl_DataReady"
-                    Width="100%">
-                    <filterstyle cssclass="FilterBox" />
-                    <predicatecontrolstyle cssclass="PredicateControl" />
-                    <activestyle cssclass="Active" />
-                    <pagestyle cssclass="pageStyle" />
-                    <activepagestyle cssclass="activePageStyle" />
-                </Report:TableViewControl>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <asp:TextBox Style="display: none" ID="ResizableTableControlBox" Width="1000" runat="server" />
-        <asp:TextBox Style="display: none" ID="ColResizableTempIDBox" Width="100" runat="server" />
-        <asp:TextBox Style="display: none" ID="SelectedRowIDBox" runat="server"></asp:TextBox>
-        <asp:TextBox Style="display: none" ID="SaveObjectsJeysonBox" runat="server" Width="1800" />
-    </asp:View>
-    <asp:View ID="TemplateDesignerView" runat="server">
-        <Template:TableTemplateDesigner ID="TemplateDesigner" runat="server" OnCloseButtonClick="CloseButtonClick_Click"
-            ShowCloseButton="true" ShowSaveButton="true" ShowSaveAsButton="true" ShowCreateNewTemplateButton="true" />
-    </asp:View>
-    <asp:View ID="FilterDesignerView" runat="server">
-        <Project:FilterDesigner ID="FilterDesigner" runat="server" OnDesigningFinished="FilterDesigner_DesigningFinished" />
-    </asp:View>
-</asp:MultiView>
-<Dialog:Form ID="FilterDialog" runat="server">
-    <ContentTemplate>
-        <table>
-            <tr>
-                <td>Имя фильтра
-                </td>
-                <td>
-                    <asp:TextBox ID="InsertNameFilter" Width="250px" runat="server" placeholder="обязательно для заполнения" />
-                </td>
-            </tr>
-        </table>
-    </ContentTemplate>
-    <Buttons>
-        <Dialog:ButtonItem Text="Применить" ControlID="ApplyNewFilterButton" OnClick="ApplyNewFilterButton_Click" />
-        <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" OnClick="FilterDialog.Close" />
-    </Buttons>
-</Dialog:Form>
-<Dialog:Form ID="ReNameFilterDialog" runat="server" OnClosed="ReNameFilterDialogCloseHandler">
-    <ContentTemplate>
-        <table>
-            <tr>
-                <td>Имя фильтра
-                </td>
-                <td>
-                    <asp:TextBox ID="RenameNameBox" Width="250px" runat="server" placeholder="обязательно для заполнения" />
-                </td>
-            </tr>
-        </table>
-    </ContentTemplate>
-    <Buttons>
-        <Dialog:ButtonItem Text="Применить" ControlID="ApplyReNameFilterButton" OnClick="ApplyReNameFilterButton_Click" />
-        <Dialog:ButtonItem Text="Отмена" ControlID="CancelButton" OnClick="ReNameFilterDialog.Close" />
-    </Buttons>
-</Dialog:Form>
-<Dialog:MessageBox ID="DeleteWarningDialog" runat="server" Icon="Warning" Buttons="YesNo"
-    OnClosed="DeleteWarningDialog_Close">
-    <ContentTemplate>
-        Объект будет удалён. Продолжить?
-    </ContentTemplate>
-</Dialog:MessageBox>
-<Dialog:MessageBox ID="WarningMessageBox" runat="server" Icon="Notification">
-    <ContentTemplate>
-        <asp:Label ID="WarningLabel" runat="server" />
-    </ContentTemplate>
-</Dialog:MessageBox>
-<Dialog:MessageBox ID="ErrorMessageBox" runat="server" Icon="Error">
-    <ContentTemplate>
-        <asp:Label ID="ErrorLabel" runat="server" />
-    </ContentTemplate>
-</Dialog:MessageBox>
-<Dialog:Form ID="ReferenceTableControlDialog" runat="server">
-    <ContentTemplate>
-        <asp:PlaceHolder ID="PlaceHolder" runat="server" />
-    </ContentTemplate>
-</Dialog:Form>
-<Dialog:MessageBox runat="server" ID="WarningMessageBoxAuthorization" Caption="Внимание !"
-    Icon="Warning" Buttons="OK">
-    <ContentTemplate>
-        У вас нет прав для совершение данного действия.
-    </ContentTemplate>
-</Dialog:MessageBox>

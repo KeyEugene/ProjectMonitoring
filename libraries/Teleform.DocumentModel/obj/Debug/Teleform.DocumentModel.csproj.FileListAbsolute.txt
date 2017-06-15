@@ -2,3 +2,8 @@ D:\Development\Teleform_work\libraries\Teleform.DocumentModel\bin\Debug\Teleform
 D:\Development\Teleform_work\libraries\Teleform.DocumentModel\bin\Debug\Teleform.DocumentModel.pdb
 D:\Development\Teleform_work\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.dll
 D:\Development\Teleform_work\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.DocumentModel\bin\Debug\Teleform.DocumentModel.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.DocumentModel\bin\Debug\Teleform.DocumentModel.pdb
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.dll
+C:\Users\Alex\Source\Repos\ProjectMonitoring\libraries\Teleform.DocumentModel\obj\Debug\Teleform.DocumentModel.pdb

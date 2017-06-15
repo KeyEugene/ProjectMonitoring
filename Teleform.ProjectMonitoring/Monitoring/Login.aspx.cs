@@ -26,9 +26,8 @@ namespace Teleform.ProjectMonitoring
 
         protected override void OnLoad(EventArgs e)
         {
-
-            var login1 = "admin";
-            var password1 = "YWRtaW4=";
+            var login1 = "admin1";
+            var password1 = "YWRtaW4x";
             if (TryAuthenticate(login1, password1))
                 Session_Start(login1);
             this.Response.Redirect("http://localhost:25000/monitoring/admin/administration.aspx");

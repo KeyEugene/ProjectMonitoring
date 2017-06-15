@@ -31,42 +31,6 @@ namespace Teleform.ProjectMonitoring {
         protected global::Teleform.ProjectMonitoring.NavigationDialogView.NavigationByObjects MenuByObject;
         
         /// <summary>
-        /// TemplateSavedMessageBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox TemplateSavedMessageBox;
-        
-        /// <summary>
-        /// DeleteMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.MessageBox DeleteMessage;
-        
-        /// <summary>
-        /// CreateDialog control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.Form CreateDialog;
-        
-        /// <summary>
-        /// DialogTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table DialogTable;
-        
-        /// <summary>
         /// hfScrollPosition control.
         /// </summary>
         /// <remarks>
@@ -74,42 +38,6 @@ namespace Teleform.ProjectMonitoring {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfScrollPosition;
-        
-        /// <summary>
-        /// RecordsNumberUpPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel RecordsNumberUpPanel;
-        
-        /// <summary>
-        /// Wcf_summator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Wcf_summator;
-        
-        /// <summary>
-        /// RecordsNumberLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label RecordsNumberLabel;
-        
-        /// <summary>
-        /// PageCountList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PageCountList;
         
         /// <summary>
         /// FilterReNameButton control.
@@ -157,6 +85,15 @@ namespace Teleform.ProjectMonitoring {
         protected global::System.Web.UI.WebControls.LinkButton navigationLink;
         
         /// <summary>
+        /// PageCountList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PageCountList;
+        
+        /// <summary>
         /// ReportMultiView control.
         /// </summary>
         /// <remarks>
@@ -173,69 +110,6 @@ namespace Teleform.ProjectMonitoring {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View TemplateView;
-        
-        /// <summary>
-        /// GroupReportForm2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Phoenix.Web.UI.Dialogs.Form GroupReportForm2;
-        
-        /// <summary>
-        /// CreateTemplateButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CreateTemplateButton;
-        
-        /// <summary>
-        /// EditTemplateButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EditTemplateButton;
-        
-        /// <summary>
-        /// ReportsTemplatesList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ReportsTemplatesList;
-        
-        /// <summary>
-        /// ArchiveNameLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ArchiveNameLabel;
-        
-        /// <summary>
-        /// ArchiveNameBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ArchiveNameBox;
-        
-        /// <summary>
-        /// DownloadButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DownloadButton;
         
         /// <summary>
         /// TemplateDesignerDialog control.
@@ -470,5 +344,68 @@ namespace Teleform.ProjectMonitoring {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Phoenix.Web.UI.Dialogs.MessageBox WarningMessageBoxAuthorization;
+        
+        /// <summary>
+        /// TemplateSavedMessageBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Phoenix.Web.UI.Dialogs.MessageBox TemplateSavedMessageBox;
+        
+        /// <summary>
+        /// DeleteMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Phoenix.Web.UI.Dialogs.MessageBox DeleteMessage;
+        
+        /// <summary>
+        /// CreateDialog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Phoenix.Web.UI.Dialogs.Form CreateDialog;
+        
+        /// <summary>
+        /// DialogTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table DialogTable;
+        
+        /// <summary>
+        /// RecordsNumberUpPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel RecordsNumberUpPanel;
+        
+        /// <summary>
+        /// Wcf_summator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Wcf_summator;
+        
+        /// <summary>
+        /// RecordsNumberLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label RecordsNumberLabel;
     }
 }

@@ -24,6 +24,12 @@ namespace Teleform.ProjectMonitoring.NavigationFrame
         public event EventHandler UserControl_CreateExcelReportButton_Click;
         public event EventHandler UserControl_LoadImportFile_Click;
 
+        public event EventHandler UserControl_CreateTemplateButton_Click;
+        public event EventHandler UserControl_ReportsTemplatesList_OnSelectedIndexChanged;
+        public event EventHandler UserControl_ReportsTemplatesList_OnLoad;
+        public event EventHandler UserControl_EditTemplateButton_Click;
+        public event EventHandler UserControl_DownloadButton_Click;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -139,5 +145,46 @@ namespace Teleform.ProjectMonitoring.NavigationFrame
                 UserControl_LoadImportFile_Click(sender, e);
             }
         }
+        
+        #region Диалоговое окно создание, редактирование отчетов Word\Excel
+        
+        protected void CreateTemplateButton_Click(object sender, EventArgs e)
+        {
+            if (UserControl_CreateTemplateButton_Click != null)
+            {
+                UserControl_CreateTemplateButton_Click(sender, e);
+            }
+        }
+        protected void ReportsTemplatesList_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (UserControl_ReportsTemplatesList_OnSelectedIndexChanged != null)
+            {
+                UserControl_ReportsTemplatesList_OnSelectedIndexChanged(sender, e);
+            }
+        }
+        protected void ReportsTemplatesList_OnLoad(object sender, EventArgs e)
+        {
+            if (UserControl_ReportsTemplatesList_OnLoad != null)
+            {
+                UserControl_ReportsTemplatesList_OnLoad(sender, e);
+            }
+        }
+        protected void EditTemplateButton_Click(object sender, EventArgs e)
+        {
+            if (UserControl_EditTemplateButton_Click != null)
+            {
+                UserControl_EditTemplateButton_Click(sender, e);
+            }
+        }
+        protected void DownloadButton_Click(object sender, EventArgs e)
+        {
+            if (UserControl_DownloadButton_Click != null)
+            {
+                UserControl_DownloadButton_Click(sender, e);
+            }
+        }
+
+
+        #endregion
     }
 }

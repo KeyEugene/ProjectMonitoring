@@ -39,10 +39,10 @@
                 </div>
                 <ul class="nav navbar-left top-nav">
                     <li>
-                        <asp:LinkButton ID="A1" runat="server" EnableViewState="false" PostBackUrl="~/EntityListAttributeView.aspx">Функционал АРМ</asp:LinkButton>
+                        <asp:LinkButton ID="A1" runat="server" EnableViewState="false" PostBackUrl="~/EntityListAttributeView.aspx">Управление объектами</asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="Templates" runat="server" EnableViewState="false" PostBackUrl="~/Templates/TemplateManager.aspx">Шаблоны</asp:LinkButton>
+                        <asp:LinkButton ID="Templates" runat="server" EnableViewState="false" PostBackUrl="~/Templates/TemplateManager.aspx">Редактор шаблонов</asp:LinkButton>
                     </li>
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Специальные отчеты<b class="caret"></b></a>
@@ -56,10 +56,10 @@
                         </ul>
                     </li>
                     <li>
-                        <asp:LinkButton ID="Routes" runat="server" EnableViewState="false" PostBackUrl="~/Routes/Routes.aspx">Маршруты документов</asp:LinkButton>
+                        <asp:LinkButton ID="Routes" runat="server" EnableViewState="false" PostBackUrl="~/Routes/Routes.aspx">Маршрутизация документов</asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="A2" runat="server" EnableViewState="false" PostBackUrl="~/events.aspx">Уведомления</asp:LinkButton>
+                        <asp:LinkButton ID="A2" runat="server" EnableViewState="false" PostBackUrl="~/events.aspx">Уведомления о событиях</asp:LinkButton>
                     </li>
                     <li>
                         <asp:LinkButton ID="A5" runat="server" EnableViewState="false" PostBackUrl="~/admin/administration.aspx">Администрирование</asp:LinkButton>

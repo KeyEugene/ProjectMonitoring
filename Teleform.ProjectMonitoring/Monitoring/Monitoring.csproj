@@ -208,6 +208,8 @@
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap_select\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap\bootstrap_select\bootstrap-select.min.js" />
+    <Content Include="Scripts\bootstrap\Dialog\modal.js" />
+    <Content Include="Scripts\bootstrap\Dialog\util.js" />
     <Content Include="Scripts\bootstrap\npm.js" />
     <Content Include="Scripts\bootstrap_treeview\bootstrap-treeview.css" />
     <Content Include="Scripts\bootstrap_treeview\bootstrap-treeview.js" />
@@ -834,6 +836,8 @@
     <Content Include="Styles\bootstrap\site_template\LICENSE" />
     <Content Include="Styles\bootstrap\site_template\README.md" />
     <Content Include="Scripts\bootstrap_treeview\LICENSE" />
+    <Content Include="Scripts\bootstrap\Dialog\modal.js.map" />
+    <Content Include="Scripts\bootstrap\Dialog\util.js.map" />
     <None Include="temp_data\report.xlsx" />
   </ItemGroup>
   <PropertyGroup>
